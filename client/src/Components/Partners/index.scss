@@ -1,0 +1,143 @@
+  .section {
+      padding: 40px 0;
+      position: relative;
+  }
+
+  .section__title {
+      color: #fff;
+      font-weight: 300;
+      font-size: 28px;
+      margin-bottom: 25px;
+  }
+
+  .section__title b {
+      font-weight: 700;
+  }
+
+  .section__title--center {
+      text-align: center;
+  }
+
+  .section__title--no-margin {
+      margin-bottom: 10px;
+  }
+
+  .section__text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      line-height: 26px;
+      margin-bottom: 25px;
+      font-family: "Open Sans", sans-serif;
+      letter-spacing: 0.2px;
+  }
+
+  .section__text:last-child {
+      margin-bottom: 0;
+  }
+
+  .section__text--last-with-margin:last-child {
+      margin-bottom: 30px;
+  }
+
+  .section__text b {
+      font-weight: 600;
+  }
+
+  .section__text a {
+      color: #ff55a5;
+  }
+
+  .section__text a:hover {
+      color: #ff55a5;
+      text-decoration: underline;
+  }
+
+  .section__wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+  }
+
+  .section--dark {
+      background-color: #28282d;
+  }
+
+  .section--first {
+      margin-top: 70px;
+  }
+
+  .section--first .section__title {
+      margin-bottom: 0;
+  }
+
+  @media (min-width: 576px) {
+      .section__title {
+          font-size: 30px;
+      }
+  }
+
+  @media (min-width: 768px) {
+      .section {
+          padding: 60px 0;
+      }
+
+      .section__title {
+          font-size: 32px;
+          margin-bottom: 35px;
+      }
+
+      .section__title--no-margin {
+          margin-bottom: 20px;
+      }
+
+      .section__wrap {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .section__btn {
+          margin: 20px auto 15px;
+      }
+
+      .section--first {
+          margin-top: 90px;
+      }
+  }
+
+  @media (min-width: 992px) {
+      .section__text--last-with-margin:last-child {
+          margin-bottom: 30px;
+      }
+
+      .section__title--no-margin {
+          margin-bottom: 15px;
+      }
+  }
+.partner {
+    display: block;
+    margin: 15px 0;
+
+    &:hover {
+        .partner__img {
+            opacity: 1;
+        }
+    }
+}
+
+.partner__img {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    -webkit-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    transition: 0.4s ease;
+    opacity: 0.75;
+}
+
+@media (min-width: 992px) {
+    .partner {
+        margin: 20px 0;
+    }
+}

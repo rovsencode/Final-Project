@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NwYj3XEymgT9afdD9Ghnk+V6kAJOmi/sG9IRICHU3R6Y6/ZJs5+lWQ643QQhaPzcgqEh9H573bGu4hFXAvqDsA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\Final Project\\server\\App\\RepositoryLayer\\RepositoryLayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.13\\microsoft.windowsdesktop.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.13\\microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.13\\microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
