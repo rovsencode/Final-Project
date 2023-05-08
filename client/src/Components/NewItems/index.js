@@ -30,10 +30,7 @@ export default function ColorTabs() {
       console.log("success");
       setMovie(datas.newRelases); 
     }
-         if (e.target.name === "cartoons") {
-      console.log("success");
-      setMovie(datas.cartoons); 
-    }
+      
     
   }
   const [value, setValue] = React.useState('one');
@@ -72,13 +69,6 @@ export default function ColorTabs() {
     marginTop: '20px',
     fontSize: '1.2rem',
   }} className='tab' value="three" name="series" onClick={handleClick} label="TV SERIES" />
-        <Tab   sx={{
-    color: 'white',
-    textAlign: 'center',
-    marginTop: '20px',
-    fontSize: '1.2rem',
-  }} className='tab' value="four" name="cartoons" onClick={handleClick} label="CARTOONS" />
-
       </Tabs>
     </Box>
 

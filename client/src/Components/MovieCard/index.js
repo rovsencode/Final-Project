@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Icon from '@mdi/react';
 import { mdiHeart } from '@mdi/js';
 import { mdiShare } from '@mdi/js';
-import { Card, CardActionArea, CardMedia, CardHeader, CardActions, IconButton, CardContent, Typography, Chip, Box, Rating } from '@mui/material';
+import { Card, CardActionArea, CardMedia, CardHeader, CardActions, IconButton, CardContent, Typography, Chip, Box, Rating ,} from '@mui/material';
 
-const MovieCard = ({ title, category, imageUrl, description, rating, ageRestriction, quality }) => {
+const MovieCard = ({ title, category, imageUrl, description, rating, ageRestriction, quality,Year }) => {
   const [clickLike, setClickLike] = useState(false);
   const handleClickLike = () => {
     setClickLike(!clickLike)
@@ -23,9 +23,9 @@ const MovieCard = ({ title, category, imageUrl, description, rating, ageRestrict
           />
           <CardContent sx={{ color: 'white' }}>
             <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 18 }}>
-              {title}
+              {title} ({Year})
             </Typography>
-            <Typography variant="body2"  color="white" component="p" sx={{ marginBottom: 1, fontSize: 14 }}>
+            <Typography variant="body2"  color="white" component="p" sx={{ marginBottom: 1, fontSize: 14,opacity:0.6 }}>
               {description.length > 100 ? `${description.slice(0, 100)}...` : description}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
