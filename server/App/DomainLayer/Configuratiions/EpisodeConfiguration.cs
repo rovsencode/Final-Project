@@ -15,6 +15,8 @@ namespace DomainLayer.Configuratiions
         {
             builder.Property(e=>e.EpisodeTitle).IsRequired().HasMaxLength(50);
             builder.Property(e => e.EpisodeNumber).IsRequired();
+            builder.Property(e=> e.isDeleted).HasDefaultValue(false);
+            builder.Property(e => e.CreatedTime).HasDefaultValue(DateTime.UtcNow);
         }
     }
 }

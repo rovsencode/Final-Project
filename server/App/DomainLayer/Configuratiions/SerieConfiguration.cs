@@ -13,13 +13,15 @@ namespace DomainLayer.Configuratiions
     {
         public void Configure(EntityTypeBuilder<Serie> builder)
         {
-            builder.Property(m => m.Name).IsRequired().HasMaxLength(50);
-            builder.Property(m => m.Description).IsRequired().HasMaxLength(100);
-            builder.Property(m => m.Year).IsRequired();
-            builder.Property(m => m.Quality).IsRequired();
-            builder.Property(m => m.AgeRestriction).IsRequired();
-            builder.Property(m => m.ImageUrl).IsRequired();
-            builder.Property(m => m.Raiting).IsRequired();
+            builder.Property(s => s.Name).IsRequired().HasMaxLength(50);
+            builder.Property(s => s.Description).IsRequired().HasMaxLength(100);
+            builder.Property(s => s.Year).IsRequired();
+            builder.Property(s => s.Quality).IsRequired();
+            builder.Property(s => s.AgeRestriction).IsRequired();
+            builder.Property(s => s.ImageUrl).IsRequired();
+            builder.Property(s => s.Raiting).IsRequired();
+            builder.Property(s => s.isDeleted).HasDefaultValue(false);
+            builder.Property(s => s.CreatedTime).HasDefaultValue(DateTime.UtcNow);
         }
     }
 }

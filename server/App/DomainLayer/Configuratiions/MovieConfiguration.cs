@@ -20,6 +20,8 @@ namespace DomainLayer.Configuratiions
             builder.Property(m => m.AgeRestriction).IsRequired();
             builder.Property(m => m.ImageUrl).IsRequired();
             builder.Property(m => m.Raiting).IsRequired();
+            builder.Property(m => m.isDeleted).HasDefaultValue(false);
+            builder.Property(m => m.CreatedTime).HasDefaultValue(DateTime.UtcNow);
 
 
         }

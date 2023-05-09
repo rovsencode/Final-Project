@@ -14,6 +14,8 @@ namespace DomainLayer.Configuratiions
         public void Configure(EntityTypeBuilder<Season> builder)
         {
             builder.Property(s => s.SeasonNumber).IsRequired();
+            builder.Property(s=> s.isDeleted).HasDefaultValue(false);
+            builder.Property(s => s.CreatedTime).HasDefaultValue(DateTime.UtcNow);
         }
     }
 }

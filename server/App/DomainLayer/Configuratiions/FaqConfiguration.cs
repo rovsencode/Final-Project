@@ -15,7 +15,9 @@ namespace DomainLayer.Configuratiions
         {
             builder.Property(f => f.Name).IsRequired().HasMaxLength(50);
             builder.Property(f => f.Description).IsRequired().HasMaxLength(50);
-          
+            builder.Property(f => f.isDeleted).HasDefaultValue(false);
+            builder.Property(f => f.CreatedTime).HasDefaultValue(DateTime.UtcNow);
+
 
         }
     }

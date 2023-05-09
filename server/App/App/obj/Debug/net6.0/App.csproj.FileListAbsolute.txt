@@ -67,3 +67,7 @@ C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\DomainLayer.dl
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\RepositoryLayer.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\RepositoryLayer.pdb
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\ServiceLayer.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\ServiceLayer.pdb

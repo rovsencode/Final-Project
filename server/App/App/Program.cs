@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repostories.Interfaces;
 using RepositoryLayer.Repostories;
+using ServiceLayer.Mappings;
+using ServiceLayer.Services.Interfaces;
+using ServiceLayer.Services;
 
 namespace App
 {
@@ -17,14 +20,23 @@ namespace App
             {
                 options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
+
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
            
 
+            builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
+            {
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }));
             var app = builder.Build();
+            app.UseCors("corspolicy");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
