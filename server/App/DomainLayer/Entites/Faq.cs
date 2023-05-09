@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class Faq:BaseEntity
+    public class Faq:BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }

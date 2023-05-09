@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class MovieActress:BaseEntity
+    public class MovieActress:BaseEntity
     {
         public int MovieId { get; set; }
         public int ActressId { get; set; }

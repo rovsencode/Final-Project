@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class PricingPlans:BaseEntity
+    public class PricingPlans:BaseEntity
     {
         public string PlanName { get; set; }
         public string Property { get; set; }

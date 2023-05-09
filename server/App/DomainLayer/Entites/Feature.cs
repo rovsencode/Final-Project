@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class Feature:BaseEntity
+    public class Feature:BaseEntity
     {
         public string Name { get; set; }
         public string ImageUrL { get; set; }

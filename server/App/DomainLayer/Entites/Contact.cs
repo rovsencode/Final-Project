@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class Contact:BaseEntity
+    public class Contact:BaseEntity
     {
         public string PhoneNumber { get; set; }
         public string MailAccount { get; set; }

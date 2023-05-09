@@ -38,10 +38,6 @@ function Slider() {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat',
 		}} >
-      
- 
-
-
 				<Carousel>
 					<Carousel.Item>
 						<img

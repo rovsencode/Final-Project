@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class Season:BaseEntity
+    public class Season:BaseEntity
     {
         public int SeasonNumber { get; set; }
-        public List<Epizode> Episodes { get; set; }
+        public List<Episode> Episodes { get; set; }
     }
 }

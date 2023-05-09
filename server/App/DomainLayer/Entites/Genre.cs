@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    internal class Genre:BaseEntity
+    public class Genre:BaseEntity
     {
         public string Name { get; set; }
         public List<Movie> Movies { get; set; }
