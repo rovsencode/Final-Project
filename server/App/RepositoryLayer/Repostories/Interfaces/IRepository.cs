@@ -15,6 +15,7 @@ namespace RepositoryLayer.Repostories.Interfaces
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
+        Task SoftDelete(T entity);
         Task<List<T>> Find(Expression<Func<T,bool>> expression);
 
     }

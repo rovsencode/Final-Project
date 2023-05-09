@@ -29,11 +29,16 @@ namespace RepositoryLayer.Repostories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public  async Task Delete(T entity)
+        public  async Task SoftDelete(T entity)
         {
             if (entity == null) throw new ArgumentNullException();
-     
             entity.isDeleted = true;
+            await _appDbContext.SaveChangesAsync();
+        }
+        public async Task Delete(T entity)
+        {
+            if (entity == null) throw new ArgumentNullException();
+            _entites.Remove(entity);
             await _appDbContext.SaveChangesAsync();
         }
 
@@ -53,9 +58,13 @@ namespace RepositoryLayer.Repostories
           return await  _entites.Where(e=>!e.isDeleted).ToListAsync();
         }
 
-        public  Task Update(T entity)
+     
+
+        public  async Task Update(T entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException();
+            _entites.Update(entity);
+            await _appDbContext.SaveChangesAsync();
         }
     }
 }

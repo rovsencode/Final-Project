@@ -15,6 +15,7 @@ namespace ServiceLayer.Mappings
         {
             CreateMap<ContactCreateDto, Contact>();
             CreateMap<Contact, ContactListDto>();
+            CreateMap<ContactUpdateDto, Contact>();
 
         }
     }

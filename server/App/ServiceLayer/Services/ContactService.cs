@@ -33,13 +33,30 @@ namespace ServiceLayer.Services
             var contact = await _repo.Get(id);
             if (contact == null) throw new ArgumentNullException();
             await _repo.Delete(contact);
-            
+        }
+        public async Task SoftDelete(int id)
+        {
+            var contact = await _repo.Get(id);
+            if (contact == null) throw new ArgumentNullException();
+            await _repo.SoftDelete(contact);
         }
 
         public async Task<List<ContactListDto>> GetAll()
         {
             var contacts = await _repo.GetAll();
             return  _mapper.Map<List<ContactListDto>>(contacts);
+        }
+
+        public async Task Update(int id, ContactUpdateDto contact)
+        {
+         
+                var dbContact = await _repo.Get(id);
+                _mapper.Map(contact, dbContact);
+                await _repo.Update(dbContact);
+
+    
+
+
         }
     }
 }

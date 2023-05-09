@@ -35,6 +35,30 @@ namespace App.Controllers
            await _contactService.Delete(id);
             return Ok();
         }
+        [HttpPost("{id}")]
+
+        public async Task<IActionResult> SoftDelete([FromRoute] int id)
+        {
+            await _contactService.SoftDelete(id);
+            return Ok();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id,ContactUpdateDto contact)
+        {
+            try
+            {
+                await _contactService.Update(id, contact);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        
+        }
        
+
+
     }
 }
