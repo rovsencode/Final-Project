@@ -42,9 +42,9 @@ namespace RepositoryLayer.Repostories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public Task<List<T>> Find(Expression<Func<T, bool>> expression)
+        public async Task<List<T>> FindAllByExpression(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await _entites.Where(expression).ToListAsync();
         }
 
         public async Task<T> Get(int id)

@@ -13,6 +13,7 @@ namespace RepositoryLayer.Repostories
     {
         public ContactRepository(AppDbContext appDbContext) : base(appDbContext)
         {
+
         }
     }
 }

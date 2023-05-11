@@ -15,6 +15,7 @@ namespace ServiceLayer.Services.Interfaces
         Task Delete(int id);
         Task SoftDelete(int id);
         Task Update(int id, ContactUpdateDto contact);
+        Task<List<ContactListDto>> Search(string searchText);
         
     }
 }

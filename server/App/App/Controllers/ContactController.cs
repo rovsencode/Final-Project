@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Controllers
 {
@@ -57,7 +58,11 @@ namespace App.Controllers
             }
         
         }
-       
+        [HttpGet]
+       public async Task<IActionResult> Search(string search)
+        {
+            return  Ok(await _contactService.Search(search));
+        }
 
 
     }
