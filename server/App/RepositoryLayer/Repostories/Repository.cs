@@ -52,13 +52,22 @@ namespace RepositoryLayer.Repostories
             return await _entites.FindAsync(id)  ?? throw new NullReferenceException();
            
         }
+        public async Task<T> GetAny()
+        {
+            return await _entites.Where(e=>!e.isDeleted).FirstOrDefaultAsync() ?? throw new NullReferenceException();
+
+        }
 
         public async Task<List<T>> GetAll()
         {
           return await  _entites.Where(e=>!e.isDeleted).ToListAsync();
         }
+        public async Task<T> GetLast()
+        {
+            return await _entites.Where(e => !e.isDeleted).FirstOrDefaultAsync();
+        }
 
-     
+
 
         public  async Task Update(T entity)
         {

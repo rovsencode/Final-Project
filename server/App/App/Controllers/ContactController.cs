@@ -29,6 +29,12 @@ namespace App.Controllers
         {
             return Ok(await _contactService.GetAll());
         }
+        [HttpGet]
+        public async Task<IActionResult> GetLast()
+        {
+            return Ok(await _contactService.GetLast());
+        }
+
         [HttpDelete("{id}")]
      
         public async Task<IActionResult> Delete([FromRoute] int id)

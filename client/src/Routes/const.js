@@ -5,6 +5,9 @@ export const ROUTER = {
     },
     Register: {
         PATH: "/register"
+    },
+    Catalog: {
+        PATH: "/catalog"
     }
 
 }

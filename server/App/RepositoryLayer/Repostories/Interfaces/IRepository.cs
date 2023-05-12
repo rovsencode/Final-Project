@@ -12,6 +12,8 @@ namespace RepositoryLayer.Repostories.Interfaces
     {
         Task<List<T>> GetAll();
         Task<T> Get(int id);
+        Task<T> GetAny();
+        Task<T> GetLast();
         Task Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);

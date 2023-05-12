@@ -9,8 +9,7 @@ namespace DomainLayer.Entites
 {
     public class Partners: BaseEntity
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+ 
         public string ImageUrl  { get; set; }
     }
 }

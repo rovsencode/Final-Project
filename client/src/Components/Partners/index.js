@@ -1,7 +1,15 @@
 import React from 'react'
 import '../Partners/index.scss'
+import { partnerService } from '../../APIs/Services/Partner';
 function Partners() {
-
+  const [partners, setPartners] = React.useState([]);
+   React.useEffect(() => {
+  const fetchData = async () => {
+    const { data } = await partnerService.getAll();
+    setPartners(data);
+  };
+  fetchData();
+  }, []);
     return (
 
       <section className="section">
@@ -25,47 +33,14 @@ function Partners() {
             </div>
             {/* end section text */}
             {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/themeforest-light-background.png" alt="" className="partner__img" />
+            {partners.map(({imageUrl})=>(
+              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+              <a  className="partner">
+                <img src={imageUrl} alt="partner" className="partner__img" />
               </a>
             </div>
-            {/* end partner */}
-            {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/audiojungle-light-background.png" alt="" className="partner__img" />
-              </a>
-            </div>
-            {/* end partner */}
-            {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/codecanyon-light-background.png" alt="" className="partner__img" />
-              </a>
-            </div>
-            {/* end partner */}
-            {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/photodune-light-background.png" alt="" className="partner__img" />
-              </a>
-            </div>
-            {/* end partner */}
-            {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/activeden-light-background.png" alt="" className="partner__img" />
-              </a>
-            </div>
-            {/* end partner */}
-            {/* partner */}
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <a href="#" className="partner">
-                <img src="img/partners/3docean-light-background.png" alt="" className="partner__img" />
-              </a>
-            </div>
-            {/* end partner */}
+          ))}
+
           </div>
         </div>
       </section>

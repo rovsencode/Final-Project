@@ -57,5 +57,17 @@ namespace ServiceLayer.Services
 
         }
 
+        public async Task<Partners> Get(int id)
+        {
+          
+            return await _repo.Get(id);
+        }
+        public async Task<Partners> GetAny()
+        {
+
+            return await _repo.GetAny();
+        }
+
+    
     }
 }

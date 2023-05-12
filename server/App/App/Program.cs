@@ -27,13 +27,16 @@ namespace App
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IContactService, ContactService>();
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
+            builder.Services.AddScoped<IPartnerService, PartnerService>();
+            builder.Services.AddScoped<IPartnerRepository,PartnerRepository>();
+
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
            
 
             builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
             {
-                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                build.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             var app = builder.Build();
             app.UseCors("corspolicy");

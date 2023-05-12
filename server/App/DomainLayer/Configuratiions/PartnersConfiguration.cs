@@ -16,7 +16,6 @@ namespace DomainLayer.Configuratiions
             builder.Property(b => b.ImageUrl).IsRequired();
             builder.Property(b => b.isDeleted).HasDefaultValue(false);
             builder.Property(b => b.CreatedTime).HasDefaultValue(DateTime.UtcNow);
-            builder.Property(b => b.Description).IsRequired().HasMaxLength(100);
         }
     }
 }

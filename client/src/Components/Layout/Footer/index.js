@@ -1,9 +1,25 @@
 import React from 'react'
 import '../Footer/index.scss'
+import { contactService } from '../../../APIs/Services/Contact';
 function Footer() {
+ const [contact, setContact] = React.useState([]);
+React.useEffect(() => {
+  const fetchData = async () => {
+    const { data } = await contactService.getPost();
+    setContact(data);
+  };
+  fetchData();
+}, []);
+  
 
-    return (
+  // React.useEffect(() => {
+  //   console.log(contact);
+  // }, [contact]);
 
+  
+ 
+  return (
+  
       <footer className="footer">
         <div className="container">
           <div className="row">
@@ -39,10 +55,10 @@ function Footer() {
             {/* footer list */}
             <div className="col-12 col-sm-4 col-md-3">
               <h6 className="footer__title">Contact</h6>
-              <ul className="footer__list">
-                <li><a href="tel:+18002345678">+1 (800) 234-5678</a></li>
-                <li><a href="mailto:support@moviego.com">support@flixgo.com</a></li>
-              </ul>
+          	<ul className="footer__list">
+              <li><a href="tel:+18002345678">{contact.phoneNumber }</a></li>
+              <li><a href="mailto:support@moviego.com">{contact.mailAccount}</a></li>
+					</ul>
               <ul className="footer__social">
                 <li className="facebook"><a href="#"><i className="icon ion-logo-facebook" /></a></li>
                 <li className="instagram"><a href="#"><i className="icon ion-logo-instagram" /></a></li>

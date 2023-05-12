@@ -6,7 +6,7 @@ using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PartnerController : ControllerBase
     {
@@ -57,5 +57,11 @@ namespace App.Controllers
             }
 
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAny()
+        {
+            return Ok(await _partnerService.GetAny());
+        }
+
     }
 }

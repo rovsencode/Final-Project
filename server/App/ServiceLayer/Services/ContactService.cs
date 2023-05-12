@@ -65,5 +65,13 @@ namespace ServiceLayer.Services
             var searchDatas= await _repo.FindAllByExpression(m => m.MailAccount.StartsWith(searchText));
     return    _mapper.Map<List<ContactListDto>>(searchDatas);
         }
+
+        public async Task<ContactListDto> GetLast()
+        {
+            var contact = await _repo.GetLast();
+            return _mapper.Map < ContactListDto> (contact);
+        }
+
+     
     }
 }
