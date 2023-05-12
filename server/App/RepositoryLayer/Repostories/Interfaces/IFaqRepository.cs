@@ -5,11 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceLayer.Services.Interfaces
+namespace RepositoryLayer.Repostories.Interfaces
 {
-    public interface IActress
+    public interface IFaqRepository: IRepository<Faq>
     {
-        Task Create(Actress actress);
-        Task<List<Actress>> GetAll();
     }
 }

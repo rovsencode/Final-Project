@@ -11,11 +11,12 @@ namespace ServiceLayer.Services.Interfaces
     public interface IContactService
     {
         Task Create(ContactCreateDto contact);
+      
         Task<List<ContactListDto>> GetAll();
-        Task<ContactListDto> GetLast();
         Task Delete(int id);
         Task SoftDelete(int id);
         Task Update(int id, ContactUpdateDto contact);
+        Task<ContactListDto> GetLast();
         Task<List<ContactListDto>> Search(string searchText);
         
     }
