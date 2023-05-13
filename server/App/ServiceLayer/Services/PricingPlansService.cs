@@ -1,4 +1,9 @@
-﻿using ServiceLayer.DTOs.PricingPlans;
+﻿using AutoMapper;
+using DomainLayer.Entites;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Contact;
+using ServiceLayer.DTOs.Faq;
+using ServiceLayer.DTOs.PricingPlans;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,29 +15,51 @@ namespace ServiceLayer.Services
 {
     public class PricingPlansService : IPricingPlansService
     {
-        public Task Create(PricingPlansCreateDto plan)
+        private readonly IPricingPlansRepository _repo;
+        private readonly IMapper _mapper;
+
+        public PricingPlansService(IMapper mapper, IPricingPlansRepository repo)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _repo = repo;
         }
 
-        public Task Delete(int id)
+
+        public async Task Create(PricingPlansCreateDto plan)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<PricingPlans>(plan);
+            await _repo.Create(mappedData);
         }
 
-        public Task<List<PricingPlansListDto>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var faq = await _repo.Get(id);
+            if (faq == null) throw new ArgumentNullException();
+            await _repo.Delete(faq);
+        }
+        public async Task SoftDelete(int id)
+        {
+            var faq = await _repo.Get(id);
+            if (faq == null) throw new ArgumentNullException();
+            await _repo.SoftDelete(faq);
         }
 
-        public Task SoftDelete(int id)
+        public async Task<List<PricingPlansListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var plans = await _repo.GetAll();
+            return _mapper.Map<List<PricingPlansListDto>>(plans);
         }
 
-        public Task Update(int id, PricingPlansUpdateDto plan)
+        public async Task Update(int id, PricingPlansUpdateDto plan)
         {
-            throw new NotImplementedException();
+
+            var dbPlan = await _repo.Get(id);
+            _mapper.Map(plan, dbPlan);
+            await _repo.Update(dbPlan);
+
+
+
+
         }
     }
 }

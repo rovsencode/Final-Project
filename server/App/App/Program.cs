@@ -29,6 +29,16 @@ namespace App
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
             builder.Services.AddScoped<IPartnerService, PartnerService>();
             builder.Services.AddScoped<IPartnerRepository,PartnerRepository>();
+            builder.Services.AddScoped<IFaqService, FaqService>();
+            builder.Services.AddScoped<IFaqRepository, FaqRepository>();
+            builder.Services.AddScoped<IPricingPlansService, PricingPlansService>();
+            builder.Services.AddScoped<IPricingPlansRepository, PricingPlansRepository>();
+
+            builder.Services.AddScoped<IMovieService, MovieService>();
+            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            builder.Services.AddScoped<IActressService, ActressService>();
+            builder.Services.AddScoped<IActressRepository, ActressRepository>();
+
 
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

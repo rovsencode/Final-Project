@@ -1,4 +1,9 @@
-﻿using ServiceLayer.DTOs.MovieDto;
+﻿using AutoMapper;
+using DomainLayer.Entites;
+using Microsoft.EntityFrameworkCore;
+using RepositoryLayer.Repostories;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,10 +15,26 @@ namespace ServiceLayer.Services
 {
     public class MovieService : IMovieService
     {
-        public Task Create(MovieCreateDto movie)
+        private readonly IMovieRepository _repo;
+    
+        private readonly IMapper _mapper;
+
+        public MovieService(IMapper mapper, IMovieRepository repo)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _repo = repo;
+        
         }
+
+        public async Task Create(MovieCreateDto movie, List<int> actressIds)
+        {
+            var mappedData = _mapper.Map<Movie>(movie);
+            
+            await _repo.Create(await _repo.CreateMany(mappedData, actressIds));
+
+        }
+
+
 
         public Task Delete(int id)
         {

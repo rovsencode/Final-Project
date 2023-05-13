@@ -12,7 +12,7 @@ namespace ServiceLayer.Services.Interfaces
     public interface IActressService
     {
         Task Create(ActressCreateDto actress);
-        Task Update(int id, ContactUpdateDto actress);
+        Task Update(int id, ActressUpdateDto actress);
 
         Task<List<ActressListDto>> GetAll();
         Task Delete(int id);

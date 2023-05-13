@@ -1,4 +1,8 @@
-﻿using ServiceLayer.DTOs.Faq;
+﻿using AutoMapper;
+using DomainLayer.Entites;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Contact;
+using ServiceLayer.DTOs.Faq;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,29 +14,51 @@ namespace ServiceLayer.Services
 {
     public class FaqService : IFaqService
     {
-        public Task Create(FaqCreateDto faq)
+        private readonly IFaqRepository _repo;
+        private readonly IMapper _mapper;
+
+        public FaqService(IMapper mapper, IFaqRepository repo)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _repo = repo;
         }
 
-        public Task Delete(int id)
+        public async Task Create(FaqCreateDto faq)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<Faq>(faq);
+            await _repo.Create(mappedData);
         }
 
-        public Task<List<FaqListDto>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var faq = await _repo.Get(id);
+            if (faq == null) throw new ArgumentNullException();
+            await _repo.Delete(faq);
+        }
+        public async Task SoftDelete(int id)
+        {
+            var faq = await _repo.Get(id);
+            if (faq == null) throw new ArgumentNullException();
+            await _repo.SoftDelete(faq);
         }
 
-        public Task SoftDelete(int id)
+        public async Task<List<FaqListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var faqs = await _repo.GetAll();
+            return _mapper.Map<List<FaqListDto>>(faqs);
         }
 
-        public Task Update(int id, FaqUpdateDto faq)
+        public async Task Update(int id, FaqUpdateDto faq)
         {
-            throw new NotImplementedException();
+
+            var dbFaq = await _repo.Get(id);
+            _mapper.Map(faq, dbFaq);
+            await _repo.Update(dbFaq);
+
+
+
+
         }
+
     }
 }

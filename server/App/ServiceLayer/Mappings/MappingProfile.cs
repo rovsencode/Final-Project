@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using ServiceLayer.DTOs.Contact;
+using ServiceLayer.DTOs.Faq;
+using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.DTOs.Partners;
+using ServiceLayer.DTOs.PricingPlans;
 using ServiceLayer.DTOs.Social;
 using System;
 using System.Collections.Generic;
@@ -24,6 +27,15 @@ namespace ServiceLayer.Mappings
             CreateMap<SocialCreateDto, Social>();
             CreateMap<Social, SocialListDto>();
             CreateMap<SocialUpdateDto, Social>();
+            CreateMap<PricingPlansCreateDto, PricingPlans>();
+            CreateMap<PricingPlans, PricingPlansListDto>();
+            CreateMap<PricingPlansUpdateDto, PricingPlans>();
+            CreateMap<FaqCreateDto, Faq>();
+            CreateMap<Faq, FaqListDto>();
+            CreateMap<FaqUpdateDto, Faq>();
+            CreateMap<MovieCreateDto, Movie>();
+            CreateMap<Movie, MovieListDto>();
+            CreateMap<MovieUpdateDto, Movie>();
 
 
         }

@@ -1,4 +1,6 @@
-﻿using ServiceLayer.DTOs.SerieDto;
+﻿using AutoMapper;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.SerieDto;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,15 @@ namespace ServiceLayer.Services
 {
     public class SerieService : ISerieService
     {
+        private readonly IFaqRepository _repo;
+        private readonly IMapper _mapper;
+
+        public SerieService(IMapper mapper, IFaqRepository repo)
+        {
+            _mapper = mapper;
+            _repo = repo;
+        }
+
         public Task Create(SerieCreateDto serie)
         {
             throw new NotImplementedException();

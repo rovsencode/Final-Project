@@ -1,4 +1,5 @@
-﻿using RepositoryLayer.Repostories.Interfaces;
+﻿using AutoMapper;
+using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.EpisodeDto;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -11,6 +12,15 @@ namespace ServiceLayer.Services
 {
     public class EpisodeService : IEpisodeService
     {
+        private readonly IEpisodeRepository _repo;
+        private readonly IMapper _mapper;
+
+        public EpisodeService(IMapper mapper, IEpisodeRepository repo)
+        {
+            _mapper = mapper;
+            _repo = repo;
+        }
+
         public Task Create(EpisodeCreateDto episode)
         {
             throw new NotImplementedException();

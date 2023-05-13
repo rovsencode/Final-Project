@@ -1,4 +1,6 @@
-﻿using ServiceLayer.DTOs.Genre;
+﻿using AutoMapper;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Genre;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,15 @@ namespace ServiceLayer.Services
 {
     public class GenreService : IGenreService
     {
+        private readonly IGenreRepository _repo;
+        private readonly IMapper _mapper;
+
+        public GenreService(IMapper mapper, IGenreRepository repo)
+        {
+            _mapper = mapper;
+            _repo = repo;
+        }
+
         public Task Create(GenreCreateDto genre)
         {
             throw new NotImplementedException();

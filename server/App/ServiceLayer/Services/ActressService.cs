@@ -1,4 +1,7 @@
-﻿using ServiceLayer.DTOs.Actress;
+﻿using AutoMapper;
+using DomainLayer.Entites;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Actress;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -11,29 +14,52 @@ namespace ServiceLayer.Services
 {
     public class ActressService : IActressService
     {
-        public Task Create(ActressCreateDto actress)
+        private readonly IContactRepository _repo;
+        private readonly IMapper _mapper;
+
+        public ActressService(IMapper mapper, IContactRepository repo)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _repo = repo;
         }
 
-        public Task Delete(int id)
+        public async Task Create(ActressCreateDto actress)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<Contact>(actress);
+            await _repo.Create(mappedData);
         }
 
-        public Task<List<ActressListDto>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var actress = await _repo.Get(id);
+            if (actress == null) throw new ArgumentNullException();
+            await _repo.Delete(actress);
+        }
+        public async Task SoftDelete(int id)
+        {
+            var actress = await _repo.Get(id);
+            if (actress == null) throw new ArgumentNullException();
+            await _repo.SoftDelete(actress);
         }
 
-        public Task SoftDelete(int id)
+        public async Task<List<ActressListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var actreses = await _repo.GetAll();
+            return _mapper.Map<List<ActressListDto>>(actreses);
         }
 
-        public Task Update(int id, ContactUpdateDto actress)
+        public async Task Update(int id, ActressUpdateDto actress)
         {
-            throw new NotImplementedException();
+
+            var dbActress = await _repo.Get(id);
+            _mapper.Map(actress, dbActress);
+            await _repo.Update(dbActress);
+
+
+
+
         }
+
+      
     }
 }

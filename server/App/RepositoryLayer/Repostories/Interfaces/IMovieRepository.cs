@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Entites;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,10 @@ namespace RepositoryLayer.Repostories.Interfaces
 {
     public interface IMovieRepository: IRepository<Movie>
     {
+
+
+        public Task<Movie> CreateMany(Movie movie, List<int> actressIds);
+
+
     }
 }

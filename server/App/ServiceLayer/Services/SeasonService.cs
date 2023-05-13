@@ -1,4 +1,6 @@
-﻿using ServiceLayer.DTOs.Genre;
+﻿using AutoMapper;
+using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.SeasonDto;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -11,6 +13,15 @@ namespace ServiceLayer.Services
 {
     public class SeasonService : ISeasonService
     {
+        private readonly ISeasonRepository _repo;
+        private readonly IMapper _mapper;
+
+        public SeasonService(IMapper mapper, ISeasonRepository repo)
+        {
+            _mapper = mapper;
+            _repo = repo;
+        }
+
         public Task Create(SeasonCreateDto season)
         {
             throw new NotImplementedException();
