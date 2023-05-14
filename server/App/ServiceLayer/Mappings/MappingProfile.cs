@@ -34,6 +34,8 @@ namespace ServiceLayer.Mappings
             CreateMap<Faq, FaqListDto>();
             CreateMap<FaqUpdateDto, Faq>();
             CreateMap<MovieCreateDto, Movie>();
+            CreateMap<Movie, MovieCreateDto>();
+
             CreateMap<Movie, MovieListDto>();
             CreateMap<MovieUpdateDto, Movie>();
 

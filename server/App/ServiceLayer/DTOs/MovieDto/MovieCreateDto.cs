@@ -17,6 +17,6 @@ namespace ServiceLayer.DTOs.MovieDto
         public DateTime Year { get; set; }
         public double Price { get; set; }
         public int Raiting { get; set; }
-        public List<MovieActress> MovieActress { get; set; }
+        public List<int> actressIds { get; set; }
     }
 }

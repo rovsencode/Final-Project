@@ -33,7 +33,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 782, DateTimeKind.Utc).AddTicks(4843));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 494, DateTimeKind.Utc).AddTicks(8927));
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -60,7 +60,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 783, DateTimeKind.Utc).AddTicks(5427));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 495, DateTimeKind.Utc).AddTicks(8583));
 
                     b.Property<string>("MailAccount")
                         .IsRequired()
@@ -96,7 +96,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 783, DateTimeKind.Utc).AddTicks(6291));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 496, DateTimeKind.Utc).AddTicks(3080));
 
                     b.Property<int>("EpisodeNumber")
                         .HasColumnType("int");
@@ -132,7 +132,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 784, DateTimeKind.Utc).AddTicks(4724));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 497, DateTimeKind.Utc).AddTicks(5648));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -165,7 +165,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 785, DateTimeKind.Utc).AddTicks(3706));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 499, DateTimeKind.Utc).AddTicks(1550));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -201,7 +201,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 796, DateTimeKind.Utc).AddTicks(2006));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 501, DateTimeKind.Utc).AddTicks(3218));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -226,9 +226,6 @@ namespace RepositoryLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ActressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AgeRestriction")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,7 +233,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 796, DateTimeKind.Utc).AddTicks(3132));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 501, DateTimeKind.Utc).AddTicks(4348));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -274,8 +271,6 @@ namespace RepositoryLayer.Migrations
                         .HasDefaultValue(false);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActressId");
 
                     b.HasIndex("GenreId");
 
@@ -322,7 +317,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 797, DateTimeKind.Utc).AddTicks(838));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 502, DateTimeKind.Utc).AddTicks(4096));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -349,7 +344,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 798, DateTimeKind.Utc).AddTicks(34));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(5546));
 
                     b.Property<string>("PlanName")
                         .IsRequired()
@@ -385,7 +380,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 798, DateTimeKind.Utc).AddTicks(856));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(6362));
 
                     b.Property<int>("SeasonNumber")
                         .HasColumnType("int");
@@ -420,7 +415,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 798, DateTimeKind.Utc).AddTicks(2085));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(7612));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -504,7 +499,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 12, 11, 13, 31, 798, DateTimeKind.Utc).AddTicks(9487));
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 504, DateTimeKind.Utc).AddTicks(5598));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -534,10 +529,6 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entites.Movie", b =>
                 {
-                    b.HasOne("DomainLayer.Entites.Actress", null)
-                        .WithMany("MovieActress")
-                        .HasForeignKey("ActressId");
-
                     b.HasOne("DomainLayer.Entites.Genre", null)
                         .WithMany("Movies")
                         .HasForeignKey("GenreId");
@@ -546,13 +537,13 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entites.MovieActress", b =>
                 {
                     b.HasOne("DomainLayer.Entites.Actress", "Actress")
-                        .WithMany()
+                        .WithMany("MovieActress")
                         .HasForeignKey("ActressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Entites.Movie", "Movie")
-                        .WithMany("MovieActress")
+                        .WithMany("MovieActresses")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -611,7 +602,7 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entites.Movie", b =>
                 {
-                    b.Navigation("MovieActress");
+                    b.Navigation("MovieActresses");
                 });
 
             modelBuilder.Entity("DomainLayer.Entites.Season", b =>

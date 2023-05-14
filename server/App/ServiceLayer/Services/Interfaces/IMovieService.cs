@@ -10,7 +10,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IMovieService
     {
-        Task Create(MovieCreateDto movie, List<int> actressIds);
+        Task Create(MovieCreateDto movie);
 
         Task Update(int id, MovieUpdateDto movie);
 

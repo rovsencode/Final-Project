@@ -26,11 +26,12 @@ namespace ServiceLayer.Services
         
         }
 
-        public async Task Create(MovieCreateDto movie, List<int> actressIds)
+        public async Task Create(MovieCreateDto movie)
         {
             var mappedData = _mapper.Map<Movie>(movie);
-            
-            await _repo.Create(await _repo.CreateMany(mappedData, actressIds));
+            await _repo.Create(mappedData);
+           await _repo.CreateMany(mappedData, movie.actressIds);
+
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Entites;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RepositoryLayer.Data;
 using RepositoryLayer.Repostories.Interfaces;
 using System;
@@ -14,32 +15,42 @@ namespace RepositoryLayer.Repostories
     {
 
         private readonly IActressRepository _repo;
-
+        private readonly AppDbContext _appDbContext;
 
         public MovieRepository(AppDbContext appDbContext, IActressRepository repo) : base(appDbContext)
         {
 
             _repo = repo;
-
+            _appDbContext = appDbContext;
         }
 
       
 
-        public async Task<Movie> CreateMany(Movie movie, List<int> actressIds)
+        public async Task CreateMany(Movie movie,List<int> actressIds)
         {
 
-
+            
             var actresses = await _repo.FindAllByExpression(a => actressIds.Contains(a.Id));
 
-
+            movie.MovieActresses = new();
             foreach (var actress in actresses)
             {
-                movie.MovieActress.Add(new MovieActress { Actress = actress });
+                movie.MovieActresses.Add(new MovieActress {
+                    ActressId=actress.Id,
+                    MovieId=movie.Id,
+                      isDeleted = false,
+                    CreatedTime = DateTime.UtcNow,
+                });
+              
+             
+               
+
             }
-
-
-
-            return movie;
+           
+           
+            await _appDbContext.SaveChangesAsync();
+           
+           
         }
     }
 }

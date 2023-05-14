@@ -12,8 +12,8 @@ using RepositoryLayer.Data;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230509072136_initial")]
-    partial class initial
+    [Migration("20230514092117_edit")]
+    partial class edit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,14 +33,18 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 494, DateTimeKind.Utc).AddTicks(8927));
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -56,7 +60,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 495, DateTimeKind.Utc).AddTicks(8583));
 
                     b.Property<string>("MailAccount")
                         .IsRequired()
@@ -69,7 +75,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -88,7 +96,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 496, DateTimeKind.Utc).AddTicks(3080));
 
                     b.Property<int>("EpisodeNumber")
                         .HasColumnType("int");
@@ -102,7 +112,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -120,7 +132,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 497, DateTimeKind.Utc).AddTicks(5648));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -133,7 +147,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -149,7 +165,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 499, DateTimeKind.Utc).AddTicks(1550));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -165,7 +183,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -181,7 +201,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 501, DateTimeKind.Utc).AddTicks(3218));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -189,7 +211,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -204,15 +228,14 @@ namespace RepositoryLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ActressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("AgeRestriction")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 501, DateTimeKind.Utc).AddTicks(4348));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -245,11 +268,11 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActressId");
 
                     b.HasIndex("GenreId");
 
@@ -294,23 +317,18 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 502, DateTimeKind.Utc).AddTicks(4096));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -326,7 +344,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(5546));
 
                     b.Property<string>("PlanName")
                         .IsRequired()
@@ -342,7 +362,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -358,7 +380,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(6362));
 
                     b.Property<int>("SeasonNumber")
                         .HasColumnType("int");
@@ -367,7 +391,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -389,7 +415,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 503, DateTimeKind.Utc).AddTicks(7612));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -422,7 +450,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -469,7 +499,9 @@ namespace RepositoryLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 14, 9, 21, 17, 504, DateTimeKind.Utc).AddTicks(5598));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -481,7 +513,9 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -497,10 +531,6 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entites.Movie", b =>
                 {
-                    b.HasOne("DomainLayer.Entites.Actress", null)
-                        .WithMany("MovieActress")
-                        .HasForeignKey("ActressId");
-
                     b.HasOne("DomainLayer.Entites.Genre", null)
                         .WithMany("Movies")
                         .HasForeignKey("GenreId");
@@ -509,13 +539,13 @@ namespace RepositoryLayer.Migrations
             modelBuilder.Entity("DomainLayer.Entites.MovieActress", b =>
                 {
                     b.HasOne("DomainLayer.Entites.Actress", "Actress")
-                        .WithMany()
+                        .WithMany("MovieActress")
                         .HasForeignKey("ActressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DomainLayer.Entites.Movie", "Movie")
-                        .WithMany("MovieActress")
+                        .WithMany("MovieActresses")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -574,7 +604,7 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entites.Movie", b =>
                 {
-                    b.Navigation("MovieActress");
+                    b.Navigation("MovieActresses");
                 });
 
             modelBuilder.Entity("DomainLayer.Entites.Season", b =>

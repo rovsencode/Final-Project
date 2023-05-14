@@ -12,7 +12,7 @@ namespace RepositoryLayer.Repostories.Interfaces
     {
 
 
-        public Task<Movie> CreateMany(Movie movie, List<int> actressIds);
+        public Task CreateMany(Movie movie, List<int> actressIds);
 
 
     }

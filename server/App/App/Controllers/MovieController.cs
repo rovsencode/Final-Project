@@ -17,11 +17,10 @@ namespace App.Controllers
             _movieService = movieService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]MovieCreateDto movie,List<int> actressIds)
+        public async Task<IActionResult> Create([FromBody]MovieCreateDto movie)
         {
             if (movie == null) return NotFound();
-            if (actressIds == null) return NotFound();
-            await _movieService.Create(movie, actressIds);
+            await _movieService.Create(movie);
             return Ok();
         }
     }

@@ -16,8 +16,8 @@ namespace RepositoryLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 369, DateTimeKind.Utc).AddTicks(1842))
                 },
                 constraints: table =>
                 {
@@ -32,8 +32,8 @@ namespace RepositoryLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PhoneNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MailAccount = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 370, DateTimeKind.Utc).AddTicks(750))
                 },
                 constraints: table =>
                 {
@@ -48,8 +48,8 @@ namespace RepositoryLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 371, DateTimeKind.Utc).AddTicks(509))
                 },
                 constraints: table =>
                 {
@@ -65,8 +65,8 @@ namespace RepositoryLayer.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 371, DateTimeKind.Utc).AddTicks(9450))
                 },
                 constraints: table =>
                 {
@@ -80,8 +80,8 @@ namespace RepositoryLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 373, DateTimeKind.Utc).AddTicks(7129))
                 },
                 constraints: table =>
                 {
@@ -94,11 +94,9 @@ namespace RepositoryLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 374, DateTimeKind.Utc).AddTicks(6136))
                 },
                 constraints: table =>
                 {
@@ -114,8 +112,8 @@ namespace RepositoryLayer.Migrations
                     PlanName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Property = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 375, DateTimeKind.Utc).AddTicks(5451))
                 },
                 constraints: table =>
                 {
@@ -130,8 +128,8 @@ namespace RepositoryLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 376, DateTimeKind.Utc).AddTicks(5638))
                 },
                 constraints: table =>
                 {
@@ -152,19 +150,13 @@ namespace RepositoryLayer.Migrations
                     Year = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Raiting = table.Column<int>(type: "int", nullable: false),
-                    ActressId = table.Column<int>(type: "int", nullable: true),
                     GenreId = table.Column<int>(type: "int", nullable: true),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 373, DateTimeKind.Utc).AddTicks(8666))
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movie", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Movie_Actress_ActressId",
-                        column: x => x.ActressId,
-                        principalTable: "Actress",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Movie_Genre_GenreId",
                         column: x => x.GenreId,
@@ -187,8 +179,8 @@ namespace RepositoryLayer.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     Raiting = table.Column<int>(type: "int", nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: true),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 375, DateTimeKind.Utc).AddTicks(7404))
                 },
                 constraints: table =>
                 {
@@ -236,8 +228,8 @@ namespace RepositoryLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SeasonNumber = table.Column<int>(type: "int", nullable: false),
                     SerieId = table.Column<int>(type: "int", nullable: true),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 375, DateTimeKind.Utc).AddTicks(6226))
                 },
                 constraints: table =>
                 {
@@ -287,8 +279,8 @@ namespace RepositoryLayer.Migrations
                     EpisodeTitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AirDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SeasonId = table.Column<int>(type: "int", nullable: true),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 14, 9, 6, 56, 370, DateTimeKind.Utc).AddTicks(1823))
                 },
                 constraints: table =>
                 {
@@ -304,11 +296,6 @@ namespace RepositoryLayer.Migrations
                 name: "IX_Episode_SeasonId",
                 table: "Episode",
                 column: "SeasonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movie_ActressId",
-                table: "Movie",
-                column: "ActressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movie_GenreId",
@@ -382,10 +369,10 @@ namespace RepositoryLayer.Migrations
                 name: "Movie");
 
             migrationBuilder.DropTable(
-                name: "Serie");
+                name: "Actress");
 
             migrationBuilder.DropTable(
-                name: "Actress");
+                name: "Serie");
 
             migrationBuilder.DropTable(
                 name: "Genre");
