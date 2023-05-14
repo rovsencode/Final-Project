@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.Services.Interfaces;
@@ -21,9 +22,10 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public Task Create(GenreCreateDto genre)
+        public async Task Create(GenreCreateDto genre)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<Genre>(genre);
+            await _repo.Create(mappedData);
         }
 
         public Task Delete(int id)

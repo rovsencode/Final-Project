@@ -15,23 +15,25 @@ namespace RepositoryLayer.Repostories
     {
 
         private readonly IActressRepository _repo;
+        private readonly IGenreRepository _genreRepository;
         private readonly AppDbContext _appDbContext;
 
-        public MovieRepository(AppDbContext appDbContext, IActressRepository repo) : base(appDbContext)
+        public MovieRepository(AppDbContext appDbContext, IActressRepository repo, IGenreRepository genreRepository) : base(appDbContext)
         {
 
             _repo = repo;
             _appDbContext = appDbContext;
+            _genreRepository = genreRepository;
         }
 
-      
+
 
         public async Task CreateMany(Movie movie,List<int> actressIds)
         {
 
             
             var actresses = await _repo.FindAllByExpression(a => actressIds.Contains(a.Id));
-
+       
             movie.MovieActresses = new();
             foreach (var actress in actresses)
             {
@@ -41,6 +43,7 @@ namespace RepositoryLayer.Repostories
                       isDeleted = false,
                     CreatedTime = DateTime.UtcNow,
                 });
+             
               
              
                

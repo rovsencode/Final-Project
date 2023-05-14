@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.EpisodeDto;
 using ServiceLayer.Services.Interfaces;
@@ -21,9 +22,10 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public Task Create(EpisodeCreateDto episode)
+        public async Task Create(EpisodeCreateDto episode)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<Episode>(episode);
+            await _repo.Create(mappedData);
         }
 
         public Task Delete(int id)

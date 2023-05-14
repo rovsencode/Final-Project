@@ -11,5 +11,7 @@ namespace DomainLayer.Entites
     {
         public int SeasonNumber { get; set; }
         public List<Episode> Episodes { get; set; }
+        public Serie Serie { get; set; }
+        public int SerieId { get; set; }
     }
 }

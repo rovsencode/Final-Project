@@ -12,5 +12,7 @@ namespace DomainLayer.Entites
         public int EpisodeNumber { get; set; }
         public string EpisodeTitle { get; set; }
         public DateTime AirDate { get; set; }
+        public Season Season { get; set; }
+        public int SeasonId { get; set; }
     }
 }

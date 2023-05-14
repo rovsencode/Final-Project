@@ -10,7 +10,6 @@ namespace ServiceLayer.DTOs.Genre
     public class GenreCreateDto
     {
         public string Name { get; set; }
-        public List<Movie> Movies { get; set; }
-        public List<Serie> Series { get; set; }
+
     }
 }

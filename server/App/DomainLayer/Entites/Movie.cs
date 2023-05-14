@@ -17,7 +17,9 @@ namespace DomainLayer.Entites
         public DateTime Year { get; set;}
         public double  Price { get; set;}
         public int Raiting { get; set;}
-        public List<MovieActress> MovieActresses { get; set; }
+        public List<MovieActress> MovieActresses{ get; set; }
+        public Genre Genre { get; set; }
+        public int? GenreId { get; set; }
 
     }
 }

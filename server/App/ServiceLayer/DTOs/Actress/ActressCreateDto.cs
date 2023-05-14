@@ -10,7 +10,6 @@ namespace ServiceLayer.DTOs.Actress
     public class ActressCreateDto
     {
         public string FullName { get; set; }
-        public List<SerieActress> SerieActress { get; set; }
-        public List<Movie> MovieActress { get; set; }
+
     }
 }

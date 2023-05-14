@@ -14,10 +14,10 @@ namespace ServiceLayer.Services
 {
     public class ActressService : IActressService
     {
-        private readonly IContactRepository _repo;
+        private readonly IActressRepository _repo;
         private readonly IMapper _mapper;
 
-        public ActressService(IMapper mapper, IContactRepository repo)
+        public ActressService(IMapper mapper, IActressRepository repo)
         {
             _mapper = mapper;
             _repo = repo;
@@ -25,7 +25,7 @@ namespace ServiceLayer.Services
 
         public async Task Create(ActressCreateDto actress)
         {
-            var mappedData = _mapper.Map<Contact>(actress);
+            var mappedData = _mapper.Map<Actress>(actress);
             await _repo.Create(mappedData);
         }
 

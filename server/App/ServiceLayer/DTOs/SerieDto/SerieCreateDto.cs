@@ -17,7 +17,11 @@ namespace ServiceLayer.DTOs.SerieDto
         public DateTime Year { get; set; }
         public double Price { get; set; }
         public int Raiting { get; set; }
-        public List<Season> Seasons { get; set; }
-        public List<SerieActress> SerieActress { get; set; }
+        public List<int> Seasons { get; set; }
+        public List<int> Episodes { get; set; }
+        public List<int> actressIds { get; set; }
+        public int GenreId { get; set; }
+        public string EpisodeTitle { get; set; }
+        public DateTime AirDate { get; set; }
     }
 }

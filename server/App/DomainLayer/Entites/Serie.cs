@@ -19,6 +19,8 @@ namespace DomainLayer.Entites
         public int Raiting { get; set; }
         public List<Season> Seasons { get; set; }
         public List<SerieActress> SerieActress{ get; set; }
+        public Genre Genre { get; set; }
+        public int GenreId { get; set; }
 
     }
 }

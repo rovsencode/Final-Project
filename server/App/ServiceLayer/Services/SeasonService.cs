@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.SeasonDto;
@@ -22,9 +23,10 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public Task Create(SeasonCreateDto season)
+        public async Task Create(SeasonCreateDto season)
         {
-            throw new NotImplementedException();
+            var mappedData = _mapper.Map<Season>(season);
+            await _repo.Create(mappedData);
         }
 
         public Task Delete(int id)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.SerieDto;
 using ServiceLayer.Services.Interfaces;
@@ -12,18 +13,32 @@ namespace ServiceLayer.Services
 {
     public class SerieService : ISerieService
     {
-        private readonly IFaqRepository _repo;
+        private readonly ISerieRepository _repo;
         private readonly IMapper _mapper;
 
-        public SerieService(IMapper mapper, IFaqRepository repo)
+        public SerieService(IMapper mapper, ISerieRepository repo)
         {
             _mapper = mapper;
             _repo = repo;
         }
 
-        public Task Create(SerieCreateDto serie)
+        public async Task Create(SerieCreateDto serieCreateDto)
         {
-            throw new NotImplementedException();
+            Serie serie = new() {
+                Name=serieCreateDto.Name,
+                AgeRestriction=serieCreateDto.AgeRestriction,
+                Description=serieCreateDto.Description,
+                ImageUrl=serieCreateDto.ImageUrl,
+                Raiting=serieCreateDto.Raiting,
+                Quality=serieCreateDto.Quality,
+                Price=serieCreateDto.Price,
+                Year=serieCreateDto.Year,
+                GenreId=serieCreateDto.GenreId,
+            };
+
+            await _repo.Create(serie);
+           await _repo.CreateMany(serie, serieCreateDto.actressIds, serieCreateDto.Seasons, serieCreateDto.Episodes, serieCreateDto.EpisodeTitle, serieCreateDto.AirDate);
+
         }
 
         public Task Delete(int id)
