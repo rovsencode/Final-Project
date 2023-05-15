@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.SerieDto;
 using ServiceLayer.Services.Interfaces;
+using System.Linq.Expressions;
 
 namespace App.Controllers
 {
@@ -20,6 +21,14 @@ namespace App.Controllers
         {
            await _serieService.Create(serie);
             return Ok();
-        } 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Filter(int genreId,string qualty,int imdbStar,int imdbEnd, DateTime startYear,DateTime endYear)
+        {
+         return Ok( await _serieService.Filter(genreId,qualty,imdbStar,imdbEnd,startYear,endYear));
+            
+
+        }
     }
 }

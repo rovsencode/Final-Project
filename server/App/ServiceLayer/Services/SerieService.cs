@@ -46,6 +46,13 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Serie>> Filter(int genreId, string quailty, int imdbStart, int imdbEnd, DateTime starYear, DateTime endYear)
+        {
+
+        var series= await   _repo.FindAllByExpression(s => s.GenreId == genreId && s.Quality == quailty && s.Raiting>=imdbStart && s.Raiting<=imdbEnd && s.Year>=starYear && s.Year<=endYear);
+            return (series);
+        }
+
         public Task<List<SerieListDto>> GetAll()
         {
             throw new NotImplementedException();

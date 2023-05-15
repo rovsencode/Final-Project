@@ -8,6 +8,8 @@ namespace RepositoryLayer.Repostories
     {
         private readonly IActressRepository _repo;
         private readonly AppDbContext _appDbContext;
+        int count=0;
+
         public SerieRepository(AppDbContext appDbContext, IActressRepository repo) : base(appDbContext)
         {
             _repo = repo;
@@ -34,33 +36,30 @@ namespace RepositoryLayer.Repostories
           serie.Seasons= new();
             foreach (var number in seasonNumbers)
             {
-               
                 Season season = new();
                 season.SerieId = serie.Id;
                 season.SeasonNumber = number;
                 serie.Seasons.Add(season);
+                
                 await _appDbContext.SaveChangesAsync();
                 season.Episodes = new();
 
-                foreach (var epiNum in episodes)
-                {
-                    for (int i = 0; i <= epiNum; i++)
-                    {
-                        Episode episode = new();
+                Episode episode = new();
+                episode.AirDate = airDate;
+                episode.EpisodeTitle = epiTitle;
+                episode.EpisodeNumber = episodes[count];
+                episode.SeasonId = season.Id;
+                 season.Episodes.Add(episode);
+                count = count + 1;
 
-                        episode.AirDate = airDate;
-                        episode.EpisodeTitle = epiTitle;
-                        episode.EpisodeNumber = epiNum;
-                        episode.SeasonId = season.Id;
-                        season.Episodes.Add(episode);
-                    }
-                }
+
             }
             await _appDbContext.SaveChangesAsync();
 
           
 
         }
+       
 
  
     }
