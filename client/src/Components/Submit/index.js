@@ -17,13 +17,13 @@ function handleFileChange(event) {
 
 
   function handleSubmit(event) {
+          console.log(event.target);    
       event.preventDefault();
       const data = {
          
       title: "React",
       description: "react image upload",
       imageUrl:file,
- 
       };
           
       console.log(data);

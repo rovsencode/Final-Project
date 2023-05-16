@@ -1,20 +1,68 @@
-import React from 'react'
-import Submit from '../../Components/Submit'
-import '../Catalog/index.scss'
-import background from '../Catalog/section.jpg'
+import React, { useState } from "react";
+import { Dropdown } from "primereact/dropdown";
+import Submit from "../../Components/Submit";
+import { Slider, colors } from "@mui/material";
+
+import { Stack } from "@mui/material";
+import { Pagination } from "@mui/material";
+import "../Catalog/index.scss";
+import background from "../Catalog/section.jpg";
+import { genreService } from "../../APIs/Services/GenreService";
+import { qualityService } from "../../APIs/Services/QualityService";
+
 function Catalog() {
+  const [deger, setDeger] = useState([0, 5]);
+
+  const handleSliderChange = (event, newValue) => {
+    setDeger(newValue);
+  };
+  const [yearFil, setYearFil] = useState([2000, 2015]);
+
+  const handleSliderYear = (event, newValue) => {
+    setYearFil(newValue);
+  };
+  const [selectedGenre, setSelectedGenre] = React.useState([]);
+  const [genres, setGenres] = React.useState([]);
+  const [selectedQualty, setSelectedQualty] = React.useState([]);
+  const [qualtys, setQualtys] = React.useState();
+  React.useEffect(() => {
+    const fetchGenre = async () => {
+      const { data } = await genreService.getAll();
+      setGenres(data);
+    };
+    fetchGenre();
+    const fetchQuality = async () => {
+      const { data } = await qualityService.getAll();
+      // console.log(data);
+      setQualtys(data);
+    };
+    fetchQuality();
+    console.log(qualtys);
+  }, []);
+
   return (
-      <>
-      <section className="section catalog section--first section--bg" style={{
-        backgroundImage: `url(${background})`,
-      
-			backgroundSize: 'cover',
-			backgroundPosition: 'center center',
-			backgroundRepeat: 'no-repeat',}} >
+    <>
+      <section
+        className="section catalog section--first section--bg"
+        style={{
+          backgroundImage: `url(${background})`,
+
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="section__wrap"  style={{display:'flex',textAlign:'center',justifyContent:'center'}} >
+              <div
+                className="section__wrap"
+                style={{
+                  display: "flex",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
                 {/* section title */}
                 <h2 className="section__title">Catalog</h2>
                 {/* end section title */}
@@ -29,7 +77,6 @@ function Catalog() {
           </div>
         </div>
       </section>
- 
 
       <div className="filter">
         <div className="container">
@@ -40,76 +87,65 @@ function Catalog() {
                   {/* filter item */}
                   <div className="filter__item" id="filter__genre">
                     <span className="filter__item-label">GENRE:</span>
-                    <div className="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <input type="button" defaultValue="Action/Adventure" />
-                      <span />
-                    </div>
-                    <ul className="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
-                      <li>Action/Adventure</li>
-                      <li>Animals</li>
-                      <li>Animation</li>
-                      <li>Biography</li>
-                      <li>Comedy</li>
-                      <li>Cooking</li>
-                      <li>Dance</li>
-                      <li>Documentary</li>
-                      <li>Drama</li>
-                      <li>Education</li>
-                      <li>Entertainment</li>
-                      <li>Family</li>
-                      <li>Fantasy</li>
-                      <li>History</li>
-                      <li>Horror</li>
-                      <li>Independent</li>
-                      <li>International</li>
-                      <li>Kids</li>
-                      <li>Kids &amp; Family</li>
-                      <li>Medical</li>
-                      <li>Military/War</li>
-                      <li>Music</li>
-                      <li>Musical</li>
-                      <li>Mystery/Crime</li>
-                      <li>Nature</li>
-                      <li>Paranormal</li>
-                      <li>Politics</li>
-                      <li>Racing</li>
-                      <li>Romance</li>
-                      <li>Sci-Fi/Horror</li>
-                      <li>Science</li>
-                      <li>Science Fiction</li>
-                      <li>Science/Nature</li>
-                      <li>Spanish</li>
-                      <li>Travel</li>
-                      <li>Western</li>
-                    </ul>
+                    <Dropdown
+                      value={selectedGenre}
+                      onChange={(e) => setSelectedGenre(e.value)}
+                      options={genres}
+                      optionLabel="name"
+                      showClear
+                      placeholder="Select a genre"
+                      className="w-full md:w-14rem"
+                      style={{ backgroundColor: "#2B2B31", color: "white" }}
+                    />{" "}
                   </div>
                   {/* end filter item */}
                   {/* filter item */}
                   <div className="filter__item" id="filter__quality">
                     <span className="filter__item-label">QUALITY:</span>
-                    <div className="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <input type="button" defaultValue="HD 1080" />
-                      <span />
-                    </div>
-                    <ul className="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-quality">
-                      <li>HD 1080</li>
-                      <li>HD 720</li>
-                      <li>DVD</li>
-                      <li>TS</li>
-                    </ul>
+                    <Dropdown
+                      value={selectedQualty}
+                      onChange={(e) => setSelectedQualty(e.value)}
+                      options={qualtys}
+                      optionLabel="name"
+                      showClear
+                      placeholder="Select a quality"
+                      className="w-full md:w-14rem"
+                      style={{ backgroundColor: "#2B2B31", color: "white" }}
+                    />
                   </div>
                   {/* end filter item */}
                   {/* filter item */}
                   <div className="filter__item" id="filter__rate">
                     <span className="filter__item-label">IMBd:</span>
-                    <div className="filter__item-btn dropdown-toggle" role="button" id="filter-rate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div
+                      className="filter__item-btn dropdown-toggle"
+                      role="button"
+                      id="filter-rate"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
                       <div className="filter__range">
-                        <div id="filter__imbd-start">2.5</div>
-                        <div id="filter__imbd-end">8.4</div>
+                        <div id="filter__imbd-start">{deger[0]} </div>
+                        <div id="filter__imbd-end">{deger[1]}</div>
                       </div>
-                      <span />
+                      <span></span>
                     </div>
-                    <div className="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-rate">
+                    <div>
+                      <Slider
+                        style={{ width: "150px" }}
+                        value={deger}
+                        onChange={handleSliderChange}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                        min={0}
+                        max={10}
+                      />
+                    </div>
+                    <div
+                      className="filter__item-menu filter__item-menu--range dropdown-menu"
+                      aria-labelledby="filter-rate"
+                    >
                       <div id="filter__imbd" />
                     </div>
                   </div>
@@ -117,29 +153,57 @@ function Catalog() {
                   {/* filter item */}
                   <div className="filter__item" id="filter__year">
                     <span className="filter__item-label">RELEASE YEAR:</span>
-                    <div className="filter__item-btn dropdown-toggle" role="button" id="filter-year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div
+                      className="filter__item-btn dropdown-toggle"
+                      role="button"
+                      id="filter-year"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
                       <div className="filter__range">
-                        <div id="filter__years-start" >2005</div>
-                        <div id="filter__years-end" >2015</div>
+                        <div id="filter__years-start">{yearFil[0]}</div>
+                        <div id="filter__years-end">{yearFil[1]}</div>
                       </div>
                       <span />
                     </div>
-                    <div className="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-year">
-                      <div id="filter__years" />
+                    <div>
+                      <Slider
+                        style={{ width: "150px" }}
+                        value={yearFil}
+                        onChange={handleSliderYear}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                        min={2000}
+                        max={2020}
+                      />
                     </div>
                   </div>
                   {/* end filter item */}
                 </div>
                 {/* filter btn */}
-                <button className="filter__btn" type="button">apply filter</button>
+                <button className="filter__btn" type="button">
+                  apply filter
+                </button>
                 {/* end filter btn */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      </>
-    );
-  }
+      <div style={{ marginLeft: "500px" }}>
+        <Stack spacing={2}>
+          <Pagination
+            count={10}
+            color="secondary"
+            style={{
+              width: "10000px",
+            }}
+          />
+        </Stack>
+      </div>
+    </>
+  );
+}
 
-export default Catalog
+export default Catalog;

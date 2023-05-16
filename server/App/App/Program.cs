@@ -42,6 +42,8 @@ namespace App
             builder.Services.AddScoped<ISerieRepository, SerieRepository>();
             builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+            builder.Services.AddScoped<IQualityService, QualityService>();
+            builder.Services.AddScoped<IQualityRepository, QualityRepository>();
 
 
 

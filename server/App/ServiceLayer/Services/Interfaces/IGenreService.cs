@@ -12,7 +12,6 @@ namespace ServiceLayer.Services.Interfaces
     {
         Task Create(GenreCreateDto genre);
         Task Update(int id, GenreUpdateDto genre);
-
         Task<List<GenreListDto>> GetAll();
         Task Delete(int id);
         Task SoftDelete(int id);

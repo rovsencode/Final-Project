@@ -2,42 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Slider/index.scss'
-import background from '../Slider/hero-area.png'
+// import background from '../Slider/hero-area.png'
 import Carousel from 'react-bootstrap/Carousel';
 
-
-
-
-
 function Slider() {
-	
-    const  handleChange=  (index)=> {
-        console.log('Slide changed to', index);
-  };
-   const handleClickItem=(index, item)=>{
-        console.log('Item clicked', index, item);
-  };
-   const  handleClickThumb= (index, item)=> {
-        console.log('Thumb clicked', index, item);
-  };
-  const [index, setIndex] = useState(0)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
-    }, 3000);
-    return () => clearInterval(interval)
-  }, [])
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
 	return (
-		<div className="home" style={{
-			backgroundImage: `url(${background})`,
-      
-			backgroundSize: 'cover',
-			backgroundPosition: 'center center',
-			backgroundRepeat: 'no-repeat',
-		}} >
+		<div className="home" 
+		 >
 				<Carousel>
 					<Carousel.Item>
 						<img

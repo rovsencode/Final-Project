@@ -24,7 +24,7 @@ namespace App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Filter(int genreId,string qualty,int imdbStar,int imdbEnd, DateTime startYear,DateTime endYear)
+        public async Task<IActionResult> Filter(int genreId,int qualty,int imdbStar,int imdbEnd, DateTime startYear,DateTime endYear)
         {
          return Ok( await _serieService.Filter(genreId,qualty,imdbStar,imdbEnd,startYear,endYear));
             

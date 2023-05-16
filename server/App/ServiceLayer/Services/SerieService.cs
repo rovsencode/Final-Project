@@ -30,14 +30,13 @@ namespace ServiceLayer.Services
                 Description=serieCreateDto.Description,
                 ImageUrl=serieCreateDto.ImageUrl,
                 Raiting=serieCreateDto.Raiting,
-                Quality=serieCreateDto.Quality,
                 Price=serieCreateDto.Price,
                 Year=serieCreateDto.Year,
                 GenreId=serieCreateDto.GenreId,
             };
 
             await _repo.Create(serie);
-           await _repo.CreateMany(serie, serieCreateDto.actressIds, serieCreateDto.Seasons, serieCreateDto.Episodes, serieCreateDto.EpisodeTitle, serieCreateDto.AirDate);
+           await _repo.CreateMany(serie, serieCreateDto.actressIds, serieCreateDto.Seasons, serieCreateDto.Episodes, serieCreateDto.EpisodeTitle, serieCreateDto.AirDate,serieCreateDto.qualityIds);
 
         }
 
@@ -46,10 +45,10 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<Serie>> Filter(int genreId, string quailty, int imdbStart, int imdbEnd, DateTime starYear, DateTime endYear)
+        public async Task<List<Serie>> Filter(int genreId, int qualtyId, int imdbStart, int imdbEnd, DateTime starYear, DateTime endYear)
         {
-
-        var series= await   _repo.FindAllByExpression(s => s.GenreId == genreId && s.Quality == quailty && s.Raiting>=imdbStart && s.Raiting<=imdbEnd && s.Year>=starYear && s.Year<=endYear);
+            //int qualtyId,
+        var series= await   _repo.FindAllByExpression(s => s.GenreId == genreId && s.Raiting>=imdbStart && s.Raiting<=imdbEnd && s.Year>=starYear && s.Year<=endYear);
             return (series);
         }
 

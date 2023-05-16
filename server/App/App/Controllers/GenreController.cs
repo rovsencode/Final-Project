@@ -6,7 +6,7 @@ using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class GenreController : ControllerBase
     {
@@ -21,6 +21,12 @@ namespace App.Controllers
             if (genre == null) return NotFound();
             await _genreService.Create(genre);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDatas()
+        {   
+            return Ok(await _genreService.GetAll());
         }
     }
 }

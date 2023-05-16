@@ -17,7 +17,7 @@ namespace RepositoryLayer.Repostories
 
         }
 
-        public async Task CreateMany(Serie serie, List<int> actressIds,List<int> seasonNumbers,List<int> episodes,string epiTitle,DateTime airDate)
+        public async Task CreateMany(Serie serie, List<int> actressIds,List<int> seasonNumbers,List<int> episodes,string epiTitle,DateTime airDate, List<int> qualityIds)
         {
 
             var actresses = await _repo.FindAllByExpression(a => actressIds.Contains(a.Id));
@@ -32,8 +32,11 @@ namespace RepositoryLayer.Repostories
                     isDeleted = false,
                     CreatedTime = DateTime.UtcNow,
                 });
+               
+
             }
-          serie.Seasons= new();
+         
+            serie.Seasons= new();
             foreach (var number in seasonNumbers)
             {
                 Season season = new();
@@ -50,8 +53,22 @@ namespace RepositoryLayer.Repostories
                 episode.EpisodeNumber = episodes[count];
                 episode.SeasonId = season.Id;
                  season.Episodes.Add(episode);
+                
                 count = count + 1;
+                
 
+            }
+            serie.SerieQualities = new();
+
+            foreach (var qualtyId in qualityIds)
+            {
+                serie.SerieQualities.Add(new SerieQuality
+                {
+                    QualityId=qualtyId,
+                    SerieId=serie.Id,
+                    isDeleted=false,
+                    CreatedTime=DateTime.UtcNow,
+                });
 
             }
             await _appDbContext.SaveChangesAsync();
@@ -60,6 +77,127 @@ namespace RepositoryLayer.Repostories
 
         }
        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
     }

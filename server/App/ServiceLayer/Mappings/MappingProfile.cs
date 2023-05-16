@@ -7,6 +7,7 @@ using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.DTOs.Partners;
 using ServiceLayer.DTOs.PricingPlans;
+using ServiceLayer.DTOs.QualityDto;
 using ServiceLayer.DTOs.SerieDto;
 using ServiceLayer.DTOs.Social;
 using System;
@@ -48,6 +49,9 @@ namespace ServiceLayer.Mappings
             CreateMap<GenreCreateDto, Genre>();
             CreateMap<Genre, GenreListDto>();
             CreateMap<GenreUpdateDto, Genre>();
+            CreateMap<QualityCreateDto, Quality>();
+            CreateMap<Quality, QualityListDto>();
+            CreateMap<QualityUpdateDto, Quality>();
 
 
         }

@@ -28,7 +28,7 @@ namespace RepositoryLayer.Repostories
 
 
 
-        public async Task CreateMany(Movie movie,List<int> actressIds)
+        public async Task CreateMany(Movie movie,List<int> actressIds,List<int> qualityIds)
         {
 
             
@@ -43,10 +43,21 @@ namespace RepositoryLayer.Repostories
                       isDeleted = false,
                     CreatedTime = DateTime.UtcNow,
                 });
-             
-              
-             
-               
+                movie.MovieQualities = new();
+                foreach (var qualtyId in qualityIds)
+                {
+                    movie.MovieQualities.Add(new MovieQuality
+                    {
+                        QualityId = qualtyId,
+                        MovieId = movie.Id,
+                        isDeleted = false,
+                        CreatedTime = DateTime.UtcNow,
+                    });
+
+                }
+
+
+
 
             }
            

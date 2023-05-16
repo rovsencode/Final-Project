@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -33,10 +34,12 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<GenreListDto>> GetAll()
+        public async Task<List<GenreListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var genres = await _repo.GetAll();
+            return _mapper.Map < List<GenreListDto>>(genres);
         }
+     
 
         public Task SoftDelete(int id)
         {

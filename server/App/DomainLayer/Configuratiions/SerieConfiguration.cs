@@ -16,7 +16,6 @@ namespace DomainLayer.Configuratiions
             builder.Property(s => s.Name).IsRequired().HasMaxLength(50);
             builder.Property(s => s.Description).IsRequired().HasMaxLength(100);
             builder.Property(s => s.Year).IsRequired();
-            builder.Property(s => s.Quality).IsRequired();
             builder.Property(s => s.AgeRestriction).IsRequired();
             builder.Property(s => s.ImageUrl).IsRequired();
             builder.Property(s => s.Raiting).IsRequired();

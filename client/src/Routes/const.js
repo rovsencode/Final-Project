@@ -8,6 +8,9 @@ export const ROUTER = {
     },
     Catalog: {
         PATH: "/catalog"
+    },
+    About: {
+        PATH: "/about"
     }
 
 }

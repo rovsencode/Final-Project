@@ -13,7 +13,6 @@ namespace ServiceLayer.Services.Interfaces
         Task Create(MovieCreateDto movie);
 
         Task Update(int id, MovieUpdateDto movie);
-
         Task<List<MovieListDto>> GetAll();
         Task Delete(int id);
         Task SoftDelete(int id);

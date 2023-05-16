@@ -5,6 +5,7 @@ import { mdiMagnify } from '@mdi/js';
 import { mdiLogin } from '@mdi/js';
 import { mdiDotsHorizontal } from '@mdi/js';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,16 +33,12 @@ function Header() {
                   <ul className="header__nav">
                     {/* dropdown */}
                     <li className="header__nav-item">
-                      <a className="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-                      <ul className=" header__dropdown-menu" aria-labelledby="dropdownMenuHome">
-                        <li><a href="index.html">Home slideshow bg</a></li>
-                        <li><a href="index2.html">Home static bg</a></li>
-                      </ul>
+                  <Link  className="header__nav-link"  to='/'> Home</Link>
                     </li>
                     {/* end dropdown */}
                     {/* dropdown */}
-                    <li className="header__nav-item">
-                      <a className="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+                  <li className="header__nav-item">
+                    <Link className="dropdown-toggle header__nav-link" id="dropdownMenuCatalog"  to='/catalog'>Catalog</Link>
                       <ul className=" header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
                         <li><a href="catalog1.html">Catalog Grid</a></li>
                         <li><a href="catalog2.html">Catalog List</a></li>
@@ -51,23 +48,22 @@ function Header() {
                     </li>
                     {/* end dropdown */}
                     <li className="header__nav-item">
-                      <a href="pricing.html" className="header__nav-link">Pricing Plan</a>
+                    <Link  className="header__nav-link"  to='/plans'>Pricing Plans</Link>
                     </li>
                     <li className="header__nav-item">
-                      <a href="faq.html" className="header__nav-link">Help</a>
+                       <Link  className="header__nav-link"  to='/help'> Help</Link>
                     </li>
                     {/* dropdown */}
                                   <li className={isActiveMore ? "header__nav-item show" : "dropdown header__nav-item "} >
-                                      <a className="dropdown-toggle header__nav-link header__nav-link--more" onClick={moreHandleClick}  href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <a className=" header__nav-link header__nav-link--more" onClick={moreHandleClick}  href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      
 <Icon path={mdiDotsHorizontal} size={1} />
    
                       </a>
                                       <ul className={isActiveMore ? " header__dropdown-menu show" : "dropdown-menu header__dropdown-menu"   } aria-labelledby="dropdownMenuMore">
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="signin.html">Sign In</a></li>
-                        <li><a href="signup.html">Sign Up</a></li>
-                        <li><a href="404.html">404 Page</a></li>
+                        <li><Link  style={{textDecoration:"none"}}  to='/about'>About </Link></li>
+                        <li><Link style={{textDecoration:"none"}} to='/login'>Sign in</Link></li>
+                      <li><Link style={{textDecoration:"none"}} to='/register'>Sign up</Link></li>
                       </ul>
                     </li>
                     {/* end dropdown */}

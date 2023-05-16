@@ -31,7 +31,7 @@ namespace ServiceLayer.Services
 
             var mappedData = _mapper.Map<Movie>(movie);
             await _repo.Create(mappedData);
-           await _repo.CreateMany(mappedData, movie.actressIds);
+           await _repo.CreateMany(mappedData, movie.actressIds,movie.qualityIds);
 
 
         }

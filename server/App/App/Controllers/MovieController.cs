@@ -23,5 +23,10 @@ namespace App.Controllers
             await _movieService.Create(movie);
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _movieService.GetAll());
+        }
     }
 }

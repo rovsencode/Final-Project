@@ -20,8 +20,9 @@ namespace ServiceLayer.DTOs.SerieDto
         public List<int> Seasons { get; set; }
         public List<int> Episodes { get; set; }
         public List<int> actressIds { get; set; }
-        public int GenreId { get; set; }
+        public List<int> qualityIds { get; set; }
         public string EpisodeTitle { get; set; }
         public DateTime AirDate { get; set; }
+        public int GenreId { get; set; }
     }
 }

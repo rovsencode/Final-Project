@@ -18,6 +18,7 @@ namespace ServiceLayer.DTOs.MovieDto
         public double Price { get; set; }
         public int Raiting { get; set; }
         public List<int> actressIds { get; set; }
+        public  List<int> qualityIds  { get; set; }
         public int GenreId { get; set; }
     
     }
