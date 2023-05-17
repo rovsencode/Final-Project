@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import Submit from "../../Components/Submit";
-import { Slider, colors } from "@mui/material";
+import { Grid, Slider, colors } from "@mui/material";
 
 import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
@@ -9,6 +9,7 @@ import "../Catalog/index.scss";
 import background from "../Catalog/section.jpg";
 import { genreService } from "../../APIs/Services/GenreService";
 import { qualityService } from "../../APIs/Services/QualityService";
+import { Container } from "react-bootstrap";
 
 function Catalog() {
   const [deger, setDeger] = useState([0, 5]);
@@ -191,17 +192,11 @@ function Catalog() {
           </div>
         </div>
       </div>
-      <div style={{ marginLeft: "500px" }}>
-        <Stack spacing={2}>
-          <Pagination
-            count={10}
-            color="secondary"
-            style={{
-              width: "10000px",
-            }}
-          />
-        </Stack>
-      </div>
+      <Container>
+        <div className="text-center" style={{ marginLeft: "500px" }}>
+          <Pagination count={10} color="secondary" />
+        </div>
+      </Container>
     </>
   );
 }

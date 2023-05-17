@@ -3,6 +3,7 @@ using DomainLayer.Entites;
 using ServiceLayer.DTOs.Actress;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
+using ServiceLayer.DTOs.FeatureDto;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.DTOs.Partners;
@@ -52,6 +53,9 @@ namespace ServiceLayer.Mappings
             CreateMap<QualityCreateDto, Quality>();
             CreateMap<Quality, QualityListDto>();
             CreateMap<QualityUpdateDto, Quality>();
+            CreateMap<FeatureCreateDto, Feature>();
+            CreateMap<Feature, FeatureListDto>();
+            CreateMap<FeatureUpdateDto, Feature>();
 
 
         }
