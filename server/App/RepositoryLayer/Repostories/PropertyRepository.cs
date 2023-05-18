@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repostories
 {
-    public class PartnerRepository : Repository<Partners>, IPartnerRepository
+    public class PropertyRepository : Repository<Property>, IPropertyRepository
     {
-        public PartnerRepository(AppDbContext appDbContext) : base(appDbContext)
+        public PropertyRepository(AppDbContext appDbContext) : base(appDbContext)
         {
         }
+
     }
 }

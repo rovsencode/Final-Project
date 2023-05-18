@@ -1,5 +1,6 @@
 ﻿using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
+using ServiceLayer.DTOs.FeatureDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IFeatureService
     {
-        Task Create(FaqCreateDto faq);
+        Task Create(FeatureCreateDto feature);
 
-        Task<List<FaqListDto>> GetAll();
+        Task<List<FeatureListDto>> GetAll();
         Task Delete(int id);
         Task SoftDelete(int id);
-        Task Update(int id, FaqUpdateDto contact);
-        Task<FaqListDto> GetLast();
+        Task Update(int id, FeatureUpdateDto feature);
+   
 
     }
 }

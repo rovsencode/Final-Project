@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Entites
 {
-    public class Partners: BaseEntity
+    public class Property:BaseEntity
     {
- 
-        public string ImageUrl  { get; set; }
+        public string  Name { get; set; }
+        public int PlanId { get; set; }
+        public PricingPlans Plan { get; set; }
     }
 }

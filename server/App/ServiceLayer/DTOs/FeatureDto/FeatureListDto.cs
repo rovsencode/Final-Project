@@ -9,7 +9,6 @@ namespace ServiceLayer.DTOs.FeatureDto
     public class FeatureListDto
     {
         public string Name { get; set; }
-        public string ImageUrL { get; set; }
         public string Description { get; set; }
     }
 }

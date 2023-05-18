@@ -10,7 +10,7 @@ namespace DomainLayer.Entites
     public class Feature:BaseEntity
     {
         public string Name { get; set; }
-        public string ImageUrL { get; set; }
+ 
         public string Description { get; set; }
     }
 }

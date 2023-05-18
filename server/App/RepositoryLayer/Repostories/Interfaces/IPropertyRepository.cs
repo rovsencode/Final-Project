@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repostories.Interfaces
 {
-    public interface IPartnerRepository:IRepository<Partners>
+    public interface IPropertyRepository:IRepository<Property>
     {
     }
 }

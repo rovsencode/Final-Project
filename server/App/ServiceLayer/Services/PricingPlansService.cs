@@ -8,6 +8,8 @@ using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,10 +58,20 @@ namespace ServiceLayer.Services
             var dbPlan = await _repo.Get(id);
             _mapper.Map(plan, dbPlan);
             await _repo.Update(dbPlan);
-
-
-
-
         }
+
+        public Task<List<PricingPlans>> PlansProperty()
+        {
+            throw new NotImplementedException();
+        }
+        //public async Task<List<PricingPlans>> PlansProperty()
+        //{
+        //    var includeProperties = new Expression<Func<PricingPlans, object>>[]
+        //    {
+        //    p => p.Properties
+        //    };
+
+        //    return _repo.GetAllIncluding();
+        //}
     }
 }

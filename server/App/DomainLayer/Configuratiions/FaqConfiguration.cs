@@ -14,7 +14,7 @@ namespace DomainLayer.Configuratiions
         public void Configure(EntityTypeBuilder<Faq> builder)
         {
             builder.Property(f => f.Name).IsRequired().HasMaxLength(50);
-            builder.Property(f => f.Description).IsRequired().HasMaxLength(50);
+            builder.Property(f => f.Description).IsRequired().HasMaxLength(500);
             builder.Property(f => f.isDeleted).HasDefaultValue(false);
             builder.Property(f => f.CreatedTime).HasDefaultValue(DateTime.UtcNow);
 

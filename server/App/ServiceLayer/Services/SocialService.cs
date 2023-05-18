@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
-using ServiceLayer.DTOs.Partners;
 using ServiceLayer.DTOs.Social;
 using ServiceLayer.Services.Interfaces;
 using System;

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.EpisodeDto;
+using ServiceLayer.DTOs.FeatureDto;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Services
 {
-    public class FeatureService
+    public class FeatureService:IFeatureService
     {
         private readonly IFeatureRepository _repo;
         private readonly IMapper _mapper;
@@ -22,9 +24,9 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public async Task Create(EpisodeCreateDto episode)
+        public async Task Create(FeatureCreateDto feature)
         {
-            var mappedData = _mapper.Map<Episode>(episode);
+            var mappedData = _mapper.Map<Feature>(feature);
             await _repo.Create(mappedData);
         }
 
@@ -33,9 +35,10 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<EpisodeListDto>> GetAll()
+        public async Task<List<FeatureListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var features = await _repo.GetAll();
+            return  _mapper.Map<List<FeatureListDto>>(features);
         }
 
         public Task SoftDelete(int id)
@@ -43,7 +46,8 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task Update(int id, EpisodeUpdateDto episode)
+
+        public Task Update(int id, FeatureUpdateDto feature)
         {
             throw new NotImplementedException();
         }

@@ -15,4 +15,7 @@ export const ROUTER = {
   Pricing: {
     PATH: "/plans",
   },
+  Help: {
+    PATH: "/help",
+  },
 };

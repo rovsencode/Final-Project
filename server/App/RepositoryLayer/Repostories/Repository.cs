@@ -28,6 +28,17 @@ namespace RepositoryLayer.Repostories
             await _entites.AddAsync(entity);
             await _appDbContext.SaveChangesAsync();
         }
+        public async Task<List<T>> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _entites;
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query =  query.Include(includeProperty);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public  async Task SoftDelete(T entity)
         {

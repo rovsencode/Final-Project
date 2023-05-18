@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.Faq;
+﻿using DomainLayer.Entites;
+using ServiceLayer.DTOs.Faq;
 using ServiceLayer.DTOs.PricingPlans;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IPricingPlansService
     {
+        Task<List<PricingPlans>> PlansProperty();
         Task Create(PricingPlansCreateDto plan);
         Task Update(int id, PricingPlansUpdateDto plan);
         Task<List<PricingPlansListDto>> GetAll();

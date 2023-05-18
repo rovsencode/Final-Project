@@ -27,8 +27,6 @@ namespace App
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IContactService, ContactService>();
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
-            builder.Services.AddScoped<IPartnerService, PartnerService>();
-            builder.Services.AddScoped<IPartnerRepository,PartnerRepository>();
             builder.Services.AddScoped<IFaqService, FaqService>();
             builder.Services.AddScoped<IFaqRepository, FaqRepository>();
             builder.Services.AddScoped<IPricingPlansService, PricingPlansService>();
@@ -44,6 +42,10 @@ namespace App
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
             builder.Services.AddScoped<IQualityService, QualityService>();
             builder.Services.AddScoped<IQualityRepository, QualityRepository>();
+            builder.Services.AddScoped<IFeatureService, FeatureService>();
+            builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+            builder.Services.AddScoped<IPropertyService, PropertyService>();
+            builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 
 
 

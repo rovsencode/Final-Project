@@ -6,8 +6,8 @@ using ServiceLayer.DTOs.Faq;
 using ServiceLayer.DTOs.FeatureDto;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
-using ServiceLayer.DTOs.Partners;
 using ServiceLayer.DTOs.PricingPlans;
+using ServiceLayer.DTOs.PropertyDto;
 using ServiceLayer.DTOs.QualityDto;
 using ServiceLayer.DTOs.SerieDto;
 using ServiceLayer.DTOs.Social;
@@ -26,9 +26,6 @@ namespace ServiceLayer.Mappings
             CreateMap<ContactCreateDto, Contact>();
             CreateMap<Contact, ContactListDto>();
             CreateMap<ContactUpdateDto, Contact>();
-            CreateMap<PartnersCreateDto, Partners>();
-            CreateMap<Partners, PartnersListDto>();
-            CreateMap<PartnersUpdateDto, Partners>();
             CreateMap<SocialCreateDto, Social>();
             CreateMap<Social, SocialListDto>();
             CreateMap<SocialUpdateDto, Social>();
@@ -56,8 +53,9 @@ namespace ServiceLayer.Mappings
             CreateMap<FeatureCreateDto, Feature>();
             CreateMap<Feature, FeatureListDto>();
             CreateMap<FeatureUpdateDto, Feature>();
-
-
+            CreateMap<PropertyCreateDto, Property>();
+            CreateMap<Property, PropertyListDto>();
+            CreateMap <PropertyUpdateDto, Property>();
         }
     }
 }

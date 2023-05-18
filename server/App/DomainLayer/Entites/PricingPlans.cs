@@ -10,7 +10,7 @@ namespace DomainLayer.Entites
     public class PricingPlans:BaseEntity
     {
         public string PlanName { get; set; }
-        public string Property { get; set; }
+        public List<Property> Properties { get; set; }
         public double Price { get; set; }
     }
 }

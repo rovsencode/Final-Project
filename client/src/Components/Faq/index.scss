@@ -1,0 +1,59 @@
+$color_1: #fff;
+$color_2: rgba(255, 255, 255, 0.7);
+$font-family_1: 'Open Sans', sans-serif;
+
+.faq {
+    display: block;
+    margin-bottom: 40px;
+}
+
+.faq__title {
+    color: $color_1;
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.faq__text {
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 15px;
+    color: $color_2;
+    font-family: $font-family_1;
+    letter-spacing: 0.2px;
+
+    b {
+        font-weight: 600;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .faq {
+        margin-bottom: 50px;
+        margin-top: 15px;
+
+        &:last-child {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .faq {
+        padding: 0 20px 0 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .faq {
+        margin-bottom: 60px;
+
+        &:last-child {
+            margin-bottom: 15px;
+        }
+    }
+}

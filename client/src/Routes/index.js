@@ -8,6 +8,7 @@ import Submit from "../Components/Submit";
 import Catalog from "../Pages/Catalog";
 import About from "../Pages/About";
 import Pricing from "../Pages/Pricings";
+import Help from "../Pages/Help";
 
 function Routs() {
   return (
@@ -18,6 +19,7 @@ function Routs() {
       <Route path={ROUTER.Catalog.PATH.toString()} element={<Catalog />} />
       <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />
       <Route path={ROUTER.About.PATH.toString()} element={<About />} />
+      <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />
     </Routes>
   );
 }
