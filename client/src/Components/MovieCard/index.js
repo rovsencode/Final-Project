@@ -29,7 +29,7 @@ const MovieCard = ({ title, category, imageUrl, description, rating, ageRestrict
               {description.length > 100 ? `${description.slice(0, 100)}...` : description}
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Chip label={quality.toUpperCase()} color="primary" size="small" />
+              {/* <Chip label={quality.toUpperCase()} color="primary" size="small" /> */}
               <Chip label={ageRestriction} color="secondary" size="small" />
               <Rating value={parseFloat(rating)} precision={0.1} readOnly />
             </Box>

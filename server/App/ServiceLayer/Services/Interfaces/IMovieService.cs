@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.Genre;
+﻿using ServiceLayer.DTOs.Contact;
+using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace ServiceLayer.Services.Interfaces
         Task Update(int id, MovieUpdateDto movie);
         Task<List<MovieListDto>> GetAll();
         Task<List<MoviePageDto>> MoviePage(int skip);
+        Task<int> Count();
+        Task<List<MovieListDto>> Search(string searchText);
         Task Delete(int id);
         Task SoftDelete(int id);
     }

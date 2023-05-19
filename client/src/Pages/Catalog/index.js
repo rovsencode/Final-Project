@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import Submit from "../../Components/Submit";
 import { Grid, Slider, colors } from "@mui/material";
-
 import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
 import "../Catalog/index.scss";
 import background from "../Catalog/section.jpg";
 import { genreService } from "../../APIs/Services/GenreService";
 import { qualityService } from "../../APIs/Services/QualityService";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
+import { movieService } from "../../APIs/Services/MovieService";
+import MovieCard from "../../Components/MovieCard";
+import { click } from "@testing-library/user-event/dist/click";
 
 function Catalog() {
   const [deger, setDeger] = useState([0, 5]);
@@ -22,16 +24,38 @@ function Catalog() {
   const handleSliderYear = (event, newValue) => {
     setYearFil(newValue);
   };
+  const [pageCount, setPageCount] = React.useState([]);
   const [selectedGenre, setSelectedGenre] = React.useState([]);
   const [genres, setGenres] = React.useState([]);
   const [selectedQualty, setSelectedQualty] = React.useState([]);
   const [qualtys, setQualtys] = React.useState();
+  const [movies, setMovies] = React.useState([]);
+  const [skip, setSkip] = React.useState(2);
+
+  const fetchMovie = async () => {
+    const { data } = await movieService.skip(skip);
+    setSkip(skip + 2);
+    console.log(skip);
+    console.log(data);
+    setMovies((prevMovies) => [...prevMovies, ...data]);
+  };
+  const click = () => {
+    console.log("success");
+  };
   React.useEffect(() => {
     const fetchGenre = async () => {
       const { data } = await genreService.getAll();
       setGenres(data);
     };
     fetchGenre();
+
+    const fetchCount = async () => {
+      const { data } = await movieService.getCount();
+      setPageCount(data);
+      console.log(data);
+    };
+    fetchCount();
+    fetchMovie();
     const fetchQuality = async () => {
       const { data } = await qualityService.getAll();
       // console.log(data);
@@ -192,11 +216,29 @@ function Catalog() {
           </div>
         </div>
       </div>
-      <Container>
-        <div className="text-center" style={{ marginLeft: "500px" }}>
-          <Pagination count={10} color="secondary" />
-        </div>
-      </Container>
+      <div className="movies">
+        <Grid container spacing={2}>
+          {movies.map((movie, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+              <MovieCard
+                key={movie.title}
+                title={movie.title}
+                description={movie.description}
+                imageUrl={movie.imageUrl}
+                action={movie.action}
+                rating={movie.rating}
+                ageRestriction={movie.ageRestriction}
+                //  quality={movie.quality}
+                Year={movie.Year}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+      <Button onClick={fetchMovie}>click</Button>
+      <div className="text-center" style={{ marginLeft: "500px" }}>
+        <Pagination count={pageCount} color="secondary" />
+      </div>
     </>
   );
 }

@@ -36,7 +36,12 @@ namespace ServiceLayer.Services
 
 
         }
+        public async Task<List<MovieListDto>> Search(string searchText)
+        {
 
+            var searchDatas = await _repo.FindAllByExpression(m => m.Name.StartsWith(searchText));
+            return _mapper.Map<List<MovieListDto>>(searchDatas);
+        }
 
 
         public Task Delete(int id)
@@ -49,26 +54,34 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<MoviePageDto>> MoviePage(int skip)
+
+        public async Task<List<MoviePageDto>> MoviePage(int skip)
         {
-            throw new NotImplementedException();
+         
+            List<MoviePageDto> moviePageDtos = new();
+            var movieSort = await _repo.PageList(skip);
+            foreach (var movie in movieSort)
+            {
+                MoviePageDto moviePageDto = new() {
+                    Name = movie.Name,
+                    AgeRestriction = movie.AgeRestriction,
+                    Description = movie.Description,
+                    Price = movie.Price,
+                    Raiting = movie.Raiting,
+                    Year = movie.Year,
+                };
+                moviePageDtos.Add(moviePageDto);
+
+            }
+           
+            return moviePageDtos;
         }
-
-        //public async Task<List<MoviePageDto>> MoviePage(int skip)
-        //{
-        //    var movies = await _repo.GetAll();
-        //    int movieCount = movies.Count / 10;
-        //    List<MoviePageDto> moviePageDtos = new();
-        //    //var movieSort=await _repo.
-        //    foreach (var item in movies)
-        //    {
-        //    MoviePageDto moviePageDto = new();
-
-        //    }
-        //    //var contacts = await _repo.GetAll();
-
-        //    //return _mapper.Map<List<ContactListDto>>(contacts);
-        //}
+        public async Task<int>Count()
+        {
+            var movies = await _repo.GetAll();
+            int movieCount = movies.Count / 10;
+            return movieCount;
+        }
 
         public Task SoftDelete(int id)
         {

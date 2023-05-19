@@ -10,8 +10,9 @@ export default function Plans() {
     const fetchPlan = async () => {
       const { data } = await plansService.getAll();
       setPLan(data.$values);
-      console.log(data.$values);
-      log
+
+      // const info = data.$values;
+      // console.log(info);
     };
 
     const fetchProperty = async () => {
@@ -27,11 +28,12 @@ export default function Plans() {
         <div className="container">
           <div className="row">
             {/* price */}
-            {plans.map(({ planName }) => (
+            {plans.map((item) => (
               <div className="col-12 col-md-6 col-lg-4">
                 <div className="price">
                   <div className="price__item price__item--first">
-                    <span>{planName}</span> <span>$</span>
+                    <span>{item.planName}</span>
+                    {item.price} <span>$</span>
                   </div>
                   <div className="price__item">
                     <span>7 days</span>

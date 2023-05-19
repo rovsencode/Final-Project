@@ -6,7 +6,7 @@ using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class MovieController : ControllerBase
     {
@@ -17,21 +17,37 @@ namespace App.Controllers
             _movieService = movieService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]MovieCreateDto movie)
+        public async Task<IActionResult> Create([FromBody] MovieCreateDto movie)
         {
             if (movie == null) return NotFound();
             await _movieService.Create(movie);
             return Ok();
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int skip)
         {
             return Ok(await _movieService.GetAll());
         }
-        //[HttpGet]
-        //public async Task<IActionResult> MoviePage()
-        //{
-        //    return Ok();
-        //}
+        [HttpGet("{skip}")]
+        public async Task<IActionResult> MovieCatalog([FromRoute]int skip)
+        {
+           
+            return Ok(await _movieService.MoviePage(skip));
+        }
+        [HttpGet]
+        public async Task<IActionResult> MovieCount()
+        {
+            
+
+            return Ok(await _movieService.Count());
+        }
+        [HttpGet("{search}")]
+        public async Task<IActionResult> Search([FromRoute]string search)
+        {
+            return Ok(await _movieService.Search(search));
+        }
+
+
     }
 }
+
