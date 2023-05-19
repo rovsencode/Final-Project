@@ -11,7 +11,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IPricingPlansService
     {
-        Task<List<PricingPlans>> PlansProperty();
+        Task<string> PlansProperty();
         Task Create(PricingPlansCreateDto plan);
         Task Update(int id, PricingPlansUpdateDto plan);
         Task<List<PricingPlansListDto>> GetAll();

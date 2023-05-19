@@ -19,7 +19,7 @@ namespace App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]ContactCreateDto contact)
+        public async Task<IActionResult> Create([FromForm] ContactCreateDto contact)
         {
             await _contactService.Create(contact);
             return Ok();

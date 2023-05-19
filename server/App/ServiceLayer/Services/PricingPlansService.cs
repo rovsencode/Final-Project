@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using RepositoryLayer.Repostories;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
@@ -11,6 +13,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ServiceLayer.Services
@@ -58,20 +62,27 @@ namespace ServiceLayer.Services
             var dbPlan = await _repo.Get(id);
             _mapper.Map(plan, dbPlan);
             await _repo.Update(dbPlan);
+
         }
 
-        public Task<List<PricingPlans>> PlansProperty()
+
+
+
+        public async Task<string> PlansProperty()
         {
-            throw new NotImplementedException();
-        }
-        //public async Task<List<PricingPlans>> PlansProperty()
-        //{
-        //    var includeProperties = new Expression<Func<PricingPlans, object>>[]
-        //    {
-        //    p => p.Properties
-        //    };
 
-        //    return _repo.get();
-        //}
+
+            var result = await _repo.Including(e => e.Properties);
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 64,
+                WriteIndented = true,
+            };
+            var jsonString = JsonSerializer.Serialize(result, options);
+
+            return jsonString;
+        }
+
     }
 }

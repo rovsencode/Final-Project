@@ -1,22 +1,25 @@
 import React from "react";
 import "./index.scss";
-import { PlansService, plansService } from "../../APIs/Services/PlansService";
+import { plansService } from "../../APIs/Services/PlansService";
 import { propertyService } from "../../APIs/Services/PropertiesService";
 
-function Plans() {
+export default function Plans() {
   const [plans, setPLan] = React.useState([]);
   const [properties, setProperty] = React.useState([]);
   React.useState(() => {
     const fetchPlan = async () => {
       const { data } = await plansService.getAll();
-      setPLan(data);
+      setPLan(data.$values);
+      console.log(data.$values);
+      log
     };
+
     const fetchProperty = async () => {
       const { data } = await propertyService.getAll();
       setProperty(data);
     };
     fetchPlan();
-    fetchProperty();
+    // fetchProperty();
   }, []);
   return (
     <>
@@ -24,11 +27,11 @@ function Plans() {
         <div className="container">
           <div className="row">
             {/* price */}
-            {plans.map(({ planName, price }) => (
+            {plans.map(({ planName }) => (
               <div className="col-12 col-md-6 col-lg-4">
                 <div className="price">
                   <div className="price__item price__item--first">
-                    <span>{planName}</span> <span>{price}$</span>
+                    <span>{planName}</span> <span>$</span>
                   </div>
                   <div className="price__item">
                     <span>7 days</span>
@@ -58,5 +61,3 @@ function Plans() {
     </>
   );
 }
-
-export default Plans;

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace RepositoryLayer.Repostories
@@ -28,19 +30,11 @@ namespace RepositoryLayer.Repostories
             await _entites.AddAsync(entity);
             await _appDbContext.SaveChangesAsync();
         }
-        public async Task<List<T>> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> query = _entites;
+    
 
-            foreach (var includeProperty in includeProperties)
-            {
-                query =  query.Include(includeProperty);
-            }
 
-            return await query.ToListAsync();
-        }
 
-        public  async Task SoftDelete(T entity)
+        public async Task SoftDelete(T entity)
         {
             if (entity == null) throw new ArgumentNullException();
             entity.isDeleted = true;
@@ -90,5 +84,19 @@ namespace RepositoryLayer.Repostories
             _entites.Update(entity);
             await _appDbContext.SaveChangesAsync();
         }
+
+        public async Task<List<T>> Including(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _entites;
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.ToListAsync();
+        }
+
+    
     }
 }

@@ -19,6 +19,8 @@ namespace RepositoryLayer.Repostories.Interfaces
         Task Delete(T entity);
         Task SoftDelete(T entity);
         Task<List<T>> FindAllByExpression(Expression<Func<T,bool>> expression);
+        Task<List<T>> Including(params Expression<Func<T, object>>[] includeProperties);
+        Task<List<T>> PageList(int skip);
 
     }
 }
