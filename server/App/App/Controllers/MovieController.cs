@@ -28,5 +28,10 @@ namespace App.Controllers
         {
             return Ok(await _movieService.GetAll());
         }
+        //[HttpGet]
+        //public async Task<IActionResult> MoviePage()
+        //{
+        //    return Ok();
+        //}
     }
 }

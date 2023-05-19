@@ -71,7 +71,7 @@ namespace ServiceLayer.Services
         //    p => p.Properties
         //    };
 
-        //    return _repo.GetAllIncluding();
+        //    return _repo.get();
         //}
     }
 }

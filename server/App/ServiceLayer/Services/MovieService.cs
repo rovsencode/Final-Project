@@ -3,6 +3,7 @@ using DomainLayer.Entites;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Repostories;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -47,6 +48,27 @@ namespace ServiceLayer.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<MoviePageDto>> MoviePage(int skip)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public async Task<List<MoviePageDto>> MoviePage(int skip)
+        //{
+        //    var movies = await _repo.GetAll();
+        //    int movieCount = movies.Count / 10;
+        //    List<MoviePageDto> moviePageDtos = new();
+        //    //var movieSort=await _repo.
+        //    foreach (var item in movies)
+        //    {
+        //    MoviePageDto moviePageDto = new();
+
+        //    }
+        //    //var contacts = await _repo.GetAll();
+
+        //    //return _mapper.Map<List<ContactListDto>>(contacts);
+        //}
 
         public Task SoftDelete(int id)
         {
