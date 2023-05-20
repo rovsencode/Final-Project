@@ -30,15 +30,32 @@ function Catalog() {
   const [selectedQualty, setSelectedQualty] = React.useState([]);
   const [qualtys, setQualtys] = React.useState();
   const [movies, setMovies] = React.useState([]);
-  const [skip, setSkip] = React.useState(2);
-
+  const [skip, setSkip] = React.useState(0);
+  const [page, setPage] = React.useState([]);
+  const [count, setCount] = React.useState(1);
   const fetchMovie = async () => {
+    console.log("success data");
     const { data } = await movieService.skip(skip);
-    setSkip(skip + 2);
-    console.log(skip);
+    setCount(count + 1);
+    setSkip(10 * page);
+
+    if (count === pageCount) {
+      console.log("sifirlandi");
+      setCount(0);
+      setSkip(0);
+    }
+
     console.log(data);
-    setMovies((prevMovies) => [...prevMovies, ...data]);
+
+    setMovies(data); // Yeni filmleri güncelle
   };
+
+  // React.useEffect(()=>{},[])
+  const handlePageChange = (event, page) => {
+    setPage(page);
+    fetchMovie();
+  };
+
   const click = () => {
     console.log("success");
   };
@@ -47,22 +64,19 @@ function Catalog() {
       const { data } = await genreService.getAll();
       setGenres(data);
     };
-    fetchGenre();
-
     const fetchCount = async () => {
       const { data } = await movieService.getCount();
       setPageCount(data);
       console.log(data);
     };
-    fetchCount();
-    fetchMovie();
     const fetchQuality = async () => {
       const { data } = await qualityService.getAll();
-      // console.log(data);
       setQualtys(data);
     };
+    fetchCount();
+    fetchGenre();
     fetchQuality();
-    console.log(qualtys);
+    fetchMovie();
   }, []);
 
   return (
@@ -218,8 +232,8 @@ function Catalog() {
       </div>
       <div className="movies">
         <Grid container spacing={2}>
-          {movies.map((movie, index) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+          {movies.map((movie) => (
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <MovieCard
                 key={movie.title}
                 title={movie.title}
@@ -228,7 +242,6 @@ function Catalog() {
                 action={movie.action}
                 rating={movie.rating}
                 ageRestriction={movie.ageRestriction}
-                //  quality={movie.quality}
                 Year={movie.Year}
               />
             </Grid>
@@ -237,7 +250,11 @@ function Catalog() {
       </div>
       <Button onClick={fetchMovie}>click</Button>
       <div className="text-center" style={{ marginLeft: "500px" }}>
-        <Pagination count={pageCount} color="secondary" />
+        <Pagination
+          count={pageCount + 1}
+          onChange={fetchMovie}
+          color="secondary"
+        />
       </div>
     </>
   );

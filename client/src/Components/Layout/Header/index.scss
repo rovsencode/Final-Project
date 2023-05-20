@@ -57,21 +57,7 @@ $background-color_4: transparent;
     -moz-transition: 0.4s ease;
     transition: 0.4s ease;
 
-    // &:before {
-    //     content: '';
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     right: 0;
-    //     height: 2px;
-    //     display: block;
-    //     background-image: -moz-linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-    //     background-image: -webkit-linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-    //     background-image: -ms-linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-    //     background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%);
-    //     -webkit-box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
-    //     box-shadow: 0 0 20px 0 rgba(255, 88, 96, 0.5);
-    // }
+  
 }
 
 .header__nav--active {
@@ -200,7 +186,6 @@ $background-color_4: transparent;
     right: 0;
     height: 60px;
     width: 100%;
-    overflow: hidden;
     -webkit-transition: 0.4s ease;
     -moz-transition: 0.4s ease;
     transition: 0.4s ease;

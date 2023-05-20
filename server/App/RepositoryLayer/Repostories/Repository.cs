@@ -64,7 +64,7 @@ namespace RepositoryLayer.Repostories
         }
         public async Task<List<T>> PageList(int skip)
         {
-            return await _entites.Where(e => !e.isDeleted).Skip(skip).Take(2).ToListAsync();
+            return await _entites.Where(e => !e.isDeleted).Skip(skip).Take(10).ToListAsync();
         }
  
         public async Task<List<T>> GetAll()

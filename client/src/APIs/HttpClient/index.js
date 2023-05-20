@@ -17,8 +17,8 @@ export class HttpClient {
   async getSkip(endpoint, skip) {
     return await axios.get(`${this.baseUrl}/${endpoint}/${skip}`);
   }
-  async search(endpoint, search) {
-    return await axios.get(`${this.baseUrl}/${endpoint}/${search}`);
+  async search(endpoint, inputValue) {
+    return await axios.get(`${this.baseUrl}/${endpoint}/${inputValue}`);
   }
   async put(endpoint, body, id) {
     return await axios.put(`${this.baseUrl}/${endpoint}/${id}`, body);

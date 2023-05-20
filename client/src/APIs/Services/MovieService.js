@@ -1,13 +1,13 @@
 import { HttpClient } from "../HttpClient";
 class MovieService extends HttpClient {
   constructor() {
-      super("https://localhost:7152/api/Movie");
+    super("https://localhost:7152/api/Movie");
   }
   skip(skip) {
     return this.getSkip("MovieCatalog", skip);
   }
-  searchFilter(search) {
-    return this.search("Search", search);
+  searchFilter(inputValue) {
+    return this.search("Search", inputValue);
   }
   getCount() {
     return this.get("MovieCount");

@@ -6,13 +6,14 @@ import { mdiLogin } from "@mdi/js";
 import { mdiDotsHorizontal } from "@mdi/js";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { movieService } from "../../../APIs/Services/MovieService";
 
 function Header() {
   const [isActiveSearch, setIsActiveSearch] = React.useState(false);
   const [isActiveMore, setIsActiveMore] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
-  const [searchData, setSearchData] = React.useState();
+  const [searchData, setSearchData] = React.useState([]);
 
   const moreHandleClick = () => {
     setIsActiveMore(!isActiveMore);
@@ -20,10 +21,17 @@ function Header() {
 
   const fetchSearch = async () => {
     console.log("Searching");
-    const { data } = movieService.searchFilter(inputValue);
-    console.log(data);
-    setSearchData(data);
+    if (inputValue.length > 0) {
+      const { data } = await movieService.searchFilter(inputValue);
+      console.log(data);
+      data.length>0 ?  setSearchData(data) : setSearchData(null)
+  
+    }
+    else {
+      setSearchData(null)
+    }
   };
+
   const activeSearch = () => {
     setIsActiveSearch(!isActiveSearch);
   };
@@ -62,7 +70,7 @@ function Header() {
                       id="dropdownMenuCatalog"
                       to="/catalog"
                     >
-                      {searchData.first()}
+                      Catalog
                     </Link>
                     <ul
                       className=" header__dropdown-menu"
@@ -189,21 +197,53 @@ function Header() {
               <div className="header__search-content">
                 <input
                   onChange={search}
+                  onBlur={(event) => {
+                    setInputValue(event.target.value);
+                    fetchSearch();
+                  }}
                   value={inputValue}
                   type="text"
                   placeholder="Search for a movie, TV Series that you are looking for"
                 />
-                <p>
-                  {searchData
-                    ? searchData.name
-                    : "istediyiniz film catalogda yoxdu"}{" "}
-                </p>
+
                 <button type="button">search</button>
               </div>
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                }}
+              >
+                {searchData && inputValue ? (
+                  searchData.map(({ name }) => (
+                    <li
+                      style={{
+                        color: "white",
+                        backgroundColor: "#28282d",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {name}
+                    </li>
+                  ))
+                ) : (
+                  <li
+                    style={{
+                      color: "white",
+                      backgroundColor: "#28282d",
+                      fontSize: "16px",
+                    }}
+                  >
+                    it is not found film
+                  </li>
+                )}
+              </ul>
             </div>
           </div>
         </div>
       </form>
+
       {/* end header search */}
     </header>
   );
