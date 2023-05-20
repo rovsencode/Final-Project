@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging.Abstractions;
 using RepositoryLayer.Repostories;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Contact;
@@ -76,10 +78,11 @@ namespace ServiceLayer.Services
            
             return moviePageDtos;
         }
-        public async Task<int>Count()
+        public async Task<float>Count()
         {
             var movies = await _repo.GetAll();
-            int movieCount = movies.Count / 10;
+            float length = movies.Count();
+            float movieCount =length/10;
             return movieCount;
         }
 

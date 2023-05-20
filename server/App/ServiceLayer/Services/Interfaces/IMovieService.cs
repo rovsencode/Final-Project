@@ -16,7 +16,7 @@ namespace ServiceLayer.Services.Interfaces
         Task Update(int id, MovieUpdateDto movie);
         Task<List<MovieListDto>> GetAll();
         Task<List<MoviePageDto>> MoviePage(int skip);
-        Task<int> Count();
+        Task<float> Count();
         Task<List<MovieListDto>> Search(string searchText);
         Task Delete(int id);
         Task SoftDelete(int id);

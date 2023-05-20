@@ -6,6 +6,7 @@ using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
 using ServiceLayer.DTOs.PricingPlans;
+using ServiceLayer.DTOs.PropertyDto;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -68,21 +69,40 @@ namespace ServiceLayer.Services
 
 
 
-        public async Task<string> PlansProperty()
+        public async Task<List<PricingPlansListDto>> PlansProperty()
         {
-
-
             var result = await _repo.Including(e => e.Properties);
-            var options = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 64,
-                WriteIndented = true,
-            };
-            var jsonString = JsonSerializer.Serialize(result, options);
 
-            return jsonString;
+            var customDataList = new List<PricingPlansListDto>();
+
+            foreach (var item in result)
+            {
+                var customData = new PricingPlansListDto
+                {
+                    PlanName = item.PlanName,
+                    Price = item.Price,
+
+                };
+              
+                    customData.Properties = new();
+                foreach (var propert in item.Properties)
+                {
+
+                    PropertyListDto property = new()
+                    {
+                        Name = propert.Name,
+                        PlanId = propert.PlanId,
+                    };
+
+
+                    customData.Properties.Add(property);
+                     customDataList.Add(customData);
+                }
+            }
+
+            return customDataList;
         }
+
 
     }
 }

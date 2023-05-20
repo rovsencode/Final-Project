@@ -30,35 +30,22 @@ function Catalog() {
   const [selectedQualty, setSelectedQualty] = React.useState([]);
   const [qualtys, setQualtys] = React.useState();
   const [movies, setMovies] = React.useState([]);
-  const [skip, setSkip] = React.useState(0);
-  const [page, setPage] = React.useState([]);
-  const [count, setCount] = React.useState(1);
-  const fetchMovie = async () => {
-    console.log("success data");
-    const { data } = await movieService.skip(skip);
-    setCount(count + 1);
-    setSkip(10 * page);
+  const fetchMovie = async (page) => {
+    console.log("normalpage: " + page);
 
-    if (count === pageCount) {
-      console.log("sifirlandi");
-      setCount(0);
-      setSkip(0);
-    }
+    const { data } = await movieService.skip(page);
 
     console.log(data);
 
-    setMovies(data); // Yeni filmleri güncelle
+    setMovies(data);
   };
 
   // React.useEffect(()=>{},[])
   const handlePageChange = (event, page) => {
-    setPage(page);
-    fetchMovie();
+    console.log("Handlepage: " + page);
+    fetchMovie(page);
   };
 
-  const click = () => {
-    console.log("success");
-  };
   React.useEffect(() => {
     const fetchGenre = async () => {
       const { data } = await genreService.getAll();
@@ -66,7 +53,9 @@ function Catalog() {
     };
     const fetchCount = async () => {
       const { data } = await movieService.getCount();
-      setPageCount(data);
+      // console.log("pageCount: " + Math.ceil(data));
+
+      setPageCount(Math.ceil(data));
       console.log(data);
     };
     const fetchQuality = async () => {
@@ -76,7 +65,7 @@ function Catalog() {
     fetchCount();
     fetchGenre();
     fetchQuality();
-    fetchMovie();
+    fetchMovie(1);
   }, []);
 
   return (
@@ -251,8 +240,8 @@ function Catalog() {
       <Button onClick={fetchMovie}>click</Button>
       <div className="text-center" style={{ marginLeft: "500px" }}>
         <Pagination
-          count={pageCount + 1}
-          onChange={fetchMovie}
+          count={pageCount}
+          onChange={handlePageChange}
           color="secondary"
         />
       </div>

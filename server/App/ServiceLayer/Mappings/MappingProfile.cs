@@ -56,6 +56,9 @@ namespace ServiceLayer.Mappings
             CreateMap<PropertyCreateDto, Property>();
             CreateMap<Property, PropertyListDto>();
             CreateMap <PropertyUpdateDto, Property>();
+            CreateMap<PricingPlansListDto, PricingPlans>();
+            CreateMap<PricingPlans, PricingPlansListDto>();
+            CreateMap<PricingPlansUpdateDto, PricingPlans>();
         }
     }
 }
