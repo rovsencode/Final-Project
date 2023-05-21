@@ -237,7 +237,8 @@ function Catalog() {
           ))}
         </Grid>
       </div>
-      <Button onClick={fetchMovie}>click</Button>
+      <Button>click</Button>
+
       <div className="text-center" style={{ marginLeft: "500px" }}>
         <Pagination
           count={pageCount}
