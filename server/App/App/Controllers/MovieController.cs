@@ -47,6 +47,12 @@ namespace App.Controllers
             return Ok(await _movieService.Search(search));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Filter()
+        {
+            return Ok(await _movieService.FilterData());
+        }
+
 
     }
 }

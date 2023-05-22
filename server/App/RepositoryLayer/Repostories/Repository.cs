@@ -75,8 +75,10 @@ namespace RepositoryLayer.Repostories
         public async Task<T> GetLast()
         {
             return await _entites.Where(e => !e.isDeleted).FirstOrDefaultAsync();
+
         }
 
+ 
 
 
         public  async Task Update(T entity)

@@ -17,6 +17,7 @@ namespace ServiceLayer.Services.Interfaces
         Task<List<MovieListDto>> GetAll();
         Task<List<MoviePageDto>> MoviePage(int skip);
         Task<float> Count();
+        Task<(DateTime,DateTime)> FilterData();
         Task<List<MovieListDto>> Search(string searchText);
         Task Delete(int id);
         Task SoftDelete(int id);

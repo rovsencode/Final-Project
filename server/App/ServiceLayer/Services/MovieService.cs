@@ -95,5 +95,16 @@ namespace ServiceLayer.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<(DateTime,DateTime)> FilterData()
+        {
+            List<Movie> movies = await _repo.GetAll();
+            DateTime minYear = movies.Min(m => m.Year);
+            DateTime maxYear = movies.Max(m => m.Year);
+
+            return (minYear, maxYear);
+        }
+
+      
     }
 }

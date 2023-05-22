@@ -37,7 +37,7 @@ namespace ServiceLayer.Services
             var qualitys = await _repo.GetAll();
             return _mapper.Map<List<QualityListDto>>(qualitys);
         }
-
+       
         public Task SoftDelete(int id)
         {
             throw new NotImplementedException();

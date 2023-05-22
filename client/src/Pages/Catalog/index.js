@@ -58,6 +58,7 @@ function Catalog() {
       setPageCount(Math.ceil(data));
       console.log(data);
     };
+
     const fetchQuality = async () => {
       const { data } = await qualityService.getAll();
       setQualtys(data);
@@ -203,7 +204,7 @@ function Catalog() {
                         valueLabelDisplay="auto"
                         aria-labelledby="range-slider"
                         min={2000}
-                        max={2020}
+                        max={2023}
                       />
                     </div>
                   </div>
