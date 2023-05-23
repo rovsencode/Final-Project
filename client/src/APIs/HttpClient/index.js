@@ -11,6 +11,10 @@ export class HttpClient {
     return await axios.get(`${this.baseUrl}/${endpoint}`);
   }
 
+  async getParams(endpoint,params) {
+    return await axios.get(`${this.baseUrl}/${endpoint}`,{params});
+  }
+
   async post(endpoint, body) {
     return await axios.post(`${this.baseUrl}/${endpoint}`, body);
   }

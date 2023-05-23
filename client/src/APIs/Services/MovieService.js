@@ -12,5 +12,8 @@ class MovieService extends HttpClient {
   getCount() {
     return this.get("MovieCount");
   }
+  getYear() {
+    return this.get("FilterData");
+  }
 }
 export const movieService = new MovieService();

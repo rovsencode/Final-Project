@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.Contact;
+﻿using DomainLayer.Entites;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
 using System;
@@ -15,9 +16,10 @@ namespace ServiceLayer.Services.Interfaces
 
         Task Update(int id, MovieUpdateDto movie);
         Task<List<MovieListDto>> GetAll();
+        Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip);
         Task<List<MoviePageDto>> MoviePage(int skip);
         Task<float> Count();
-        Task<(DateTime,DateTime)> FilterData();
+        Task<(int,int)> FilterData();
         Task<List<MovieListDto>> Search(string searchText);
         Task Delete(int id);
         Task SoftDelete(int id);

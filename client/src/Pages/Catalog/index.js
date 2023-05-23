@@ -12,24 +12,19 @@ import { Button, Container } from "react-bootstrap";
 import { movieService } from "../../APIs/Services/MovieService";
 import MovieCard from "../../Components/MovieCard";
 import { click } from "@testing-library/user-event/dist/click";
+import { PanoramaSharp } from "@mui/icons-material";
 
 function Catalog() {
-  const [deger, setDeger] = useState([0, 5]);
-
-  const handleSliderChange = (event, newValue) => {
-    setDeger(newValue);
-  };
-  const [yearFil, setYearFil] = useState([2000, 2015]);
-
-  const handleSliderYear = (event, newValue) => {
-    setYearFil(newValue);
-  };
+  const [raiting, setRaiting] = useState([0, 5]);
+  const [year, setYear] = useState([undefined,undefined]);
+  const [rangeYear, setRangeYear] = React.useState([]);
   const [pageCount, setPageCount] = React.useState([]);
   const [selectedGenre, setSelectedGenre] = React.useState([]);
   const [genres, setGenres] = React.useState([]);
   const [selectedQualty, setSelectedQualty] = React.useState([]);
   const [qualtys, setQualtys] = React.useState();
   const [movies, setMovies] = React.useState([]);
+
   const fetchMovie = async (page) => {
     console.log("normalpage: " + page);
 
@@ -40,12 +35,32 @@ function Catalog() {
     setMovies(data);
   };
 
-  // React.useEffect(()=>{},[])
   const handlePageChange = (event, page) => {
     console.log("Handlepage: " + page);
     fetchMovie(page);
   };
+  const handleSliderChange = (event, newRaiting) => {
+    setRaiting(newRaiting);
+  };
+  const handleSliderYear = (event, newYear) => {
+    setYear(newYear);
+  };
 
+  const handleFilter = () => {
+    let params = {};
+    if (selectedGenre) {
+      params.genre = selectedGenre;
+    }
+    if (raiting) {
+      params.raiting = raiting;
+    }
+    if (selectedQualty) {
+      params.quality = selectedQualty;
+    }
+    if (year) {
+      params.year = year;
+    }
+  };
   React.useEffect(() => {
     const fetchGenre = async () => {
       const { data } = await genreService.getAll();
@@ -58,11 +73,18 @@ function Catalog() {
       setPageCount(Math.ceil(data));
       console.log(data);
     };
+    const getYear = async () => {
+      const { data } = await movieService.getYear();
+      const { minYear, maxYear } = data;
+      setRangeYear([minYear, maxYear]);
+      console.log(data);
+    };
 
     const fetchQuality = async () => {
       const { data } = await qualityService.getAll();
       setQualtys(data);
     };
+    getYear();
     fetchCount();
     fetchGenre();
     fetchQuality();
@@ -155,15 +177,15 @@ function Catalog() {
                       aria-expanded="false"
                     >
                       <div className="filter__range">
-                        <div id="filter__imbd-start">{deger[0]} </div>
-                        <div id="filter__imbd-end">{deger[1]}</div>
+                        <div id="filter__imbd-start">{raiting[0]} </div>
+                        <div id="filter__imbd-end">{raiting[1]}</div>
                       </div>
                       <span></span>
                     </div>
                     <div>
                       <Slider
                         style={{ width: "150px" }}
-                        value={deger}
+                        value={raiting}
                         onChange={handleSliderChange}
                         valueLabelDisplay="auto"
                         aria-labelledby="range-slider"
@@ -191,20 +213,20 @@ function Catalog() {
                       aria-expanded="false"
                     >
                       <div className="filter__range">
-                        <div id="filter__years-start">{yearFil[0]}</div>
-                        <div id="filter__years-end">{yearFil[1]}</div>
+                        <div id="filter__years-start">{year[0]}</div>
+                        <div id="filter__years-end">{year[1]}</div>
                       </div>
                       <span />
                     </div>
                     <div>
                       <Slider
                         style={{ width: "150px" }}
-                        value={yearFil}
+                        value={year}
                         onChange={handleSliderYear}
                         valueLabelDisplay="auto"
                         aria-labelledby="range-slider"
-                        min={2000}
-                        max={2023}
+                        min={rangeYear[0]}
+                        max={rangeYear[1]}
                       />
                     </div>
                   </div>

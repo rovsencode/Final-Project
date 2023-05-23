@@ -11,6 +11,7 @@ using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -96,15 +97,21 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public async Task<(DateTime,DateTime)> FilterData()
+        public async Task<(int,int)> FilterData()
         {
             List<Movie> movies = await _repo.GetAll();
-            DateTime minYear = movies.Min(m => m.Year);
-            DateTime maxYear = movies.Max(m => m.Year);
+            int minYear = movies.Min(m => m.Year.Year);
+            int maxYear = movies.Max(m => m.Year.Year);
 
             return (minYear, maxYear);
         }
 
-      
+        public Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
+        {
+            //var movies= _repo.FilterMovie(movieFilter.startRaiting, movieFilter.endRaiting, movieFilter.startYear,
+            //      movieFilter.endYear, movieFilter.quality, movieFilter.genre, skip);
+            //  return movies;
+            return _repo.GetAll();
+        }
     }
 }

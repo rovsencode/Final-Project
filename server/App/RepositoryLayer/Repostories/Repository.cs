@@ -24,6 +24,10 @@ namespace RepositoryLayer.Repostories
             _entites = _appDbContext.Set<T>();
         }
 
+        public IQueryable<T> GetAllT()
+        {
+            return _appDbContext.Set<T>();
+        }
         public  async Task Create(T entity)
         {
             if (entity == null) throw new ArgumentNullException();
@@ -66,7 +70,9 @@ namespace RepositoryLayer.Repostories
         {
             return await _entites.Where(e => !e.isDeleted).Skip((skip-1)*10).Take(10).ToListAsync();
         }
- 
+     
+
+
         public async Task<List<T>> GetAll()
         {
           return await  _entites.Where(e=>!e.isDeleted).ToListAsync();
@@ -100,6 +106,6 @@ namespace RepositoryLayer.Repostories
             return await query.ToListAsync();
         }
 
-    
+     
     }
 }

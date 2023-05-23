@@ -48,9 +48,16 @@ namespace App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Filter()
+        public async Task<IActionResult> FilterData()
         {
-            return Ok(await _movieService.FilterData());
+            var result = await _movieService.FilterData();
+            var response = new { MinYear = result.Item1, MaxYear = result.Item2 };
+            return Ok(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter, [FromRoute] int skip )
+        {
+            return Ok(await _movieService.MovieFilter(movieFilter,skip));
         }
 
 
