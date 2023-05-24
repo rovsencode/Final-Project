@@ -105,13 +105,42 @@ namespace ServiceLayer.Services
 
             return (minYear, maxYear);
         }
-
-        public Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
+ 
+        public async Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
         {
-            //var movies= _repo.FilterMovie(movieFilter.startRaiting, movieFilter.endRaiting, movieFilter.startYear,
-            //      movieFilter.endYear, movieFilter.quality, movieFilter.genre, skip);
-            //  return movies;
-            return _repo.GetAll();
+            IQueryable<Movie> query = _repo.GetAllT();
+
+
+            if (movieFilter.startRaiting != null && movieFilter.endRaiting != null)
+            {
+                query = query.Where(movie => movie.Raiting >= movieFilter.startRaiting && movie.Raiting <= movieFilter.endRaiting);
+            }
+
+            if (movieFilter.startYear != null && movieFilter.endYear != null)
+            {
+                query = query.Where(movie => movie.Year.Year >= movieFilter.startYear && movie.Year.Year <= movieFilter.endYear);
+            }
+
+            if (!string.IsNullOrEmpty(movieFilter.quality))
+            {
+                query = query.Where(movie => movie.MovieQualities.FirstOrDefault().Quality.Name == movieFilter.quality);
+            }
+
+            if (!string.IsNullOrEmpty(movieFilter.genre))
+            {
+                query = query.Where(movie => movie.Genre.Name == movieFilter.genre);
+            }
+
+            return await query.Where(m => !m.isDeleted).Take(10).Skip((skip - 1) * 10).ToListAsync();
         }
+
+   
     }
+    //public Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
+    //{
+    //    //var movies= _repo.FilterMovie(movieFilter.startRaiting, movieFilter.endRaiting, movieFilter.startYear,
+    //    //      movieFilter.endYear, movieFilter.quality, movieFilter.genre, skip);
+    //    //  return movies;
+    //    return _repo.GetAll();
+    //}
 }

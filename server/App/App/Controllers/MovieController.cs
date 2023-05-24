@@ -55,8 +55,9 @@ namespace App.Controllers
             return Ok(response);
         }
         [HttpGet]
-        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter, [FromRoute] int skip )
+        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter )
         {
+            int skip = 1;
             return Ok(await _movieService.MovieFilter(movieFilter,skip));
         }
 
