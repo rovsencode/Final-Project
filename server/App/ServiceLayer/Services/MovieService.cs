@@ -111,14 +111,14 @@ namespace ServiceLayer.Services
             IQueryable<Movie> query = _repo.GetAllT();
 
 
-            if (movieFilter.startRaiting != null && movieFilter.endRaiting != null)
+            if (movieFilter.raiting!=null)
             {
-                query = query.Where(movie => movie.Raiting >= movieFilter.startRaiting && movie.Raiting <= movieFilter.endRaiting);
+                query = query.Where(movie => movie.Raiting >= movieFilter.raiting[0] && movie.Raiting <= movieFilter.raiting[1]);
             }
 
-            if (movieFilter.startYear != null && movieFilter.endYear != null)
+            if (movieFilter.year!=null)
             {
-                query = query.Where(movie => movie.Year.Year >= movieFilter.startYear && movie.Year.Year <= movieFilter.endYear);
+                query = query.Where(movie => movie.Year.Year >= movieFilter.year[0] && movie.Year.Year <= movieFilter.year[1]);
             }
 
             if (!string.IsNullOrEmpty(movieFilter.quality))
@@ -136,11 +136,4 @@ namespace ServiceLayer.Services
 
    
     }
-    //public Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
-    //{
-    //    //var movies= _repo.FilterMovie(movieFilter.startRaiting, movieFilter.endRaiting, movieFilter.startYear,
-    //    //      movieFilter.endYear, movieFilter.quality, movieFilter.genre, skip);
-    //    //  return movies;
-    //    return _repo.GetAll();
-    //}
 }

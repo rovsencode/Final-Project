@@ -8,12 +8,10 @@ namespace ServiceLayer.DTOs.MovieDto
 {
     public class MovieFilterDto
     {
-
-        public int startYear { get; set; }
-        public int endYear { get; set; }
-        public int startRaiting { get; set; }
-        public int endRaiting { get; set; }
-        public string quality { get; set; }
         public string genre { get; set; }
+        public string quality { get; set; }
+
+        public int[] year { get; set; }
+        public int[] raiting { get; set; }
     }
 }

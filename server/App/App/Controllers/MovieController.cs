@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DomainLayer.Entites;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Contact;
+using ServiceLayer.DTOs.Genre;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
 
@@ -55,11 +57,16 @@ namespace App.Controllers
             return Ok(response);
         }
         [HttpGet]
-        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter )
+        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter)
         {
             int skip = 1;
-            return Ok(await _movieService.MovieFilter(movieFilter,skip));
+
+            return Ok(await _movieService.MovieFilter(movieFilter, skip));
         }
+
+
+
+
 
 
     }

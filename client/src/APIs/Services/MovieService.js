@@ -15,5 +15,8 @@ class MovieService extends HttpClient {
   getYear() {
     return this.get("FilterData");
   }
+  filterSort(params) {
+    return this.getParams("FilterPage", params);
+  }
 }
 export const movieService = new MovieService();

@@ -16,7 +16,7 @@ import { PanoramaSharp } from "@mui/icons-material";
 
 function Catalog() {
   const [raiting, setRaiting] = useState([0, 5]);
-  const [year, setYear] = useState([undefined,undefined]);
+  const [year, setYear] = useState([undefined, undefined]);
   const [rangeYear, setRangeYear] = React.useState([]);
   const [pageCount, setPageCount] = React.useState([]);
   const [selectedGenre, setSelectedGenre] = React.useState([]);
@@ -30,8 +30,6 @@ function Catalog() {
 
     const { data } = await movieService.skip(page);
 
-    console.log(data);
-
     setMovies(data);
   };
 
@@ -42,25 +40,33 @@ function Catalog() {
   const handleSliderChange = (event, newRaiting) => {
     setRaiting(newRaiting);
   };
+
   const handleSliderYear = (event, newYear) => {
     setYear(newYear);
   };
 
+  const filterFetch = async (params) => {
+    const { data } = await movieService.filterSort(params);
+    setMovies(data);
+    console.log(data);
+  };
   const handleFilter = () => {
-    let params = {};
+    let params = "";
     if (selectedGenre) {
-      params.genre = selectedGenre;
+      params += `genre=${selectedGenre.name}&`;
     }
     if (raiting) {
-      params.raiting = raiting;
+      params += `raiting=${raiting[0]}&raiting=${raiting[1]}&`;
     }
     if (selectedQualty) {
-      params.quality = selectedQualty;
+      params += `quality=${selectedQualty.name}&`;
     }
     if (year) {
-      params.year = year;
+      params += `year=${year[0]}&year=${year[1]}&`;
     }
+    filterFetch(params);
   };
+
   React.useEffect(() => {
     const fetchGenre = async () => {
       const { data } = await genreService.getAll();
@@ -233,7 +239,11 @@ function Catalog() {
                   {/* end filter item */}
                 </div>
                 {/* filter btn */}
-                <button className="filter__btn" type="button">
+                <button
+                  onClick={handleFilter}
+                  className="filter__btn"
+                  type="button"
+                >
                   apply filter
                 </button>
                 {/* end filter btn */}
@@ -248,7 +258,7 @@ function Catalog() {
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <MovieCard
                 key={movie.title}
-                title={movie.title}
+                title={movie.name}
                 description={movie.description}
                 imageUrl={movie.imageUrl}
                 action={movie.action}
