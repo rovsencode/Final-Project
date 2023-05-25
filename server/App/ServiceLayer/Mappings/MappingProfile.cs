@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.Actress;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
@@ -60,6 +61,8 @@ namespace ServiceLayer.Mappings
             CreateMap<PricingPlansListDto, PricingPlans>();
             CreateMap<PricingPlans, PricingPlansListDto>();
             CreateMap<PricingPlansUpdateDto, PricingPlans>();
+            CreateMap<RegisterDto, AppUser>();
+
         }
     }
 }

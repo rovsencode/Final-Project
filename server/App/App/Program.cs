@@ -5,6 +5,8 @@ using RepositoryLayer.Repostories;
 using ServiceLayer.Mappings;
 using ServiceLayer.Services.Interfaces;
 using ServiceLayer.Services;
+using DomainLayer.Entites;
+using Microsoft.AspNetCore.Identity;
 
 namespace App
 {
@@ -12,7 +14,7 @@ namespace App
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+           var builder = WebApplication.CreateBuilder(args);
             var _config = builder.Configuration;
 
             // Add services to the container.
@@ -48,14 +50,17 @@ namespace App
             builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 
 
-
+            
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-           
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<AppDbContext>();
 
             builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
             {
                 build.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
+         
+         
             var app = builder.Build();
             app.UseCors("corspolicy");
 
