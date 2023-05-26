@@ -11,5 +11,6 @@ namespace ServiceLayer.Services.Interfaces
     {
         Task<string?> Login(LoginDto model);
         Task<ApiResponse> Register(RegisterDto model);
+        Task CreateRole(RoleDto model);
     }
 }

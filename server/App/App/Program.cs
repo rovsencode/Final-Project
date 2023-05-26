@@ -80,7 +80,7 @@ namespace App
                     {
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience =builder.Configuration["Jwt:Auidience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtKey"])),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
@@ -97,6 +97,7 @@ namespace App
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

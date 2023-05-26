@@ -33,6 +33,13 @@ namespace App.Controllers
             var result= await _accountService.Login(user);
             return Ok(result);
         }
+        [HttpPost]
+
+        public async Task<IActionResult> CreateRole([FromBody] RoleDto role)
+        {
+           await  _accountService.CreateRole(role);
+            return Ok();
+        }
 
     }
 }

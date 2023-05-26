@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ServiceLayer.DTOs.Account;
@@ -20,12 +21,19 @@ namespace ServiceLayer.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountService(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, IConfiguration config)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
             _config = config;
+        }
+
+        public async Task CreateRole(RoleDto model)
+        {
+            await _roleManager.CreateAsync(new IdentityRole { Name = model.Role});
         }
 
         public async Task<string?> Login(LoginDto model)
@@ -48,10 +56,14 @@ namespace ServiceLayer.Services
                     Errors = result.Errors.Select(m => m.Description).ToList(),
                     StatusMessage = "Failed"
                 };
+                
 
-              
-            return response;
+                return response;
             }
+            var dbUser = await _userManager.FindByEmailAsync(model.Email);
+
+            await _userManager.AddToRoleAsync(dbUser, "Member");
+
             return new ApiResponse { Errors = null, StatusMessage = "Success" };
 
 

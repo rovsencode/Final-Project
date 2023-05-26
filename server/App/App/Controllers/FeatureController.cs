@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
 {
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class FeatureController : ControllerBase
@@ -15,6 +17,7 @@ namespace App.Controllers
             _featureService = featureService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
