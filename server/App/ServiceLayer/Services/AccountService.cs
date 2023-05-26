@@ -23,7 +23,7 @@ namespace ServiceLayer.Services
             _roleManager = roleManager;
             _mapper = mapper;
         }
-        +
+        
         public Task Login(LoginDto model)
         {
             throw new NotImplementedException();
@@ -33,9 +33,20 @@ namespace ServiceLayer.Services
         {
             var user=_mapper.Map<AppUser>(model);  
             IdentityResult result= await _userManager.CreateAsync(user,model.Password);
-            ApiResponse apiResponse = new();
-            apiResponse.StatusMessage = "success";
-            return apiResponse;
+            if (!result.Succeeded)
+            {
+                ApiResponse response = new()
+                {
+                    Errors = result.Errors.Select(m => m.Description).ToList(),
+                    StatusMessage = "Failed"
+                };
+
+              
+            return response;
+            }
+            return new ApiResponse { Errors = null, StatusMessage = "Success" };
+
+
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.DTOs.Account
 {
-    internal class ApiResponse
+    public class ApiResponse
     {
         public List<string>? Errors { get; set; }
         public string? StatusMessage { get; set; }

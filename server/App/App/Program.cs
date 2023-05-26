@@ -48,9 +48,10 @@ namespace App
             builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
             builder.Services.AddScoped<IPropertyService, PropertyService>();
             builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
 
 
-            
+
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddEntityFrameworkStores<AppDbContext>();
