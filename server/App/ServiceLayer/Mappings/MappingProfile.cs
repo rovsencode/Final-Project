@@ -62,6 +62,8 @@ namespace ServiceLayer.Mappings
             CreateMap<PricingPlans, PricingPlansListDto>();
             CreateMap<PricingPlansUpdateDto, PricingPlans>();
             CreateMap<RegisterDto, AppUser>();
+            CreateMap<LoginDto, AppUser>();
+
 
         }
     }

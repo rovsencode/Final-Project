@@ -73,3 +73,4 @@ C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\ServiceLayer.d
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\ServiceLayer.pdb
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

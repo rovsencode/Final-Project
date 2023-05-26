@@ -9,7 +9,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task Login(LoginDto model);
+        Task<string?> Login(LoginDto model);
         Task<ApiResponse> Register(RegisterDto model);
     }
 }
