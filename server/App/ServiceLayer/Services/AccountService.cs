@@ -18,25 +18,26 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace ServiceLayer.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         private readonly RoleManager<IdentityRole> _roleManager;
 
 
-        public AccountService(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+        public AccountService(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, IConfiguration config)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _config = config;
-            _httpContextAccessor = httpContextAccessor;
+      
         }
 
         public async Task CreateRole(RoleDto model)
@@ -149,5 +150,67 @@ namespace ServiceLayer.Services
             return "email is confirmed successfuly";
           
         }
+
+        public async Task<ApiResponse> ForgetPassword(ForgetPasswordDto forgetPassword,HttpRequest request)
+        {
+            AppUser dbUser = await _userManager.FindByEmailAsync(forgetPassword.Email);
+            if (dbUser == null)
+            {
+                return new ApiResponse { StatusMessage = "User not found", StatusCode = StatusCodes.Status400BadRequest };
+            }
+
+            var resetPasswordRoute = "ResetPassword";
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+            var token = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
+            var userId = await _userManager.GetUserIdAsync(dbUser);
+            //var encodedToken = Uri.EscapeDataString(token);
+            var link = $"{baseUrl}/api/Account/{resetPasswordRoute}?userId={userId}&token={token}";
+            await SendEmailConfirmationEmail(dbUser.Email, link);
+            return new ApiResponse { StatusMessage = "Password reset email sent", StatusCode = StatusCodes.Status200OK };
+        }
+
+        public async Task<ApiResponse> ResetPassword(string userId, string token,string password)
+        {
+            AppUser exsistUser = await _userManager.FindByIdAsync(userId);
+
+            if (exsistUser == null)
+            {
+                // Kullanıcı bulunamadı hatası döndürün
+                return new ApiResponse { StatusCode = StatusCodes.Status404NotFound };
+            }
+
+            bool checkPassword = await _userManager.VerifyUserTokenAsync(
+                exsistUser,
+                _userManager.Options.Tokens.PasswordResetTokenProvider,
+                "ResetPassword",
+                token);
+
+            if (!checkPassword)
+            {
+                // Şifre sıfırlama token'ı geçerli değil hatası döndürün
+                return new ApiResponse { StatusCode = StatusCodes.Status400BadRequest };
+            }
+
+            if (await _userManager.CheckPasswordAsync(exsistUser, password))
+            {
+                // Yeni şifre, kullanıcının önceki şifresiyle aynı hatası döndürün
+                return new ApiResponse { StatusMessage = "This password is the same as your previous password" };
+            }
+
+            // Şifreyi sıfırla
+            var resetPasswordResult = await _userManager.ResetPasswordAsync(exsistUser, token, password);
+            if (!resetPasswordResult.Succeeded)
+            {
+                // Şifre sıfırlama işlemi başarısız oldu hatası döndürün
+                return new ApiResponse { StatusCode = StatusCodes.Status500InternalServerError };
+            }
+
+            // Güvenlik damgasını güncelle
+            await _userManager.UpdateSecurityStampAsync(exsistUser);
+
+            // Başarılı yanıt döndürün
+            return new ApiResponse { StatusCode = StatusCodes.Status200OK };
+        }
+
     }
 }

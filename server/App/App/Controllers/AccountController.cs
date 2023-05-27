@@ -36,6 +36,21 @@ namespace App.Controllers
             var request = _httpContextAccessor.HttpContext.Request;
             return await _accountService.Register(user,request);
         }
+
+        [HttpPost(Name = "ResetPassword")]
+        public async Task<ApiResponse> ResetPassword(string userId,string token, string password)
+        {
+            return await _accountService.ResetPassword(userId,token,password);
+
+
+
+        }
+        [HttpPost]
+        public async Task<ApiResponse> ForgetPassword(ForgetPasswordDto forgetPassword)
+        {
+            var request = _httpContextAccessor.HttpContext.Request;
+            return await _accountService.ForgetPassword(forgetPassword, request);
+        }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDto user)
         {

@@ -14,5 +14,8 @@ namespace ServiceLayer.Services.Interfaces
         Task<ApiResponse> Register(RegisterDto model,HttpRequest request);
         Task CreateRole(RoleDto model);
         Task<string?> ConfirmEmail(string userId, string token);
+        Task<ApiResponse> ForgetPassword(ForgetPasswordDto forgetPassword, HttpRequest request);
+        Task<ApiResponse> ResetPassword(string userId,string token,string password);
+
     }
 }
