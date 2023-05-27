@@ -58,7 +58,7 @@ namespace App
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                 .AddEntityFrameworkStores<AppDbContext>();
+                 .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
             {

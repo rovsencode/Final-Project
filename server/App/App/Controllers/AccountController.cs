@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DomainLayer.Entites;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ServiceLayer.DTOs.Account;
@@ -14,18 +16,25 @@ namespace App.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
- 
+            _httpContextAccessor = httpContextAccessor;
+        }
+        [HttpGet(Name = "ConfirmEmail")]
+        public async Task<string?> ConfirmEmail(string userId,string token)
+        {
+            
+            return await _accountService.ConfirmEmail(userId,token);
         }
 
         [HttpPost]
         public async Task<ApiResponse> Register([FromBody] RegisterDto user)
         {
-
-            return await _accountService.Register(user);
+            var request = _httpContextAccessor.HttpContext.Request;
+            return await _accountService.Register(user,request);
         }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDto user)

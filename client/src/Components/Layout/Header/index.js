@@ -24,16 +24,15 @@ function Header() {
     if (inputValue.length > 0) {
       const { data } = await movieService.searchFilter(inputValue);
       console.log(data);
-      data.length>0 ?  setSearchData(data) : setSearchData(null)
-  
-    }
-    else {
-      setSearchData(null)
+      data.length > 0 ? setSearchData(data) : setSearchData(null);
+    } else {
+      setSearchData(null);
     }
   };
 
   const activeSearch = () => {
     setIsActiveSearch(!isActiveSearch);
+    setInputValue("");
   };
 
   const search = (event) => {
@@ -187,8 +186,8 @@ function Header() {
         action="#"
         className={
           isActiveSearch
-            ? "header__search"
-            : " header__search header__search--active"
+            ? " header__search header__search--active"
+            : " header__search "
         }
       >
         <div className="container">
@@ -215,7 +214,7 @@ function Header() {
                   margin: 0,
                 }}
               >
-                {searchData && inputValue ? (
+                {searchData && inputValue && isActiveSearch ? (
                   searchData.map(({ name }) => (
                     <li
                       style={{
@@ -227,8 +226,21 @@ function Header() {
                       {name}
                     </li>
                   ))
+                ) : inputValue.length < 2 && inputValue.length > 0 ? (
+                  <li
+                    style={{
+                      color: "white",
+                      backgroundColor: "#28282d",
+                      fontSize: "16px",
+                    }}
+                  >
+                    En azi 2 herf daxil edin
+                  </li>
                 ) : (
                   <li
+                    className={
+                      isActiveSearch && inputValue ? "content" : "d-none"
+                    }
                     style={{
                       color: "white",
                       backgroundColor: "#28282d",
