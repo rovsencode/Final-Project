@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services;
@@ -18,6 +19,7 @@ namespace App.Controllers
             _contactService = contactService;
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] ContactCreateDto contact)
         {

@@ -17,7 +17,7 @@ namespace App.Controllers
             _featureService = featureService;
         }
 
-        [Authorize]
+        [Authorize(Roles ="Member")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
