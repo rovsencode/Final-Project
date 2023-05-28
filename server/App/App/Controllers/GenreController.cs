@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.DTOs.Genre;
+using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
 

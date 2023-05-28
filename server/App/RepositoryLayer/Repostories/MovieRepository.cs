@@ -71,38 +71,6 @@ namespace RepositoryLayer.Repostories
 
         }
 
-        public Task<List<Movie>> FilterMovie(int startRating, int endRaiting, int startYear, int endYear, string quality, string genreName, int skip)
-        {
-            throw new NotImplementedException();
-        }
 
-
-        //    public async Task<List<Movie>> FilterMovie(int startRating,int endRaiting, int startYear,int endYear, string quality, string genreName, int skip)
-        //    {
-        //        IQueryable<Movie> query = _movieRepository.GetAllT();
-
-        //        if (startRating!=null && endRaiting!=null) 
-        //        {
-        //            query = query.Where(movie => movie.Raiting >= startRating && movie.Raiting<=endRaiting);
-        //        }
-
-        //        if (startYear!=null && endYear!=null)
-        //        {
-        //            query = query.Where(movie => movie.Year.Year >=startYear && movie.Year.Year<=endYear );
-        //        }
-
-        //        if (!string.IsNullOrEmpty(quality))
-        //        {
-        //            query = query.Where(movie => movie.MovieQualities.FirstOrDefault().Quality.Name == quality);
-        //        }
-
-        //        if (!string.IsNullOrEmpty(genreName))
-        //        {
-        //            query = query.Where(movie => movie.Genre.Name == genreName);
-        //        }
-
-        //        return await query.Where(m => !m.isDeleted).Take(10).Skip((skip - 1) * 10).ToListAsync();
-        //    }
-        //}
     }
 }

@@ -1,4 +1,4 @@
-﻿using ServiceLayer.DTOs.Genre;
+﻿using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.SeasonDto;
 using System;
 using System.Collections.Generic;

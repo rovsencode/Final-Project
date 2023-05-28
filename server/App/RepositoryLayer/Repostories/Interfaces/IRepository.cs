@@ -21,7 +21,7 @@ namespace RepositoryLayer.Repostories.Interfaces
         Task<List<T>> FindAllByExpression(Expression<Func<T,bool>> expression);
         Task<List<T>> Including(params Expression<Func<T, object>>[] includeProperties);
         public IQueryable<T> GetAllT();
-        Task<List<T>> PageList(int skip);
+        Task<List<T>> PageList(IQueryable<T> query,int skip);
 
     }
 }

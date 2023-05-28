@@ -2,7 +2,7 @@
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
 using ServiceLayer.DTOs.Contact;
-using ServiceLayer.DTOs.Genre;
+using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using DomainLayer.Entites;
 using ServiceLayer.DTOs.Contact;
-using ServiceLayer.DTOs.Genre;
+using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.MovieDto;
 using System;
 using System.Collections.Generic;

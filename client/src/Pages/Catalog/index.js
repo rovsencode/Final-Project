@@ -257,14 +257,14 @@ function Catalog() {
           {movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <MovieCard
-                key={movie.title}
+                key={movie.id}
                 title={movie.name}
                 description={movie.description}
                 imageUrl={movie.imageUrl}
-                action={movie.action}
-                rating={movie.rating}
+                action={movie.genre}
+                rating={movie.raiting}
                 ageRestriction={movie.ageRestriction}
-                Year={movie.Year}
+                Year={movie.year}
               />
             </Grid>
           ))}

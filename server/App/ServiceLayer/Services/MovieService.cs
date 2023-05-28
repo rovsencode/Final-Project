@@ -13,7 +13,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
+using ServiceLayer.DTOs.GenreDto;
+using ServiceLayer.DTOs.ActressDto;
+using ServiceLayer.DTOs.QualityDto;
 
 namespace ServiceLayer.Services
 {
@@ -60,24 +65,43 @@ namespace ServiceLayer.Services
 
         public async Task<List<MoviePageDto>> MoviePage(int skip)
         {
-         
-            List<MoviePageDto> moviePageDtos = new();
-            var movieSort = await _repo.PageList(skip);
-            foreach (var movie in movieSort)
-            {
-                MoviePageDto moviePageDto = new() {
-                    Name = movie.Name,
-                    AgeRestriction = movie.AgeRestriction,
-                    Description = movie.Description,
-                    Price = movie.Price,
-                    Raiting = movie.Raiting,
-                    Year = movie.Year,
-                };
-                moviePageDtos.Add(moviePageDto);
+            //IQueryable<Movie> query = _repo.GetAllT();
+  
+           //var movies= await _repo.GetAllWithGenre();
 
-            }
+                var movies = await _repo.GetAllT().Include(m => m.Genre).Include(m=>m.MovieActresses)
+                .ThenInclude(m=>m.Actress).Include(m=>m.MovieQualities)
+                .ThenInclude(m=>m.Quality).Where(e => !e.isDeleted).Skip((skip - 1) * 10).Take(10).ToListAsync();
+
+            return movies.Select(m => new MoviePageDto
+            {
+                Name = m.Name,
+                Description = m.Description,
+                AgeRestriction = m.AgeRestriction,
+                Raiting = m.Raiting,
+                Year = m.Year.Year,
+                Genre = m.Genre.Name,
+                GenreId = m.Genre.Id,
+                Actresses = m.MovieActresses.Select(ma => new ActressListDto
+                {
+                   FullName = ma.Actress.FullName,
+                }).ToList(),
+                Qualities = m.MovieQualities.Select(ma => new QualityListDto
+                {
+                    Name = ma.Quality.Name,
+              
+                    
+                }).ToList(),
+            }).ToList();
+
+            
+                    
+
+
+  
+        
+            
            
-            return moviePageDtos;
         }
         public async Task<float>Count()
         {
@@ -113,6 +137,7 @@ namespace ServiceLayer.Services
 
             if (movieFilter.raiting!=null)
             {
+                
                 query = query.Where(movie => movie.Raiting >= movieFilter.raiting[0] && movie.Raiting <= movieFilter.raiting[1]);
             }
 

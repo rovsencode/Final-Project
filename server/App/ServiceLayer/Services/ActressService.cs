@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
-using ServiceLayer.DTOs.Actress;
+using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services.Interfaces;
 using System;

@@ -9,9 +9,9 @@ namespace DomainLayer.Entites
 {
     public class Genre:BaseEntity
     {
-        public string Name { get; set; }
-        public List<Movie> Movies { get; set; }
-        public List<Serie> Series { get; set; }
+        public string? Name { get; set; }
+        public List<Movie>? Movies { get; set; }
+        public List<Serie>? Series { get; set; }
 
     }
 }

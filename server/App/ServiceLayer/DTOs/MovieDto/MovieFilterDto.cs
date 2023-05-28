@@ -8,10 +8,10 @@ namespace ServiceLayer.DTOs.MovieDto
 {
     public class MovieFilterDto
     {
-        public string genre { get; set; }
-        public string quality { get; set; }
+        public string ?genre { get; set; }
+        public string ?quality { get; set; }
 
-        public int[] year { get; set; }
-        public int[] raiting { get; set; }
+        public int[] ?year { get; set; }
+        public int[] ?raiting { get; set; }
     }
 }

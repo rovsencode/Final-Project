@@ -66,9 +66,9 @@ namespace RepositoryLayer.Repostories
             return await _entites.Where(e=>!e.isDeleted).FirstOrDefaultAsync() ?? throw new NullReferenceException();
 
         }
-        public async Task<List<T>> PageList(int skip)
+        public async Task<List<T>> PageList(IQueryable<T>query,int skip)
         {
-            return await _entites.Where(e => !e.isDeleted).Skip((skip-1)*10).Take(10).ToListAsync();
+            return await query.Where(e => !e.isDeleted).Skip((skip-1)*10).Take(10).ToListAsync();
         }
      
 

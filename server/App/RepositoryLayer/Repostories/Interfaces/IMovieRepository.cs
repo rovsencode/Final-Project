@@ -13,7 +13,6 @@ namespace RepositoryLayer.Repostories.Interfaces
 
 
         public Task CreateMany(Movie movie, List<int> actressIds,List<int> qualityIds);
-        public Task<List<Movie>> FilterMovie(int startRating, int endRaiting, int startYear, int endYear, string quality, string genreName, int skip);
-
+     
     }
 }

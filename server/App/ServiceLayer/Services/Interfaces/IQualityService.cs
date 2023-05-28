@@ -1,4 +1,4 @@
-﻿using ServiceLayer.DTOs.Actress;
+﻿using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.QualityDto;
 using System;
 using System.Collections.Generic;

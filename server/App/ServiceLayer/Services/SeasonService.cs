@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
-using ServiceLayer.DTOs.Genre;
+using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.SeasonDto;
 using ServiceLayer.Services.Interfaces;
 using System;
