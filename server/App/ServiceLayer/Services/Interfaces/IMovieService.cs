@@ -16,7 +16,7 @@ namespace ServiceLayer.Services.Interfaces
 
         Task Update(int id, MovieUpdateDto movie);
         Task<List<MovieListDto>> GetAll();
-        Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip);
+        Task<List<MoviePageDto>> MovieFilter(MovieFilterDto movieFilter, int skip);
         Task<List<MoviePageDto>> MoviePage(int skip);
         Task<float> Count();
         Task<(int,int)> FilterData();

@@ -41,7 +41,7 @@ const MovieCard = ({
           <CardMedia
             component="img"
             alt={title}
-            image={imageUrl}
+            src={`data:image/jpeg;base64,${imageUrl}`}
             sx={{
               objectFit: "cover",
               height: 200,
@@ -49,6 +49,7 @@ const MovieCard = ({
               borderRadius: 0,
             }}
           />
+
           <CardContent sx={{ color: "white" }}>
             <Typography
               gutterBottom

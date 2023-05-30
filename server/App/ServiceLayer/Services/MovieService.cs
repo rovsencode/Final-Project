@@ -36,9 +36,8 @@ namespace ServiceLayer.Services
         }
 
         public async Task Create(MovieCreateDto movie)
-        {      
-
-            var mappedData = _mapper.Map<Movie>(movie);
+        {
+            var mappedData= _mapper.Map<Movie>(movie);
             await _repo.Create(mappedData);
            await _repo.CreateMany(mappedData, movie.actressIds,movie.qualityIds);
 
@@ -57,9 +56,11 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<MovieListDto>> GetAll()
+        public async Task<List<MovieListDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var movies = await _repo.GetAll();
+           var mappedData=  _mapper.Map <List<MovieListDto>>(movies);
+            return mappedData;
         }
 
 
@@ -81,6 +82,8 @@ namespace ServiceLayer.Services
                 Raiting = m.Raiting,
                 Year = m.Year.Year,
                 Genre = m.Genre.Name,
+                Price= m.Price,
+                ImageUrl=m.ImageUrl,
                 GenreId = m.Genre.Id,
                 Actresses = m.MovieActresses.Select(ma => new ActressListDto
                 {
@@ -93,15 +96,6 @@ namespace ServiceLayer.Services
                     
                 }).ToList(),
             }).ToList();
-
-            
-                    
-
-
-  
-        
-            
-           
         }
         public async Task<float>Count()
         {
@@ -130,9 +124,11 @@ namespace ServiceLayer.Services
             return (minYear, maxYear);
         }
  
-        public async Task<List<Movie>> MovieFilter(MovieFilterDto movieFilter, int skip)
+        public async Task<List<MoviePageDto>> MovieFilter(MovieFilterDto movieFilter, int skip)
         {
-            IQueryable<Movie> query = _repo.GetAllT();
+            IQueryable<Movie> query = _repo.GetAllT().Include(m=>m.MovieActresses)
+                .ThenInclude(m=>m.Actress).Include(m=>m.MovieQualities)
+                .ThenInclude(m=>m.Quality).Include(m=>m.Genre);
 
 
             if (movieFilter.raiting!=null)
@@ -155,8 +151,30 @@ namespace ServiceLayer.Services
             {
                 query = query.Where(movie => movie.Genre.Name == movieFilter.genre);
             }
+           var movies= await query.Where(m => !m.isDeleted).Take(10).Skip((skip - 1) * 10).ToListAsync();
+            return  movies.Select(m => new MoviePageDto
+            {
+                Name = m.Name,
+                Description = m.Description,
+                AgeRestriction = m.AgeRestriction,
+                Raiting = m.Raiting,
+                Year = m.Year.Year,
+                Genre = m.Genre.Name,
+                Price = m.Price,
+                ImageUrl = m.ImageUrl,
+                GenreId = m.Genre.Id,
+                Actresses = m.MovieActresses.Select(ma => new ActressListDto
+                {
+                    FullName = ma.Actress.FullName,
+                }).ToList(),
+                Qualities = m.MovieQualities.Select(ma => new QualityListDto
+                {
+                    Name = ma.Quality.Name,
 
-            return await query.Where(m => !m.isDeleted).Take(10).Skip((skip - 1) * 10).ToListAsync();
+
+                }).ToList(),
+            }).ToList();
+          
         }
 
    

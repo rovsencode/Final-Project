@@ -12,9 +12,9 @@ function App() {
   return (
     <>
       <TokenProvider>
-        {/* <Header /> */}
+        <Header />
         <Routs />
-        {/* <Footer /> */}
+        <Footer />
       </TokenProvider>
     </>
   );

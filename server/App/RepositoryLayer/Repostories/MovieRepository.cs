@@ -30,7 +30,7 @@ namespace RepositoryLayer.Repostories
 
 
 
-        public async Task CreateMany(Movie movie, List<int> actressIds, List<int> qualityIds)
+        public async Task CreateMany(Movie movie, int[] actressIds, int[] qualityIds)
         {
 
             var genres = _genreRepository.GetAll();

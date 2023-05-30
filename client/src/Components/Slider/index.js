@@ -1,58 +1,39 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../Slider/index.scss'
-// import background from '../Slider/hero-area.png'
-import Carousel from 'react-bootstrap/Carousel';
+import React, { useEffect, useRef } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Carousel from "react-bootstrap/Carousel";
 
 function Slider() {
-	return (
-		<div className="home" 
-		 >
-				<Carousel>
-					<Carousel.Item>
-						<img
-							className="d-block w-100"
-							src="/img/gallery/project-1.jpg"
-							alt="First slide"
-						/>
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<img
-							className="d-block w-100"
-							src="/img/gallery/project-2.jpg"
-							alt="Second slide"
-						/>
+  const carouselRef = useRef(null);
 
-						<Carousel.Caption>
-							<h3>Second slide label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<img
-							className="d-block w-100"
-							src="/img/gallery/project-6.jpg"
-							alt="Third slide"
-						/>
+  useEffect(() => {
+    carouselRef.current?.next();
+  }, []);
 
-						<Carousel.Caption>
-							<h3>Third slide label</h3>
-							<p>
-								Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-				</Carousel>
-
-
-			</div>
-
-
-	);
+  return (
+    <div className="home" style={{ marginTop: "100px" }}>
+      <Carousel
+        ref={carouselRef}
+        interval={5000}
+        pause={false}
+        slide={true}
+        className="carousel"
+      >
+        <Carousel.Item>
+          <div className="video-container">
+            <iframe
+              width="1500"
+              height="605"
+              src="https://www.youtube.com/embed/95ghQs5AmNk?autoplay=1"
+              title="YouTube video player"
+              FrameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </Carousel.Item>
+      </Carousel>
+    </div>
+  );
 }
+
 export default Slider;
