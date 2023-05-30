@@ -11,10 +11,8 @@ namespace ServiceLayer.DTOs.Account
     {
         public string ?Username { get; set; }
         public string ?FullName { get; set; }
-        [DataType(DataType.Password)]
         public string ?Email { get; set; }
         public string ?Password { get; set; }
-        [DataType(DataType.Password), Compare(nameof(Password))]
         public string? RePassword { get; set; }
     }
 }

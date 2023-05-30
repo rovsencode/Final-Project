@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
-import Submit from "../../Components/Submit";
+import Submit from "../../Components/MovieForm";
 import { Grid, Slider, colors } from "@mui/material";
 import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
@@ -29,7 +29,7 @@ function Catalog() {
     console.log("normalpage: " + page);
 
     const { data } = await movieService.skip(page);
-
+    console.log(data);
     setMovies(data);
   };
 
@@ -261,6 +261,7 @@ function Catalog() {
                 title={movie.name}
                 description={movie.description}
                 imageUrl={movie.imageUrl}
+                quality={movie.qualities[0].name}
                 action={movie.genre}
                 rating={movie.raiting}
                 ageRestriction={movie.ageRestriction}

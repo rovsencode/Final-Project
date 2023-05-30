@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Header/index.scss";
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
@@ -8,17 +8,23 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { movieService } from "../../../APIs/Services/MovieService";
+import { accountService } from "../../../APIs/Services/AccountService";
+import { TokenContext } from "../../../Context/tokenContext";
 
 function Header() {
+  const { token, setToken } = useContext(TokenContext);
   const [isActiveSearch, setIsActiveSearch] = React.useState(false);
   const [isActiveMore, setIsActiveMore] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const [searchData, setSearchData] = React.useState([]);
-
   const moreHandleClick = () => {
     setIsActiveMore(!isActiveMore);
   };
-
+  const logOut = () => {
+    accountService.clearToken();
+    localStorage.removeItem("token");
+    setToken("");
+  };
   const fetchSearch = async () => {
     console.log("Searching");
     if (inputValue.length > 0) {
@@ -101,6 +107,20 @@ function Header() {
                       Help
                     </Link>
                   </li>
+                  {token ? (
+                    <li className="header__nav-item">
+                      <Link className="header__nav-link" to="/help">
+                        Rovsen
+                      </Link>
+                    </li>
+                  ) : (
+                    <li className="header__nav-item">
+                      <Link className="header__nav-link" to="/help">
+                        User yoxdur
+                      </Link>
+                    </li>
+                  )}
+
                   {/* dropdown */}
                   <li
                     className={
@@ -142,6 +162,11 @@ function Header() {
                       <li>
                         <Link style={{ textDecoration: "none" }} to="/register">
                           Sign up
+                        </Link>
+                      </li>
+                      <li onClick={logOut}>
+                        <Link style={{ textDecoration: "none" }} to="/register">
+                          Log out
                         </Link>
                       </li>
                     </ul>

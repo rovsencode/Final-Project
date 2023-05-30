@@ -84,7 +84,17 @@ namespace App
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
-
+            builder.Services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequireDigit = true;
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireUppercase = false;
+      
+                opt.SignIn.RequireConfirmedEmail = true;
+                opt.Lockout.MaxFailedAccessAttempts = 3;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                opt.Lockout.AllowedForNewUsers = true;
+            });
             var app = builder.Build();
             app.UseCors("corspolicy");
 

@@ -4,7 +4,7 @@ import Home from "../Pages/Home";
 import { Routes, Route } from "react-router-dom";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
-import Submit from "../Components/Submit";
+import Submit from "../Components/MovieForm";
 import Catalog from "../Pages/Catalog";
 import About from "../Pages/About";
 import Pricing from "../Pages/Pricings";

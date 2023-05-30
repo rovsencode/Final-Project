@@ -6,6 +6,9 @@ class MovieService extends HttpClient {
   skip(skip) {
     return this.getSkip("MovieCatalog", skip);
   }
+  create(body) {
+    return this.post("Create", body);
+  }
   searchFilter(inputValue) {
     return this.search("Search", inputValue);
   }

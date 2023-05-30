@@ -55,6 +55,7 @@ namespace App.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto user)
         {
             var result= await _accountService.Login(user);
+            if (result == null) return BadRequest();
             return Ok(result);
         }
         [HttpPost]

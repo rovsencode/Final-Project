@@ -6,7 +6,8 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
 import "primereact/resources/primereact.min.css";
-import Submit from "../../Components/Submit";
+import Submit from "../../Components/MovieForm";
+import MovieForm from "../../Components/MovieForm";
 
 export default function About() {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -18,9 +19,5 @@ export default function About() {
     { name: "Paris", code: "PRS" },
   ];
 
-  return (
-    <></>
-
-    // <Submit/>
-  );
+  return <MovieForm />;
 }

@@ -49,8 +49,10 @@ namespace ServiceLayer.Services
         {
             var dbUser=await _userManager.FindByEmailAsync(model.Email);
             if (!await _userManager.CheckPasswordAsync(dbUser, model.Password))
+            {
                 return null;
-            if(!dbUser.EmailConfirmed)
+            }
+            if (!dbUser.EmailConfirmed)
                 return null;
             var roles = await _userManager.GetRolesAsync(dbUser);
             return  GenerateJwtToken(dbUser.UserName,(List<string>) roles);
@@ -58,8 +60,14 @@ namespace ServiceLayer.Services
 
         public async Task<ApiResponse> Register(RegisterDto model, HttpRequest request)
         {
-            var user=_mapper.Map<AppUser>(model);  
-            IdentityResult result= await _userManager.CreateAsync(user,model.Password);
+            var user=_mapper.Map<AppUser>(model);
+            var existingUser = await _userManager.FindByEmailAsync(user.Email);
+            if (existingUser != null)
+            {
+                return new ApiResponse { Errors = new List<string> { "A user with the same email already exists." }, StatusMessage = "Failed" };
+            }
+
+            IdentityResult result = await _userManager.CreateAsync(user,model.Password);
             if (!result.Succeeded)
             {
                 ApiResponse response = new()
