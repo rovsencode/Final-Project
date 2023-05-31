@@ -5,7 +5,6 @@ import { Carousel } from "react-responsive-carousel";
 
 const VideoPLAYER = () => {
   const [videoId, setVideoId] = useState("");
-
   const handleSearch = async (filmName) => {
     try {
       const response = await axios.get(

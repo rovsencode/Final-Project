@@ -8,9 +8,10 @@ const validationSchema = Yup.object().shape({
 });
 
 function MovieForm() {
-  const actressOptions = [1, 2]; // Actress seçenekleri
-  const qualityOptions = [6, 7, 8]; // Quality seçenekleri
-  const handleSubmit = (values) => {
+  const actressOptions = [1, 2]; 
+  const qualityOptions = [6, 7, 8]; 
+  const imageUrl ="https://storage.cloud.google.com/my-films-1207/Films/homealone2.jpeg";
+ const handleSubmit = (values) => {
     const {
       name,
       description,
@@ -23,6 +24,7 @@ function MovieForm() {
       qualityIds,
       genreId,
     } = values;
+
     const form = {
       name: name,
       description: description,
@@ -157,6 +159,7 @@ function MovieForm() {
           </Form>
         )}
       </Formik>
+      <img src={imageUrl} alt="Uploaded Image" />;
     </div>
   );
 }

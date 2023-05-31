@@ -143,7 +143,7 @@ function Catalog() {
                   {/* filter item */}
                   <div className="filter__item" id="filter__genre">
                     <span className="filter__item-label">GENRE:</span>
-                    {/* <Dropdown
+                    <Dropdown
                       value={selectedGenre}
                       onChange={(e) => setSelectedGenre(e.value)}
                       options={genres}
@@ -152,13 +152,13 @@ function Catalog() {
                       placeholder="Select a genre"
                       className="w-full md:w-14rem"
                       style={{ backgroundColor: "#2B2B31", color: "white" }}
-                    />{" "} */}
+                    />{" "}
                   </div>
                   {/* end filter item */}
                   {/* filter item */}
                   <div className="filter__item" id="filter__quality">
                     <span className="filter__item-label">QUALITY:</span>
-                    {/* <Dropdown
+                    <Dropdown
                       value={selectedQualty}
                       onChange={(e) => setSelectedQualty(e.value)}
                       options={qualtys}
@@ -167,7 +167,7 @@ function Catalog() {
                       placeholder="Select a quality"
                       className="w-full md:w-14rem"
                       style={{ backgroundColor: "#2B2B31", color: "white" }}
-                    /> */}
+                    />
                   </div>
                   {/* end filter item */}
                   {/* filter item */}
