@@ -6,6 +6,9 @@ class MovieService extends HttpClient {
   skip(skip) {
     return this.getSkip("MovieCatalog", skip);
   }
+  movieVideo() {
+    return this.get("MovieVideo");
+  }
   create(body) {
     return this.post("Create", body);
   }
@@ -20,6 +23,9 @@ class MovieService extends HttpClient {
   }
   filterSort(params) {
     return this.getParams("FilterPage", params);
+  }
+  getAll() {
+    return this.get("GetAll");
   }
 }
 export const movieService = new MovieService();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import image from "../Slider/split.webp";
@@ -6,13 +6,75 @@ import Icon from "@mdi/react";
 import { mdiVolumeHigh } from "@mdi/js";
 import { mdiVolumeOff } from "@mdi/js";
 import "../Slider/index.scss";
+import { movieService } from "../../APIs/Services/MovieService";
+import { SplitButton } from "react-bootstrap";
+import { MovieContext } from "../../Contexts/movieContext";
 
 function Slider() {
-  const videoUrl =
-    "https://storage.cloud.google.com/my-film-trailers/Trailers/Split%20Official%20Trailer%201%20(2017)%20-%20M.%20Night%20Shyamalan%20Movie.mp4";
-
+  const [video, setVideo] = React.useState([]);
   const imageUrl = image;
-
+  const videoUrls = [
+    {
+      name: "Split",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Split%20Official%20Trailer%201%20(2017)%20-%20M.%20Night%20Shyamalan%20Movie.mp4",
+    },
+    {
+      name: "BirdBox",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Split%20Official%20Trailer%201%20(2017)%20-%20M.%20Night%20Shyamalan%20Movie.mp4",
+    },
+    {
+      name: "1917",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4",
+    },
+    {
+      name: "A Quiet Place",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/A%20Quiet%20Place%20(2018)%20-%20Official%20Trailer%20-%20Paramount%20Pictures.mp4",
+    },
+    {
+      name: "Escape Room",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/ESCAPE%20ROOM%20-%20Official%20Trailer%20(HD).mp4",
+    },
+    {
+      name: "Extniction",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Extinction%20Official%20Trailer%201%20(2015)%20-%20Matthew%20Fox%20Sci-Fi%20Horror%20Movie%20HD.mp4",
+    },
+    {
+      name: "Fantasy Island",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/FANTASY%20ISLAND%20-%20Official%20Trailer%20(HD).mp4",
+    },
+    {
+      name: "Hereditary",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Hereditary%20_%20Official%20Trailer%20HD%20_%20A24.mp4",
+    },
+    {
+      name: "Passengers",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Passengers%20Official%20Trailer%201%20(2016)%20-%20Jennifer%20Lawrence%20Movie.mp4",
+    },
+    {
+      name: "Smile",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/Smile%20_%20Official%20Trailer%20(2022%20Movie).mp4",
+    },
+    {
+      name: "The 5th Wave",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/THE%205TH%20WAVE%20-%20Official%20Trailer%20(HD).mp4",
+    },
+    {
+      name: "The Black Phone",
+      videoUrl:
+        "https://storage.cloud.google.com/my-film-trailers/Trailers/The%20Black%20Phone%20-%20Official%20Trailer.mp4",
+    },
+  ];
   const [isLoading, setIsLoading] = useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
@@ -36,8 +98,11 @@ function Slider() {
       }
     }
   };
-
-  useEffect(() => {
+  const movies = useContext(MovieContext);
+  React.useEffect(() => {
+    const randomVideo = videoUrls[Math.floor(Math.random() * videoUrls.length)];
+    // const movie = movies.contains(randomVideo.name);
+    setVideo(randomVideo);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -90,18 +155,23 @@ function Slider() {
           onLoadedData={handleVideoLoad}
           ref={videoRef}
         >
-          <source src={videoUrl} type="video/mp4" />
+          {video != null ? (
+            <source
+              src={
+                videoUrls[Math.floor(Math.random() * videoUrls.length)].videoUrl
+              }
+              type="video/mp4"
+            />
+          ) : null}
         </video>
 
         <div className={`content ${isLoading ? "hide" : ""}`}>
-          <h1 className="video-title">Split</h1>
+          <h1 className="video-title">{video.name}</h1>
           <p className="video-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            scelerisque malesuada enim, sed cursus tortor consequat sit amet.
-            Donec id fringilla lacus. Phasellus id metus ac nibh luctus
-            fermentum. Vestibulum vitae erat at mi finibus auctor. Curabitur
-            dapibus, turpis et commodo finibus, elit elit efficitur justo, non
-            finibus lectus dui ut turpis.
+            James McAvoy, Anya Taylor-Joy ve Betty Buckley başrollerde oynuyor.
+            Film, izole bir yeraltı tesisinde üç genç kızı kaçırıp hapseden 24
+            farklı kişiliğe sahip bir adamı konu ediyor. Ana çekimler 11 Kasım
+            2015'te Philadelphia, Pennsylvania'da başladı.
           </p>
 
           <button className="watch-now-button" onClick={handlePlayPause}>

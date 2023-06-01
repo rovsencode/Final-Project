@@ -13,7 +13,8 @@ import MovieCard from "../../Components/MovieCard";
 import { click } from "@testing-library/user-event/dist/click";
 import { PanoramaSharp } from "@mui/icons-material";
 import { movieService } from "../../APIs/Services/MovieService";
-
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 function Catalog() {
   const [raiting, setRaiting] = useState([0, 5]);
   const [year, setYear] = useState([undefined, undefined]);

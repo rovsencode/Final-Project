@@ -28,12 +28,15 @@ namespace ServiceLayer.Services
     
         private readonly IMapper _mapper;
 
+
         public MovieService(IMapper mapper, IMovieRepository repo)
         {
             _mapper = mapper;
             _repo = repo;
         
         }
+
+  
 
         public async Task Create(MovieCreateDto movie)
         {
@@ -42,6 +45,11 @@ namespace ServiceLayer.Services
            await _repo.CreateMany(mappedData, movie.actressIds,movie.qualityIds);
 
 
+        }
+        public async Task<List<MovieVideoDto>> MovieVideos()
+        {
+            var movies =await _repo.GetAll();
+            return _mapper.Map<List<MovieVideoDto>>(movies);
         }
         public async Task<List<MovieListDto>> Search(string searchText)
         {
@@ -58,22 +66,45 @@ namespace ServiceLayer.Services
 
         public async Task<List<MovieListDto>> GetAll()
         {
-            var movies = await _repo.GetAll();
-           var mappedData=  _mapper.Map <List<MovieListDto>>(movies);
-            return mappedData;
+
+
+            var movies = await _repo.GetAllT().Include(m => m.Genre).Include(m => m.MovieActresses)
+            .ThenInclude(m => m.Actress).Include(m => m.MovieQualities)
+            .ThenInclude(m => m.Quality).Where(e => !e.isDeleted).ToListAsync();
+
+            return movies.Select(m => new MovieListDto
+            {
+                Name = m.Name,
+                Description = m.Description,
+                AgeRestriction = m.AgeRestriction,
+                Raiting = m.Raiting,
+                Year = m.Year.Year,
+                Genre = m.Genre.Name,
+                Price = m.Price,
+                ImageUrl = m.ImageUrl,
+                GenreId = m.Genre.Id,
+                Actresses = m.MovieActresses.Select(ma => new ActressListDto
+                {
+                    FullName = ma.Actress.FullName,
+                }).ToList(),
+                Qualities = m.MovieQualities.Select(ma => new QualityListDto
+                {
+                    Name = ma.Quality.Name,
+
+
+                }).ToList(),
+            }).ToList();
         }
+        
 
 
         public async Task<List<MoviePageDto>> MoviePage(int skip)
         {
-            //IQueryable<Movie> query = _repo.GetAllT();
-  
-           //var movies= await _repo.GetAllWithGenre();
 
-                var movies = await _repo.GetAllT().Include(m => m.Genre).Include(m=>m.MovieActresses)
-                .ThenInclude(m=>m.Actress).Include(m=>m.MovieQualities)
-                .ThenInclude(m=>m.Quality).Where(e => !e.isDeleted).Skip((skip - 1) * 10).Take(10).ToListAsync();
 
+            var movies = await _repo.GetAllT().Include(m => m.Genre).Include(m => m.MovieActresses)
+            .ThenInclude(m => m.Actress).Include(m => m.MovieQualities)
+            .ThenInclude(m => m.Quality).Where(e => !e.isDeleted).Skip((skip - 1) * 10).Take(10).ToListAsync();
             return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
@@ -82,18 +113,18 @@ namespace ServiceLayer.Services
                 Raiting = m.Raiting,
                 Year = m.Year.Year,
                 Genre = m.Genre.Name,
-                Price= m.Price,
-                ImageUrl=m.ImageUrl,
+                Price = m.Price,
+                ImageUrl = m.ImageUrl,
                 GenreId = m.Genre.Id,
                 Actresses = m.MovieActresses.Select(ma => new ActressListDto
                 {
-                   FullName = ma.Actress.FullName,
+                    FullName = ma.Actress.FullName,
                 }).ToList(),
                 Qualities = m.MovieQualities.Select(ma => new QualityListDto
                 {
                     Name = ma.Quality.Name,
-              
-                    
+
+
                 }).ToList(),
             }).ToList();
         }
@@ -152,7 +183,7 @@ namespace ServiceLayer.Services
                 query = query.Where(movie => movie.Genre.Name == movieFilter.genre);
             }
            var movies= await query.Where(m => !m.isDeleted).Take(10).Skip((skip - 1) * 10).ToListAsync();
-            return  movies.Select(m => new MoviePageDto
+            return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
                 Description = m.Description,
@@ -174,7 +205,8 @@ namespace ServiceLayer.Services
 
                 }).ToList(),
             }).ToList();
-          
+
+         
         }
 
    

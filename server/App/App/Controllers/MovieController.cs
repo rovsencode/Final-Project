@@ -63,6 +63,11 @@ namespace App.Controllers
 
             return Ok(await _movieService.MovieFilter(movieFilter, skip));
         }
+        [HttpGet]
+        public async Task<IActionResult> MovieVideo()
+        {
+            return Ok(await  _movieService.MovieVideos());
+        }
 
 
 

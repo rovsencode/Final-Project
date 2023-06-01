@@ -9,18 +9,21 @@ import Catalog from "../Pages/Catalog";
 import About from "../Pages/About";
 import Pricing from "../Pages/Pricings";
 import Help from "../Pages/Help";
+import { MoiveProvider } from "../Contexts/movieContext";
 
 function Routs() {
   return (
-    <Routes>
-      <Route path={ROUTER.PATH.toString()} element={<Home />} exact />
-      <Route path={ROUTER.Login.PATH.toString()} element={<Login />} />
-      <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
-      <Route path={ROUTER.Catalog.PATH.toString()} element={<Catalog />} />
-      <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />
-      <Route path={ROUTER.About.PATH.toString()} element={<About />} />
-      <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />
-    </Routes>
+    <MoiveProvider>
+      <Routes>
+        <Route path={ROUTER.PATH.toString()} element={<Home />} exact />
+        <Route path={ROUTER.Login.PATH.toString()} element={<Login />} />
+        <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
+        <Route path={ROUTER.Catalog.PATH.toString()} element={<Catalog />} />
+        <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />
+        <Route path={ROUTER.About.PATH.toString()} element={<About />} />
+        <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />/
+      </Routes>
+    </MoiveProvider>
   );
 }
 

@@ -8,10 +8,11 @@ const validationSchema = Yup.object().shape({
 });
 
 function MovieForm() {
-  const actressOptions = [1, 2]; 
-  const qualityOptions = [6, 7, 8]; 
-  const imageUrl ="https://storage.cloud.google.com/my-films-1207/Films/homealone2.jpeg";
- const handleSubmit = (values) => {
+  const actressOptions = [1, 2];
+  const qualityOptions = [6, 7, 8];
+  const imageUrl =
+    "https://storage.cloud.google.com/my-films-1207/Films/homealone2.jpeg";
+  const handleSubmit = (values) => {
     const {
       name,
       description,
@@ -23,6 +24,7 @@ function MovieForm() {
       actressIds,
       qualityIds,
       genreId,
+      videoUrl,
     } = values;
 
     const form = {
@@ -36,6 +38,7 @@ function MovieForm() {
       actressIds: actressIds,
       qualityIds: qualityIds,
       genreId: genreId,
+      videoUrl: videoUrl,
     };
     console.log(form);
     const createForm = async () => {
@@ -144,6 +147,12 @@ function MovieForm() {
                 Price
               </label>
               <Field type="number" name="price" id="price" />
+            </div>
+            <div>
+              <label htmlFor="videoUrl" style={{ color: "white" }}>
+                Movie VideoUrl:
+              </label>
+              <Field type="text" name="videoUrl" id="videoUrl" />
             </div>
             <div>
               <label htmlFor="file-upload">Dosya seçin:</label>

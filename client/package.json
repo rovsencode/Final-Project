@@ -27,6 +27,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.62.1",
     "styled-components": "^5.3.10",

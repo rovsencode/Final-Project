@@ -33,7 +33,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 595, DateTimeKind.Utc).AddTicks(4834));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 884, DateTimeKind.Utc).AddTicks(561));
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -128,7 +128,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 596, DateTimeKind.Utc).AddTicks(3797));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 884, DateTimeKind.Utc).AddTicks(9766));
 
                     b.Property<string>("MailAccount")
                         .IsRequired()
@@ -164,7 +164,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 596, DateTimeKind.Utc).AddTicks(4715));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 885, DateTimeKind.Utc).AddTicks(951));
 
                     b.Property<int>("EpisodeNumber")
                         .HasColumnType("int");
@@ -200,7 +200,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 597, DateTimeKind.Utc).AddTicks(3418));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 885, DateTimeKind.Utc).AddTicks(9598));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -233,7 +233,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 598, DateTimeKind.Utc).AddTicks(1513));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 886, DateTimeKind.Utc).AddTicks(7380));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -265,7 +265,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 598, DateTimeKind.Utc).AddTicks(2654));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 886, DateTimeKind.Utc).AddTicks(8127));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -297,12 +297,11 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 598, DateTimeKind.Utc).AddTicks(4332));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 886, DateTimeKind.Utc).AddTicks(9384));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GenreId")
                         .HasColumnType("int");
@@ -319,8 +318,12 @@ namespace RepositoryLayer.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Raiting")
-                        .HasColumnType("int");
+                    b.Property<float>("Raiting")
+                        .HasColumnType("real");
+
+                    b.Property<string>("VideoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
@@ -406,7 +409,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 600, DateTimeKind.Utc).AddTicks(9982));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 889, DateTimeKind.Utc).AddTicks(3994));
 
                     b.Property<string>("PlanName")
                         .IsRequired()
@@ -437,7 +440,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 602, DateTimeKind.Utc).AddTicks(789));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 890, DateTimeKind.Utc).AddTicks(4265));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -469,7 +472,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 602, DateTimeKind.Utc).AddTicks(58));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 890, DateTimeKind.Utc).AddTicks(3571));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -496,7 +499,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 601, DateTimeKind.Utc).AddTicks(803));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 889, DateTimeKind.Utc).AddTicks(4672));
 
                     b.Property<int>("SeasonNumber")
                         .HasColumnType("int");
@@ -531,7 +534,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 601, DateTimeKind.Utc).AddTicks(1954));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 889, DateTimeKind.Utc).AddTicks(5669));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -640,7 +643,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 47, 34, 601, DateTimeKind.Utc).AddTicks(9179));
+                        .HasDefaultValue(new DateTime(2023, 6, 1, 14, 47, 8, 890, DateTimeKind.Utc).AddTicks(2933));
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()

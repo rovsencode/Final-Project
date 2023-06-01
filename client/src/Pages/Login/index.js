@@ -1,13 +1,12 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import "../Login/index.scss";
-import { TokenContext } from "../../Context/tokenContext";
+import { TokenContext } from "../../Contexts/tokenContext";
 import { accountService } from "../../APIs/Services/AccountService";
 import Header from "../../Components/Layout/Header";
 
 function Login() {
-
-  const {setToken}=useContext(TokenContext)
+  const { setToken } = useContext(TokenContext);
   const initialValues = {
     email: "",
     password: "",
@@ -19,7 +18,7 @@ function Login() {
     console.log(data);
     if (data != undefined) {
       localStorage.setItem("token", data);
-    const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
       setToken(token);
       alert("giris olundu");
     } else {

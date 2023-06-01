@@ -21,6 +21,7 @@ namespace ServiceLayer.Services.Interfaces
         Task<float> Count();
         Task<(int,int)> FilterData();
         Task<List<MovieListDto>> Search(string searchText);
+        Task <List<MovieVideoDto>> MovieVideos();
         Task Delete(int id);
         Task SoftDelete(int id);
     }
