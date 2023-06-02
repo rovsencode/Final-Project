@@ -19,7 +19,7 @@ const ExpectedCard = ({ name, genre, imageUrl, rating }) => {
         <CardMedia
           component="img"
           alt={name}
-          src={`data:image/jpeg;base64,${imageUrl}`}
+          src={imageUrl}
           sx={{
             height: "auto",
             objectFit: "cover",

@@ -45,7 +45,7 @@ namespace ServiceLayer.Services
             await _roleManager.CreateAsync(new IdentityRole { Name = model.Role});
         }
 
-        public async Task<string?> Login(LoginDto model)
+        public async Task<LoginInfoDto?> Login(LoginDto model)
         {
             var dbUser=await _userManager.FindByEmailAsync(model.Email);
             if (!await _userManager.CheckPasswordAsync(dbUser, model.Password))
@@ -55,7 +55,13 @@ namespace ServiceLayer.Services
             if (!dbUser.EmailConfirmed)
                 return null;
             var roles = await _userManager.GetRolesAsync(dbUser);
-            return  GenerateJwtToken(dbUser.UserName,(List<string>) roles);
+            var token = GenerateJwtToken(dbUser.UserName, (List<string>)roles);
+            LoginInfoDto loginInfo = new();
+            loginInfo.Token= token;
+            loginInfo.UserName=dbUser.UserName;
+            return loginInfo;
+              
+            
         }
 
         public async Task<ApiResponse> Register(RegisterDto model, HttpRequest request)

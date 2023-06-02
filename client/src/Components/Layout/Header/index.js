@@ -6,12 +6,13 @@ import { mdiLogin } from "@mdi/js";
 import { mdiDotsHorizontal } from "@mdi/js";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { movieService } from "../../../APIs/Services/MovieService";
 import { accountService } from "../../../APIs/Services/AccountService";
 import { TokenContext } from "../../../Contexts/tokenContext";
+import ExpectedCard from "../../ExpectedCard";
 
 function Header() {
+  const [userName, setUserName] = React.useState("");
   const { token, setToken } = useContext(TokenContext);
   const [isActiveSearch, setIsActiveSearch] = React.useState(false);
   const [isActiveMore, setIsActiveMore] = React.useState(false);
@@ -23,6 +24,7 @@ function Header() {
   const logOut = () => {
     accountService.clearToken();
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     setToken("");
   };
   const fetchSearch = async () => {
@@ -31,10 +33,15 @@ function Header() {
       const { data } = await movieService.searchFilter(inputValue);
       console.log(data);
       data.length > 0 ? setSearchData(data) : setSearchData(null);
+      console.log(searchData);
     } else {
       setSearchData(null);
     }
   };
+  React.useEffect(() => {
+    const user = localStorage.getItem("userName");
+    setUserName(user);
+  }, [token]);
 
   const activeSearch = () => {
     setIsActiveSearch(!isActiveSearch);
@@ -107,17 +114,15 @@ function Header() {
                       Help
                     </Link>
                   </li>
-                  {token ? (
+                  {userName != null ? (
                     <li className="header__nav-item">
                       <Link className="header__nav-link" to="/help">
-                        Rovsen
+                        {userName}
                       </Link>
                     </li>
                   ) : (
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to="/help">
-                        User yoxdur
-                      </Link>
+                      <Link className="header__nav-link" to="/help"></Link>
                     </li>
                   )}
 
@@ -188,10 +193,27 @@ function Header() {
                     <Icon path={mdiMagnify} size={1.5} />
                     {/* <Search /> */}
                   </button>
-                  <a className="header__sign-in">
-                    <Icon className="icon" path={mdiLogin} size={1} />
-                    <span>sign in</span>
-                  </a>
+                  {userName ? (
+                    <a
+                      className="header__sign-in"
+                      style={{ color: "white" }}
+                      onClick={logOut}
+                    >
+                      <Link
+                        style={{ textDecoration: "none", color: "white" }}
+                        to="/register"
+                      >
+                        Log out
+                      </Link>
+                    </a>
+                  ) : (
+                    <a className="header__sign-in">
+                      <Icon className="icon" path={mdiLogin} size={1} />
+                      <Link to="/login">
+                        <span>sign in</span>
+                      </Link>
+                    </a>
+                  )}
                 </div>
                 {/* end header auth */}
                 {/* header menu btn */}
@@ -239,8 +261,26 @@ function Header() {
                   margin: 0,
                 }}
               >
-                {searchData && inputValue && isActiveSearch ? (
-                  searchData.map(({ name }) => (
+                {
+                  searchData && inputValue && isActiveSearch ? (
+                    searchData.map((movie) => (
+                      <div style={{ width: "400px" }}>
+                        <li
+                          style={{
+                            width: "50%",
+                            color: "white",
+                            backgroundColor: "#28282d",
+                            fontSize: "16px",
+                          }}
+                        >
+                          <ExpectedCard
+                            name={movie.name}
+                            imageUrl={movie.imageUrl}
+                          />
+                        </li>
+                      </div>
+                    ))
+                  ) : inputValue.length < 2 && inputValue.length > 0 ? (
                     <li
                       style={{
                         color: "white",
@@ -248,33 +288,24 @@ function Header() {
                         fontSize: "16px",
                       }}
                     >
-                      {name}
+                      En azi 2 herf daxil edin
                     </li>
-                  ))
-                ) : inputValue.length < 2 && inputValue.length > 0 ? (
-                  <li
-                    style={{
-                      color: "white",
-                      backgroundColor: "#28282d",
-                      fontSize: "16px",
-                    }}
-                  >
-                    En azi 2 herf daxil edin
-                  </li>
-                ) : (
-                  <li
-                    className={
-                      isActiveSearch && inputValue ? "content" : "d-none"
-                    }
-                    style={{
-                      color: "white",
-                      backgroundColor: "#28282d",
-                      fontSize: "16px",
-                    }}
-                  >
-                    it is not found film
-                  </li>
-                )}
+                  ) : null
+                  //     (
+                  //   <li
+                  //     className={
+                  //       isActiveSearch && inputValue ? "content" : "d-none"
+                  //     }
+                  //     style={{
+                  //       color: "white",
+                  //       backgroundColor: "#28282d",
+                  //       fontSize: "16px",
+                  //     }}
+                  //   >
+                  //     it is not found film
+                  //   </li>
+                  // )
+                }
               </ul>
             </div>
           </div>

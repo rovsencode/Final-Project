@@ -64,7 +64,7 @@ namespace ServiceLayer.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<MovieListDto>> GetAll()
+        public async Task<List<MoviePageDto>> GetAll()
         {
 
 
@@ -72,7 +72,7 @@ namespace ServiceLayer.Services
             .ThenInclude(m => m.Actress).Include(m => m.MovieQualities)
             .ThenInclude(m => m.Quality).Where(e => !e.isDeleted).ToListAsync();
 
-            return movies.Select(m => new MovieListDto
+            return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
                 Description = m.Description,
@@ -82,6 +82,7 @@ namespace ServiceLayer.Services
                 Genre = m.Genre.Name,
                 Price = m.Price,
                 ImageUrl = m.ImageUrl,
+                VideoUrl=m.VideoUrl,
                 GenreId = m.Genre.Id,
                 Actresses = m.MovieActresses.Select(ma => new ActressListDto
                 {
@@ -178,7 +179,7 @@ namespace ServiceLayer.Services
                 query = query.Where(movie => movie.MovieQualities.FirstOrDefault().Quality.Name == movieFilter.quality);
             }
 
-            if (!string.IsNullOrEmpty(movieFilter.genre))
+            if (string.IsNullOrEmpty(movieFilter.genre))
             {
                 query = query.Where(movie => movie.Genre.Name == movieFilter.genre);
             }

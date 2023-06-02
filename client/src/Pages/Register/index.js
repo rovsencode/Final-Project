@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import "../Login/index.scss";
 import { accountService } from "../../APIs/Services/AccountService";
+import { Link } from "react-router-dom";
 
 function Register() {
   const initialValues = {
@@ -13,7 +14,7 @@ function Register() {
   };
 
   const handleSubmit = (values) => {
-   const initialValues = {
+    const initialValues = {
       fullName: "",
       username: "",
       email: "",
@@ -103,7 +104,7 @@ function Register() {
                   </button>
                   <span className="sign__text">
                     Already have an account?
-                    <a href="signin.html">Sign in!</a>
+                    <Link to="/login">Sign in!</Link>
                   </span>
                 </Form>
               </Formik>

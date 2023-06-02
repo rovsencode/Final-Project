@@ -41,7 +41,7 @@ const MovieCard = ({
           <CardMedia
             component="img"
             alt={title}
-            src={`data:image/jpeg;base64,${imageUrl}`}
+            src={imageUrl}
             sx={{
               objectFit: "cover",
               height: 200,

@@ -4,6 +4,8 @@ import "../Login/index.scss";
 import { TokenContext } from "../../Contexts/tokenContext";
 import { accountService } from "../../APIs/Services/AccountService";
 import Header from "../../Components/Layout/Header";
+import { Link } from "react-router-dom";
+import Register from "../Register";
 
 function Login() {
   const { setToken } = useContext(TokenContext);
@@ -17,7 +19,8 @@ function Login() {
     const { data } = await accountService.signIn(values);
     console.log(data);
     if (data != undefined) {
-      localStorage.setItem("token", data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userName", data.userName);
       const token = localStorage.getItem("token");
       setToken(token);
       alert("giris olundu");
@@ -68,7 +71,7 @@ function Login() {
                       Sign in
                     </button>
                     <span className="sign__text">
-                      Don't have an account? <a href="signup.html">Sign up!</a>
+                      Don't have an account? <Link to={"/register"}>Sign up!</Link>
                     </span>
                     <span className="sign__text">
                       <a href="#">Forgot password?</a>

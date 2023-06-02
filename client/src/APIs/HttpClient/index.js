@@ -6,13 +6,13 @@ export class HttpClient {
   constructor(url) {
     this.baseUrl = url;
   }
-  //  setAuthToken(token) {
-  //  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  // }
+  setAuthToken(token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
 
-  // clearAuthToken() {
-  //   delete axios.defaults.headers.common["Authorization"];
-  // }
+  clearAuthToken() {
+    delete axios.defaults.headers.common["Authorization"];
+  }
 
   async get(endpoint) {
     return await axios.get(`${this.baseUrl}/${endpoint}`);

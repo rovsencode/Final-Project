@@ -16,7 +16,7 @@ namespace ServiceLayer.DTOs.MovieDto
         public string? ImageUrl { get; set; }
         public string? AgeRestriction { get; set; }
         public string VideoUrl { get; set; }
-        public int? Year { get; set; }
+        public DateTime? Year { get; set; }
         public double? Price { get; set; }
         public float Raiting { get; set; }
         public List<ActressListDto>? Actresses { get; set; }

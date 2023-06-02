@@ -9,10 +9,7 @@ import "../Slider/index.scss";
 import { movieService } from "../../APIs/Services/MovieService";
 import { SplitButton } from "react-bootstrap";
 import { MovieContext } from "../../Contexts/movieContext";
-
 function Slider() {
-  const [video, setVideo] = React.useState([]);
-  const imageUrl = image;
   const videoUrls = [
     {
       name: "Split",
@@ -75,9 +72,13 @@ function Slider() {
         "https://storage.cloud.google.com/my-film-trailers/Trailers/The%20Black%20Phone%20-%20Official%20Trailer.mp4",
     },
   ];
-  const [isLoading, setIsLoading] = useState(true);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
+  const movies = useContext(MovieContext);
+  const [video, setVideo] = React.useState(null);
+  const imageUrl = image;
+
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(true);
+  const [isMuted, setIsMuted] = React.useState(false);
 
   const videoRef = useRef(null);
 
@@ -98,11 +99,14 @@ function Slider() {
       }
     }
   };
-  const movies = useContext(MovieContext);
+
   React.useEffect(() => {
+    const fetchMovies = async () => {
+      const { data } = await movieService.getAll();
+      setVideo(data);
+    };
     const randomVideo = videoUrls[Math.floor(Math.random() * videoUrls.length)];
-    // const movie = movies.contains(randomVideo.name);
-    setVideo(randomVideo);
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -156,23 +160,20 @@ function Slider() {
           ref={videoRef}
         >
           {video != null ? (
-            <source
-              src={
-                videoUrls[Math.floor(Math.random() * videoUrls.length)].videoUrl
-              }
-              type="video/mp4"
-            />
+            <source src={video[0].videoUrl} type="video/mp4" />
           ) : null}
         </video>
 
         <div className={`content ${isLoading ? "hide" : ""}`}>
-          <h1 className="video-title">{video.name}</h1>
-          <p className="video-description">
-            James McAvoy, Anya Taylor-Joy ve Betty Buckley başrollerde oynuyor.
-            Film, izole bir yeraltı tesisinde üç genç kızı kaçırıp hapseden 24
-            farklı kişiliğe sahip bir adamı konu ediyor. Ana çekimler 11 Kasım
-            2015'te Philadelphia, Pennsylvania'da başladı.
-          </p>
+          {video != null ? (
+            <h1 className="video-title">{video[0].name}</h1>
+          ) : (
+            ""
+          )}
+
+          {/*           
+            <p className="video-description">{movie.description}</p>
+         */}
 
           <button className="watch-now-button" onClick={handlePlayPause}>
             Watch Now
