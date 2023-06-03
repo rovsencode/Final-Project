@@ -3,7 +3,7 @@ import "./index.scss";
 import { plansService } from "../../APIs/Services/PlansService";
 import { propertyService } from "../../APIs/Services/PropertiesService";
 import MovieForm from "../MovieForm";
-
+import background from "../../Pages/Catalog/section.jpg"
 export default function Plans() {
   const [plans, setPLans] = React.useState([]);
   const [properties, setProperty] = React.useState([]);
@@ -17,6 +17,33 @@ export default function Plans() {
   }, []);
   return (
     <>
+      <section
+        className="section catalog section--first section--bg"
+        style={{
+          backgroundImage: `url(${background})`,
+
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div
+                className="section__wrap"
+                style={{
+                  display: "flex",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <h2 className="section__title">Plans</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <div className="section">
         <div className="container">
           <div className="row">

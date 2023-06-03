@@ -28,7 +28,6 @@ namespace RepositoryLayer.Data
             modelBuilder.ApplyConfiguration(new PricingPlansConfiguration());
             modelBuilder.ApplyConfiguration(new SeasonConfiguration());
             modelBuilder.ApplyConfiguration(new SerieConfiguration());
-            modelBuilder.ApplyConfiguration(new SocialConfiguration());
             modelBuilder.ApplyConfiguration(new QualityConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
             base.OnModelCreating(modelBuilder);

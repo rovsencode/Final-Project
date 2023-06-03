@@ -10,8 +10,11 @@ import ExpectedCard from "../ExpectedCard";
 import "../ExpectedFilms/index.scss";
 import { BeatLoader } from "react-spinners";
 import { MovieContext } from "../../Contexts/movieContext";
-
+import { Navigate } from "react-router-dom";
 function ExpectedFilms() {
+  const handleMovieClick = (movieId) => {
+    Navigate(`/movies/${movieId}`);
+  };
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const movies = useContext(MovieContext);
@@ -63,13 +66,14 @@ function ExpectedFilms() {
                 style={{ gap: "80px" }}
               >
                 {movies.slice(0, 3).map((movie) => (
-                  <ExpectedCard
+                 <li onClick={handleMovieClick}>  <ExpectedCard
                     key={movie.name}
                     name={movie.name}
                     imageUrl={movie.imageUrl}
                     genre={movie.genre}
                     rating={movie.raiting}
                   />
+                    </li>
                 ))}
               </div>
             </Carousel.Item>

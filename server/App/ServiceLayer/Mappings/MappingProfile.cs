@@ -11,7 +11,6 @@ using ServiceLayer.DTOs.PricingPlans;
 using ServiceLayer.DTOs.PropertyDto;
 using ServiceLayer.DTOs.QualityDto;
 using ServiceLayer.DTOs.SerieDto;
-using ServiceLayer.DTOs.Social;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +26,6 @@ namespace ServiceLayer.Mappings
             CreateMap<ContactCreateDto, Contact>();
             CreateMap<Contact, ContactListDto>();
             CreateMap<ContactUpdateDto, Contact>();
-            CreateMap<SocialCreateDto, Social>();
-            CreateMap<Social, SocialListDto>();
-            CreateMap<SocialUpdateDto, Social>();
             CreateMap<PricingPlansCreateDto, PricingPlans>();
             CreateMap<PricingPlans, PricingPlansListDto>();
             CreateMap<PricingPlansUpdateDto, PricingPlans>();

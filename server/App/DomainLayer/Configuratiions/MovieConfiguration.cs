@@ -15,6 +15,7 @@ namespace DomainLayer.Configuratiions
         {
             builder.Property(m => m.Name).IsRequired().HasMaxLength(50);
             builder.Property(m => m.Description).IsRequired();
+            builder.Property(m => m.BackgroundImage).IsRequired();
             builder.Property(m => m.Year).IsRequired();
             builder.Property(m => m.VideoUrl).IsRequired();
             builder.Property(m => m.AgeRestriction).IsRequired();

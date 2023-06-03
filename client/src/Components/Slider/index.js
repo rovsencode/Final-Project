@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
-import image from "../Slider/split.webp";
 import Icon from "@mdi/react";
 import { mdiVolumeHigh } from "@mdi/js";
 import { mdiVolumeOff } from "@mdi/js";
@@ -10,70 +9,6 @@ import { movieService } from "../../APIs/Services/MovieService";
 import { SplitButton } from "react-bootstrap";
 import { MovieContext } from "../../Contexts/movieContext";
 function Slider() {
-  const videoUrls = [
-    {
-      name: "Split",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Split%20Official%20Trailer%201%20(2017)%20-%20M.%20Night%20Shyamalan%20Movie.mp4",
-    },
-    {
-      name: "BirdBox",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Split%20Official%20Trailer%201%20(2017)%20-%20M.%20Night%20Shyamalan%20Movie.mp4",
-    },
-    {
-      name: "1917",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4",
-    },
-    {
-      name: "A Quiet Place",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/A%20Quiet%20Place%20(2018)%20-%20Official%20Trailer%20-%20Paramount%20Pictures.mp4",
-    },
-    {
-      name: "Escape Room",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/ESCAPE%20ROOM%20-%20Official%20Trailer%20(HD).mp4",
-    },
-    {
-      name: "Extniction",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Extinction%20Official%20Trailer%201%20(2015)%20-%20Matthew%20Fox%20Sci-Fi%20Horror%20Movie%20HD.mp4",
-    },
-    {
-      name: "Fantasy Island",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/FANTASY%20ISLAND%20-%20Official%20Trailer%20(HD).mp4",
-    },
-    {
-      name: "Hereditary",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Hereditary%20_%20Official%20Trailer%20HD%20_%20A24.mp4",
-    },
-    {
-      name: "Passengers",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Passengers%20Official%20Trailer%201%20(2016)%20-%20Jennifer%20Lawrence%20Movie.mp4",
-    },
-    {
-      name: "Smile",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/Smile%20_%20Official%20Trailer%20(2022%20Movie).mp4",
-    },
-    {
-      name: "The 5th Wave",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/THE%205TH%20WAVE%20-%20Official%20Trailer%20(HD).mp4",
-    },
-    {
-      name: "The Black Phone",
-      videoUrl:
-        "https://storage.cloud.google.com/my-film-trailers/Trailers/The%20Black%20Phone%20-%20Official%20Trailer.mp4",
-    },
-  ];
-  const imageUrl = image;
-
   const [isLoading, setIsLoading] = React.useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(true);
   const [isMuted, setIsMuted] = React.useState(false);
@@ -99,24 +34,16 @@ function Slider() {
   };
 
   const [randomVideo, setRandomVideo] = useState({});
-  const [movies, setMovies] = React.useState([]);
+
+  const movies = useContext(MovieContext);
   const [randomMovie, setRandomMovie] = React.useState({});
   React.useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * videoUrls.length);
-    setRandomVideo(videoUrls[randomIndex]);
-  }, []);
-
-  React.useEffect(() => {
-    const fetchRandomMovie = async () => {
-      const { data } = await movieService.getAll();
-      const randomMovie = await data.find(
-        (movie) => movie.name === randomVideo.name
-      );
-      setRandomMovie(randomMovie);
-    };
-
-    fetchRandomMovie();
-  }, [randomVideo]);
+    console.log("vasvdsasddss");
+    if (movies.length) {
+      const randomIndex = Math.floor(Math.random() * movies.length);
+      setRandomVideo(movies[randomIndex]);
+    }
+  }, [movies]);
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -154,12 +81,12 @@ function Slider() {
   return (
     <div className="home">
       <div className="video-container">
-        {isLoading ? (
+        {isLoading && randomVideo ? (
           <img
-            src={imageUrl}
+            src={randomVideo.backgroundImage}
             alt="Loading"
             className="loading-image"
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "100%" }}
           />
         ) : null}
         <video
@@ -176,27 +103,31 @@ function Slider() {
           ) : null}
         </video>
 
-        <div className={`content ${isLoading ? "hide" : ""}`}>
+        <div className="content">
           {randomVideo != null ? (
             <h1 className="video-title">{randomVideo.name}</h1>
           ) : (
             ""
           )}
-          {randomMovie != null ? (
-            <p className="video-description">{randomMovie.description}</p>
+          {randomVideo != null ? (
+            <p className="video-description">{randomVideo.description}</p>
           ) : (
             ""
           )}
           <button className="watch-now-button" onClick={handlePlayPause}>
             Watch Now
           </button>
-          <div className="mute-button" onClick={handleMuteUnmute}>
-            {isMuted ? (
-              <Icon path={mdiVolumeOff} size={2} />
-            ) : (
-              <Icon path={mdiVolumeHigh} size={2} />
-            )}
-          </div>
+          {isLoading ? (
+            ""
+          ) : (
+            <div className="mute-button" onClick={handleMuteUnmute}>
+              {isMuted ? (
+                <Icon path={mdiVolumeOff} size={2} />
+              ) : (
+                <Icon path={mdiVolumeHigh} size={2} />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

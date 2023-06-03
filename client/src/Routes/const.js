@@ -18,4 +18,7 @@ export const ROUTER = {
   Help: {
     PATH: "/help",
   },
+  MovieDetail: {
+    PATH: "/catalog/movieId",
+  },
 };

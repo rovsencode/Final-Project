@@ -80,6 +80,7 @@ namespace ServiceLayer.Services
                 Raiting = m.Raiting,
                 Year = m.Year.Year,
                 Genre = m.Genre.Name,
+                BackgroundImage=m.BackgroundImage,
                 Price = m.Price,
                 ImageUrl = m.ImageUrl,
                 VideoUrl=m.VideoUrl,

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../Header/index.scss";
 import Icon from "@mdi/react";
+
 import { mdiMagnify } from "@mdi/js";
 import { mdiLogin } from "@mdi/js";
 import { mdiDotsHorizontal } from "@mdi/js";
@@ -18,6 +19,11 @@ function Header() {
   const [isActiveMore, setIsActiveMore] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const [searchData, setSearchData] = React.useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
   const moreHandleClick = () => {
     setIsActiveMore(!isActiveMore);
   };
@@ -25,6 +31,7 @@ function Header() {
     accountService.clearToken();
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
+    setUserName();
     setToken("");
   };
   const fetchSearch = async () => {
@@ -116,9 +123,7 @@ function Header() {
                   </li>
                   {userName != null ? (
                     <li className="header__nav-item">
-                      <Link className="header__nav-link" to="/help">
-                        {userName}
-                      </Link>
+                      <Link className="header__nav-link">{userName}</Link>
                     </li>
                   ) : (
                     <li className="header__nav-item">
@@ -159,21 +164,19 @@ function Header() {
                           About{" "}
                         </Link>
                       </li>
-                      <li>
-                        <Link style={{ textDecoration: "none" }} to="/login">
-                          Sign in
-                        </Link>
-                      </li>
-                      <li>
-                        <Link style={{ textDecoration: "none" }} to="/register">
-                          Sign up
-                        </Link>
-                      </li>
-                      <li onClick={logOut}>
-                        <Link style={{ textDecoration: "none" }} to="/register">
-                          Log out
-                        </Link>
-                      </li>
+                      {userName ? (
+                        <li onClick={logOut}>
+                          <Link style={{ textDecoration: "none" }} to="/login">
+                            Log out
+                          </Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link style={{ textDecoration: "none" }} to="/login">
+                            Login
+                          </Link>
+                        </li>
+                      )}
                     </ul>
                   </li>
                   {/* end dropdown */}
@@ -209,7 +212,7 @@ function Header() {
                   ) : (
                     <a className="header__sign-in">
                       <Icon className="icon" path={mdiLogin} size={1} />
-                      <Link to="/login">
+                      <Link to="/login" style={{ textDecoration: "none" }}>
                         <span>sign in</span>
                       </Link>
                     </a>
@@ -217,11 +220,77 @@ function Header() {
                 </div>
                 {/* end header auth */}
                 {/* header menu btn */}
-                <button className="header__btn" type="button">
-                  <span />
-                  <span />
-                  <span />
-                </button>
+                <div className="header__btn">
+                  <div className="burger-menu">
+                    <div
+                      className={`burger-icon ${isOpen ? "open" : ""}`}
+                      onClick={toggleMenu}
+                    >
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    {isOpen && (
+                      <ul
+                        className="menu-items"
+                        style={{ backgroundColor: "#2b2b31" }}
+                      >
+                        <li>
+                          <Link
+                            to="/"
+                            style={{ textDecoration: "none", color: "white" }}
+                          >
+                            Home
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/catalog"
+                            style={{ textDecoration: "none", color: "white" }}
+                          >
+                            Catalog
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/plans"
+                            style={{ textDecoration: "none", color: "white" }}
+                          >
+                            Pricing PLans
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/help"
+                            style={{ textDecoration: "none", color: "white" }}
+                          >
+                            Help
+                          </Link>
+                        </li>
+                        {userName ? (
+                          <li>
+                            <Link
+                              to="/login"
+                              style={{ textDecoration: "none" }}
+                              onClick={logOut}
+                            >
+                              Log out
+                            </Link>
+                          </li>
+                        ) : (
+                          <li>
+                            <Link
+                              to="/login"
+                              style={{ textDecoration: "none", color: "white" }}
+                            >
+                              Sign in
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </div>
                 {/* end header menu btn */}
               </div>
             </div>

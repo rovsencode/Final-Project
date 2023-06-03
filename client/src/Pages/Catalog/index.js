@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
-import Submit from "../../Components/MovieForm";
 import { Grid, Slider, colors } from "@mui/material";
-import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
 import "../Catalog/index.scss";
 import background from "../Catalog/section.jpg";
 import { genreService } from "../../APIs/Services/GenreService";
 import { qualityService } from "../../APIs/Services/QualityService";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import MovieCard from "../../Components/MovieCard";
-import { click } from "@testing-library/user-event/dist/click";
+import { Navigate } from "react-router-dom";
 import { PanoramaSharp } from "@mui/icons-material";
 import { movieService } from "../../APIs/Services/MovieService";
 import "primereact/resources/primereact.min.css";
@@ -26,6 +24,9 @@ function Catalog() {
   const [qualtys, setQualtys] = React.useState();
   const [movies, setMovies] = React.useState([]);
 
+  const handleMovieClick = (movieId) => {
+    Navigate(`/movies/${movieId}`);
+  };
   const fetchMovie = async (page) => {
     console.log("normalpage: " + page);
     const { data } = await movieService.skip(page);
@@ -74,7 +75,6 @@ function Catalog() {
     };
     const fetchCount = async () => {
       const { data } = await movieService.getCount();
-      // console.log("pageCount: " + Math.ceil(data));
 
       setPageCount(Math.ceil(data));
       console.log(data);
@@ -256,17 +256,20 @@ function Catalog() {
         <Grid container spacing={2}>
           {movies.map((movie) => (
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <MovieCard
-                key={movie.id}
-                title={movie.name}
-                description={movie.description}
-                imageUrl={movie.imageUrl}
-                quality={movie.qualities[0].name}
-                action={movie.genre}
-                rating={movie.raiting}
-                ageRestriction={movie.ageRestriction}
-                Year={movie.year}
-              />
+              <li onClick={handleMovieClick}>
+                {" "}
+                <MovieCard
+                  key={movie.id}
+                  title={movie.name}
+                  description={movie.description}
+                  imageUrl={movie.imageUrl}
+                  quality={movie.qualities[0].name}
+                  action={movie.genre}
+                  rating={movie.raiting}
+                  ageRestriction={movie.ageRestriction}
+                  Year={movie.year}
+                />
+              </li>
             </Grid>
           ))}
         </Grid>
