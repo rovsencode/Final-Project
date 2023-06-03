@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using RepositoryLayer.Repostories;
 using RepositoryLayer.Repostories.Interfaces;
@@ -53,8 +54,19 @@ namespace ServiceLayer.Services
 
         public async Task<List<PricingPlansListDto>> GetAll()
         {
-            var plans = await _repo.GetAll();
-            return _mapper.Map<List<PricingPlansListDto>>(plans);
+            var plans = await _repo.GetAllT().Include(p => p.Properties).ToListAsync();
+
+            return plans.Select(p => new PricingPlansListDto
+            {
+                PlanName = p.PlanName,
+                Price = p.Price,
+                Properties = p.Properties.Select(p => new Property
+                {
+                    Name = p.Name
+                }).ToList(),
+            }).ToList();
+
+           
         }
 
         public async Task Update(int id, PricingPlansUpdateDto plan)
@@ -65,44 +77,5 @@ namespace ServiceLayer.Services
             await _repo.Update(dbPlan);
 
         }
-
-
-
-
-        public async Task<List<PricingPlansListDto>> PlansProperty()
-        {
-            var result = await _repo.Including(e => e.Properties);
-
-            var customDataList = new List<PricingPlansListDto>();
-
-            foreach (var item in result)
-            {
-                var customData = new PricingPlansListDto
-                {
-                    PlanName = item.PlanName,
-                    Price = item.Price,
-
-                };
-              
-                    customData.Properties = new();
-                foreach (var propert in item.Properties)
-                {
-
-                    PropertyListDto property = new()
-                    {
-                        Name = propert.Name,
-                        PlanId = propert.PlanId,
-                    };
-
-
-                    customData.Properties.Add(property);
-                     customDataList.Add(customData);
-                }
-            }
-
-            return customDataList;
-        }
-
-
     }
 }

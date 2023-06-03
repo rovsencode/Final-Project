@@ -11,7 +11,7 @@ namespace ServiceLayer.DTOs.PricingPlans
     public class PricingPlansListDto
     {
         public string PlanName { get; set; }
-        public List<PropertyListDto > Properties { get; set; }
+        public List<Property > Properties { get; set; }
         public double Price { get; set; }
     }
 }

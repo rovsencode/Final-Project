@@ -5,9 +5,11 @@ import { TokenContext } from "../../Contexts/tokenContext";
 import { accountService } from "../../APIs/Services/AccountService";
 import Header from "../../Components/Layout/Header";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Register from "../Register";
 
 function Login() {
+  const navigate = useNavigate();
   const { setToken } = useContext(TokenContext);
   const initialValues = {
     email: "",
@@ -23,7 +25,7 @@ function Login() {
       localStorage.setItem("userName", data.userName);
       const token = localStorage.getItem("token");
       setToken(token);
-      alert("giris olundu");
+      navigate("/");
     } else {
       console.log(data.errors);
     }
@@ -67,11 +69,13 @@ function Login() {
                       />
                       <label htmlFor="remember">Remember Me</label>
                     </div>
+
                     <button className="sign__btn" type="submit">
                       Sign in
                     </button>
                     <span className="sign__text">
-                      Don't have an account? <Link to={"/register"}>Sign up!</Link>
+                      Don't have an account?{" "}
+                      <Link to={"/register"}>Sign up!</Link>
                     </span>
                     <span className="sign__text">
                       <a href="#">Forgot password?</a>

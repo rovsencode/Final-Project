@@ -58,6 +58,7 @@ $background-color_1: #28282d;
     a {
         font-size: 14px;
         color: $color_2;
+        text-decoration: none;
 
         &:hover {
             color: $color_3;
@@ -237,6 +238,7 @@ $background-color_1: #28282d;
 
     .footer__title {
         margin-bottom: 15px;
+        margin-left: 24px;
     }
 }
 

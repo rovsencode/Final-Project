@@ -72,8 +72,6 @@ function Slider() {
         "https://storage.cloud.google.com/my-film-trailers/Trailers/The%20Black%20Phone%20-%20Official%20Trailer.mp4",
     },
   ];
-  const movies = useContext(MovieContext);
-  const [video, setVideo] = React.useState(null);
   const imageUrl = image;
 
   const [isLoading, setIsLoading] = React.useState(true);
@@ -100,13 +98,27 @@ function Slider() {
     }
   };
 
+  const [randomVideo, setRandomVideo] = useState({});
+  const [movies, setMovies] = React.useState([]);
+  const [randomMovie, setRandomMovie] = React.useState({});
   React.useEffect(() => {
-    const fetchMovies = async () => {
-      const { data } = await movieService.getAll();
-      setVideo(data);
-    };
-    const randomVideo = videoUrls[Math.floor(Math.random() * videoUrls.length)];
+    const randomIndex = Math.floor(Math.random() * videoUrls.length);
+    setRandomVideo(videoUrls[randomIndex]);
+  }, []);
 
+  React.useEffect(() => {
+    const fetchRandomMovie = async () => {
+      const { data } = await movieService.getAll();
+      const randomMovie = await data.find(
+        (movie) => movie.name === randomVideo.name
+      );
+      setRandomMovie(randomMovie);
+    };
+
+    fetchRandomMovie();
+  }, [randomVideo]);
+
+  React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -159,22 +171,22 @@ function Slider() {
           onLoadedData={handleVideoLoad}
           ref={videoRef}
         >
-          {video != null ? (
-            <source src={video[0].videoUrl} type="video/mp4" />
+          {randomVideo && randomVideo.videoUrl ? (
+            <source src={randomVideo.videoUrl} type="video/mp4" />
           ) : null}
         </video>
 
         <div className={`content ${isLoading ? "hide" : ""}`}>
-          {video != null ? (
-            <h1 className="video-title">{video[0].name}</h1>
+          {randomVideo != null ? (
+            <h1 className="video-title">{randomVideo.name}</h1>
           ) : (
             ""
           )}
-
-          {/*           
-            <p className="video-description">{movie.description}</p>
-         */}
-
+          {randomMovie != null ? (
+            <p className="video-description">{randomMovie.description}</p>
+          ) : (
+            ""
+          )}
           <button className="watch-now-button" onClick={handlePlayPause}>
             Watch Now
           </button>

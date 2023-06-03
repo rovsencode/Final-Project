@@ -18,7 +18,7 @@ namespace App.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            return Ok(await _pricingPlansService.PlansProperty());
+            return Ok(await _pricingPlansService.GetAll());
         }
     }
 }

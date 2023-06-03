@@ -14,7 +14,6 @@ namespace DomainLayer.Configuratiions
         public void Configure(EntityTypeBuilder<Social> builder)
         {
             builder.Property(s => s.Name).IsRequired().HasMaxLength(100);
-            builder.Property(s => s.ImageUrl).IsRequired();
             builder.Property(s=>s.isDeleted).HasDefaultValue(false);
             builder.Property(s=>s.CreatedTime).HasDefaultValue(DateTime.UtcNow);
         }
