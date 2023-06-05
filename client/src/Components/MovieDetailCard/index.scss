@@ -1,0 +1,79 @@
+// // .row{
+// //     // display: flex;
+// // }
+.movie-left{
+    width: 50%;
+    position: relative;
+    left: 10px;
+}
+.movie-right{
+    width: 50%;
+    margin-top: 25px;
+}
+.movie-card {
+    background-color: #2b2b31;
+    color: white;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+}
+
+.movie-poster {
+    margin-right: 16px;
+}
+
+.movie-poster img {
+    width: 200px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    font-size: 24px;
+    color: #ffff;
+    font-weight: bold;
+    margin-left: 45px;
+    margin-bottom: 5px;
+
+}
+
+.movie-info {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.quality,
+.age-restriction,
+.rating {
+    padding: 4px 8px;
+    margin-right: 8px;
+    background-color: #212529;
+    border-radius: 4px;
+    color: white;
+}
+
+.genres,
+.release-year,
+.running-time,
+.country {
+    margin-bottom: 8px;
+    color: #FFFFFFB3;
+ 
+}
+.country,.genres{
+    span{
+     
+   color: #ff55a5;
+    }
+}
+
+.description {
+    line-height: 1.5;
+}
