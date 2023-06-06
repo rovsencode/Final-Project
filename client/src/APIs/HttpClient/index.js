@@ -17,6 +17,9 @@ export class HttpClient {
   async get(endpoint) {
     return await axios.get(`${this.baseUrl}/${endpoint}`);
   }
+  async getByID(endpoint, id) {
+    return await axios.get(`${this.baseUrl}/${endpoint}/${id}`);
+  }
 
   async getParams(endpoint, params) {
     return await axios.get(`${this.baseUrl}/${endpoint}/?${params}`);

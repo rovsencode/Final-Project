@@ -17,7 +17,7 @@ namespace App.Controllers
             _commentService = commentService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CommentCreateDto comment)
+        public async Task<IActionResult> Create([FromBody]CommentCreateDto comment)
         {
             return Ok(await _commentService.Add(comment));
         }

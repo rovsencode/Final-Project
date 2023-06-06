@@ -19,6 +19,7 @@ namespace ServiceLayer.Services.Interfaces
         Task<List<MoviePageDto>> MovieFilter(MovieFilterDto movieFilter, int skip);
         Task<List<MoviePageDto>> MoviePage(int skip);
         Task<float> Count();
+        Task<MoviePageDto> Get(int id);
         Task<(int,int)> FilterData();
         Task<List<MovieListDto>> Search(string searchText);
         Task <List<MovieVideoDto>> MovieVideos();

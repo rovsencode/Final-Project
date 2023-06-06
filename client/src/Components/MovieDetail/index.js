@@ -3,44 +3,67 @@ import MovieDetailCard from "../MovieDetailCard";
 import "../MovieDetail/index.scss";
 import ExpectedCard from "../ExpectedCard";
 import { MovieContext } from "../../Contexts/movieContext";
+import { useParams } from "react-router-dom";
+import { movieService } from "../../APIs/Services/MovieService";
 function MovieDetail() {
   const movies = useContext(MovieContext);
+  const { movieId } = useParams();
+  const [movie, setMovie] = React.useState();
+  const fetchMovie = async () => {
+    const { data } = await movieService.getMovie(movieId);
+    setMovie(data);
+    console.log(data);
+  };
+  React.useEffect(() => {
+    fetchMovie();
+  }, []);
   return (
     <section className="movie-detail">
       <div style={{ marginTop: "100px" }}>
-        <MovieDetailCard
-          title="Split"
-          poster="/img/covers/cover.jpg"
-          rating="8.4"
-          quality="HD"
-          ageRestriction="16+"
-          genres="horro"
-          releaseYear="2012"
-          runningTime="120"
-          country="USA"
-          description="Though Kevin (James McAvoy) has evidenced 23 personalities to his trusted psychiatrist, Dr. Fletcher (Betty Buckley), there remains one still submerged who is set to materialize and dominate all of the others. Compelled to abduct three teenage girls led by the willful, observant Casey, Kevin reaches a war for survival among all of those contained within him -- as well as everyone around him -- as the walls between his compartments shatter."
-          trailer="video"
-        />
+        {movie ? (
+          <MovieDetailCard
+            key={movie.id}
+            title={movie.name}
+            poster={movie.imageUrl}
+            rating={movie.raiting}
+            quality={movie.qualities[0].name}
+            ageRestriction={movie.ageRestriction}
+            genres={movie.genre}
+            releaseYear={movie.year}
+            runningTime="120"
+            country="USA"
+            description={movie.description}
+            trailer={movie.videoUrl}
+          />
+        ) : (
+          ""
+        )}
       </div>
       <div className="content__head">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2 className="content__title">Discover</h2>
+              {movie ? <h2 className="content__title">{movie.name}</h2> : ""}
             </div>
             <div className="col-12 video-section ">
-              <div className="movie-video">
-                <video style={{ width: "90%" }}>
-                  <source
-                    src="https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4"
-                    type="video/mp4"
-                  />
-                </video>
+              <div className="movie-video" style={{width:"80%"}}>
+                {movie ? (
+                  <iframe
+                    width="900px"
+                    height="500px"
+                    src="https://www.youtube.com/embed/z_iyiHdRL6A"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                  ></iframe>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="aside">
                 <div className="aside-movies">
                   {movies
-                    ? movies.slice(0, 4).map((movie, idx) => (
+                    ? movies.slice(3,7).map((movie, idx) => (
                         <div key={idx} className="movie">
                           <ExpectedCard
                             name={movie.name}

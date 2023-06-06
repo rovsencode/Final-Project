@@ -19,6 +19,6 @@ export const ROUTER = {
     PATH: "/help",
   },
   MovieDetail: {
-    PATH: "/catalog/movieId",
+    PATH: "/catalog/:movieId",
   },
 };

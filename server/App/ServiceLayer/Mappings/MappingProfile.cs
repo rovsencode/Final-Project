@@ -60,6 +60,8 @@ namespace ServiceLayer.Mappings
             CreateMap<Property, PropertyListDto>();
             CreateMap <PropertyUpdateDto, Property>();
             CreateMap<CommentCreateDto, Comment>();
+            CreateMap<Comment, CommentListDto>();
+            CreateMap<Comment,CommentListDto>().ReverseMap();
             CreateMap<PricingPlansListDto, PricingPlans>();
             CreateMap<PricingPlans, PricingPlansListDto>();
             CreateMap<PricingPlansUpdateDto, PricingPlans>();

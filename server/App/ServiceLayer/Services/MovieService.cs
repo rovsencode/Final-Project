@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.QualityDto;
+using Newtonsoft.Json.Schema;
 
 namespace ServiceLayer.Services
 {
@@ -75,6 +76,7 @@ namespace ServiceLayer.Services
             return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
+                Id=m.Id,
                 Description = m.Description,
                 AgeRestriction = m.AgeRestriction,
                 Raiting = m.Raiting,
@@ -110,6 +112,7 @@ namespace ServiceLayer.Services
             return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
+                Id=m.Id,
                 Description = m.Description,
                 AgeRestriction = m.AgeRestriction,
                 Raiting = m.Raiting,
@@ -180,7 +183,7 @@ namespace ServiceLayer.Services
                 query = query.Where(movie => movie.MovieQualities.FirstOrDefault().Quality.Name == movieFilter.quality);
             }
 
-            if (string.IsNullOrEmpty(movieFilter.genre))
+            if (!string.IsNullOrEmpty(movieFilter.genre))
             {
                 query = query.Where(movie => movie.Genre.Name == movieFilter.genre);
             }
@@ -188,6 +191,7 @@ namespace ServiceLayer.Services
             return movies.Select(m => new MoviePageDto
             {
                 Name = m.Name,
+                Id=m.Id,
                 Description = m.Description,
                 AgeRestriction = m.AgeRestriction,
                 Raiting = m.Raiting,
@@ -211,6 +215,39 @@ namespace ServiceLayer.Services
          
         }
 
-   
+        public async Task<MoviePageDto> Get(int id)
+        {
+            IQueryable<Movie> query = _repo.GetAllT().Include(m => m.MovieActresses)
+                    .ThenInclude(m => m.Actress).Include(m => m.MovieQualities)
+                    .ThenInclude(m => m.Quality).Include(m => m.Genre);
+           Movie movie=await query.Where(m => !m.isDeleted).FirstOrDefaultAsync(m => m.Id == id);
+            MoviePageDto moviePage = new()
+            {
+                AgeRestriction = movie.AgeRestriction,
+                ImageUrl = movie.ImageUrl,
+                Description = movie.Description,
+                Name = movie.Name,
+                Raiting = movie.Raiting,
+                VideoUrl = movie.VideoUrl,
+                Year = movie.Year.Year,
+                Id = movie.Id,
+                BackgroundImage = movie.BackgroundImage,
+                Price = movie.Price,
+                Actresses = movie.MovieActresses.Select(ma => new ActressListDto
+                {
+                    FullName = ma.Actress.FullName,
+                }).ToList(),
+                Qualities = movie.MovieQualities.Select(ma => new QualityListDto
+                {
+                    Name = ma.Quality.Name,
+
+
+                }).ToList(),
+                Genre=movie.Genre.Name,
+                GenreId=movie.GenreId
+            };
+           
+            return moviePage;
+        }
     }
 }

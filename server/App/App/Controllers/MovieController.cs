@@ -48,6 +48,11 @@ namespace App.Controllers
         {
             return Ok(await _movieService.Search(search));
         }
+        [HttpGet("{movieId}")]
+        public async Task<IActionResult> GetOne([FromRoute]int movieId)
+        {
+            return Ok(await _movieService.Get(movieId));
+        }
 
         [HttpGet]
         public async Task<IActionResult> FilterData()

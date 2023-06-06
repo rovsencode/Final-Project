@@ -13,6 +13,7 @@ function MovieDetailCard({
   runningTime,
   country,
   description,
+  trailer
 }) {
   return (
     <div className="container">
@@ -45,10 +46,7 @@ function MovieDetailCard({
           </div>
         </div>
         <div className="movie-right">
-          <video
-            width="550px"
-            src="https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4"
-          ></video>
+          <video width="550px" controls src={trailer} type="video/mp4"></video>
         </div>
       </div>
     </div>

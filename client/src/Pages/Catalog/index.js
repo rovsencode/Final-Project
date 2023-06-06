@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "primereact/dropdown";
-import { Grid, Slider, colors } from "@mui/material";
+import { Grid, Slider } from "@mui/material";
 import { Pagination } from "@mui/material";
 import "../Catalog/index.scss";
 import background from "../Catalog/section.jpg";
@@ -8,11 +8,10 @@ import { genreService } from "../../APIs/Services/GenreService";
 import { qualityService } from "../../APIs/Services/QualityService";
 import { Button } from "react-bootstrap";
 import MovieCard from "../../Components/MovieCard";
-import { Navigate } from "react-router-dom";
-import { PanoramaSharp } from "@mui/icons-material";
 import { movieService } from "../../APIs/Services/MovieService";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+import { useNavigate } from "react-router-dom";
 function Catalog() {
   const [raiting, setRaiting] = useState([0, 5]);
   const [year, setYear] = useState([undefined, undefined]);
@@ -23,15 +22,28 @@ function Catalog() {
   const [selectedQualty, setSelectedQualty] = React.useState([]);
   const [qualtys, setQualtys] = React.useState();
   const [movies, setMovies] = React.useState([]);
-
+  const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
-    Navigate(`/movies/movieId=${movieId}`);
+    navigate(`/catalog/${movieId}`);
+  };
+  const handleReset = () => {
+    setSelectedGenre([]);
+    setSelectedQualty([]);
+    setYear([undefined, undefined]);
+    setRaiting([0, 5]);
+    fetchMovie(1);
+    fetchCount();
   };
   const fetchMovie = async (page) => {
     console.log("normalpage: " + page);
     const { data } = await movieService.skip(page);
     console.log(data);
     setMovies(data);
+  };
+  const fetchCount = async () => {
+    const { data } = await movieService.getCount();
+    setPageCount(Math.ceil(data));
+    console.log(data);
   };
 
   const handlePageChange = (event, page) => {
@@ -49,20 +61,21 @@ function Catalog() {
   const filterFetch = async (params) => {
     const { data } = await movieService.filterSort(params);
     setMovies(data);
+    setPageCount(Math.ceil(data.length / 10));
     console.log(data);
   };
   const handleFilter = () => {
     let params = "";
-    if (selectedGenre) {
+    if (selectedGenre.name !== undefined) {
       params += `genre=${selectedGenre.name}&`;
     }
-    if (raiting) {
+    if (raiting !== undefined) {
       params += `raiting=${raiting[0]}&raiting=${raiting[1]}&`;
     }
-    if (selectedQualty) {
+    if (selectedQualty.name !== undefined) {
       params += `quality=${selectedQualty.name}&`;
     }
-    if (year) {
+    if (year[0] !== undefined && year[1] !== undefined) {
       params += `year=${year[0]}&year=${year[1]}&`;
     }
     filterFetch(params);
@@ -73,12 +86,7 @@ function Catalog() {
       const { data } = await genreService.getAll();
       setGenres(data);
     };
-    const fetchCount = async () => {
-      const { data } = await movieService.getCount();
 
-      setPageCount(Math.ceil(data));
-      console.log(data);
-    };
     const getYear = async () => {
       const { data } = await movieService.getYear();
       const { minYear, maxYear } = data;
@@ -246,6 +254,13 @@ function Catalog() {
                 >
                   apply filter
                 </button>
+                <button
+                  onClick={handleReset}
+                  className="filter__btn"
+                  type="button"
+                >
+                  reset
+                </button>
                 {/* end filter btn */}
               </div>
             </div>
@@ -274,7 +289,7 @@ function Catalog() {
           ))}
         </Grid>
       </div>
-      <Button>click</Button>
+      <Button onClick={handleMovieClick}>click</Button>
 
       <div className="text-center" style={{ marginLeft: "500px" }}>
         <Pagination

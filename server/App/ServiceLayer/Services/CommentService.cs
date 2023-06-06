@@ -41,6 +41,7 @@ namespace ServiceLayer.Services
 
             Comment comment = new()
             {
+                
                 AppUserId = dbUser.Id,
                 Message = commentCreateDto.Message,
                 MovieId = commentCreateDto.MovieId,
@@ -60,12 +61,18 @@ namespace ServiceLayer.Services
         public async Task<List<CommentListDto>> GetComments()
         {
            var comments=await _repo.GetAll();
-            return comments.Select(c=> new CommentListDto
+            List<CommentListDto> commentListDtos = new();
+            foreach (var comment in comments)
             {
-                UserName=c.AppUser.UserName,
-                Message=c.Message,
-                CreatedTime=c.CreatedTime,
-            }).ToList();
+                CommentListDto commentListDto= new();
+                commentListDto.CreatedTime = comment.CreatedTime.ToString(" dd MMMM yyyy");
+                commentListDto.Message = comment.Message;
+                AppUser dbUser =await _userManager.FindByIdAsync(comment.AppUserId);
+                commentListDto.UserName=dbUser.UserName;
+                commentListDto.CommentId = comment.Id;
+                 commentListDtos.Add(commentListDto);
+            }
+            return commentListDtos;
         }
     }
 }
