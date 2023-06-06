@@ -2,6 +2,7 @@
 using DomainLayer.Entites;
 using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.ActressDto;
+using ServiceLayer.DTOs.Comment;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
 using ServiceLayer.DTOs.FeatureDto;
@@ -58,6 +59,7 @@ namespace ServiceLayer.Mappings
             CreateMap<PropertyCreateDto, Property>();
             CreateMap<Property, PropertyListDto>();
             CreateMap <PropertyUpdateDto, Property>();
+            CreateMap<CommentCreateDto, Comment>();
             CreateMap<PricingPlansListDto, PricingPlans>();
             CreateMap<PricingPlans, PricingPlansListDto>();
             CreateMap<PricingPlansUpdateDto, PricingPlans>();

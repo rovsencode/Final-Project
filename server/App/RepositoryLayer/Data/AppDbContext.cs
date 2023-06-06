@@ -30,6 +30,7 @@ namespace RepositoryLayer.Data
             modelBuilder.ApplyConfiguration(new SerieConfiguration());
             modelBuilder.ApplyConfiguration(new QualityConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

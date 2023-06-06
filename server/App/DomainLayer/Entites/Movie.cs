@@ -14,6 +14,7 @@ namespace DomainLayer.Entites
         public string? ImageUrl { get; set; }
         public string? BackgroundImage { get; set; }
         public string? AgeRestriction { get; set; }
+        public List<Comment> Comments { get; set; }
         public DateTime Year { get; set;}
         public double  Price { get; set;}
         public float Raiting { get; set;}

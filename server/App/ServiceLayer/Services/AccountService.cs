@@ -177,7 +177,6 @@ namespace ServiceLayer.Services
             var baseUrl = $"{request.Scheme}://{request.Host}";
             var token = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
             var userId = await _userManager.GetUserIdAsync(dbUser);
-            //var encodedToken = Uri.EscapeDataString(token);
             var link = $"{baseUrl}/api/Account/{resetPasswordRoute}?userId={userId}&token={token}";
             await SendEmailConfirmationEmail(dbUser.Email, link);
             return new ApiResponse { StatusMessage = "Password reset email sent", StatusCode = StatusCodes.Status200OK };
@@ -189,7 +188,6 @@ namespace ServiceLayer.Services
 
             if (exsistUser == null)
             {
-                // Kullanıcı bulunamadı hatası döndürün
                 return new ApiResponse { StatusCode = StatusCodes.Status404NotFound };
             }
 
@@ -201,28 +199,23 @@ namespace ServiceLayer.Services
 
             if (!checkPassword)
             {
-                // Şifre sıfırlama token'ı geçerli değil hatası döndürün
                 return new ApiResponse { StatusCode = StatusCodes.Status400BadRequest };
             }
 
             if (await _userManager.CheckPasswordAsync(exsistUser, password))
             {
-                // Yeni şifre, kullanıcının önceki şifresiyle aynı hatası döndürün
+
                 return new ApiResponse { StatusMessage = "This password is the same as your previous password" };
             }
 
-            // Şifreyi sıfırla
             var resetPasswordResult = await _userManager.ResetPasswordAsync(exsistUser, token, password);
             if (!resetPasswordResult.Succeeded)
             {
-                // Şifre sıfırlama işlemi başarısız oldu hatası döndürün
                 return new ApiResponse { StatusCode = StatusCodes.Status500InternalServerError };
             }
 
-            // Güvenlik damgasını güncelle
             await _userManager.UpdateSecurityStampAsync(exsistUser);
 
-            // Başarılı yanıt döndürün
             return new ApiResponse { StatusCode = StatusCodes.Status200OK };
         }
 
