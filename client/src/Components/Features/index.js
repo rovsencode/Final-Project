@@ -38,7 +38,7 @@ function Features() {
           </div>
           {/* end section title */}
           {features.map((item, idx) => (
-            <div className="col-12 col-md-6 col-lg-4">
+            <div key={idx} className="col-12 col-md-6 col-lg-4">
               <div className="feature">
                 <Icon
                   className="icon feature__icon"

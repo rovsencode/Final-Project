@@ -43,21 +43,27 @@
 }
 
 .movie-info {
-
     display: flex;
     align-items: center;
     margin-bottom: 8px;
 }
 
 .quality,
-.age-restriction,
-.rating {
+.age-restriction {
     padding: 4px 8px;
     margin-right: 8px;
     background-color: #212529;
     border-radius: 4px;
     color: white;
+    color: #FFFFFFB3;
 }
+.raiting-box{
+    margin-right: 7px;
+    .rating{
+        margin-left: 3px;
+    }
+}
+
 
 .genres,
 .release-year,
@@ -65,6 +71,7 @@
 .country {
     margin-bottom: 8px;
     color: #FFFFFFB3;
+    font-size: 15px;
  
 }
 .country,.genres{
@@ -76,4 +83,6 @@
 
 .description {
     line-height: 1.5;
+   color: #FFFFFFB3;
+   font-size: 15px;
 }

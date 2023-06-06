@@ -32,8 +32,8 @@ function Partners() {
           </div>
           {/* end section text */}
           {/* partner */}
-          {partners.map((partner) => (
-            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+          {partners.map((partner, idx) => (
+            <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
               <a className="partner">
                 <img
                   src={partner.imageUrl}

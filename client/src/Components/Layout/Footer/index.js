@@ -17,7 +17,6 @@ function Footer() {
       setContact(data);
     };
     fetchContact();
-
   }, []);
 
   return (
@@ -61,20 +60,20 @@ function Footer() {
           <div className="col-12 col-sm-4 col-md-3">
             <h6 className="footer__title">Contact</h6>
             <ul className="footer__list">
-              <li>
+              <li key={contact.id + "_phone"}>
                 <Link to={`tel:${contact.phoneNumber}`}>
                   Phone: {contact.phoneNumber}
                 </Link>
               </li>
-              <li>
+              <li key={contact.id + "_mail"}>
                 <Link to={`mailto:${contact.mailAccount}`}>
                   Mail: {contact.mailAccount}
                 </Link>
               </li>
             </ul>
             <ul className="footer__social">
-              {socialIcons.map((icon) => (
-                <li className="icon">
+              {socialIcons.map((icon, idx) => (
+                <li key={idx} className="icon">
                   <a href="#">
                     <Icon path={icon} size={1} />
                   </a>

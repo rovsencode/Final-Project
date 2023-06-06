@@ -13,7 +13,7 @@ import { MovieContext } from "../../Contexts/movieContext";
 import { Navigate } from "react-router-dom";
 function ExpectedFilms() {
   const handleMovieClick = (movieId) => {
-    Navigate(`/movies/${movieId}`);
+    Navigate(`/catalog/movieId=${movieId}`);
   };
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -65,15 +65,17 @@ function ExpectedFilms() {
                 className="d-flex justify-content-center"
                 style={{ gap: "80px" }}
               >
-                {movies.slice(0, 3).map((movie) => (
-                 <li onClick={handleMovieClick}>  <ExpectedCard
-                    key={movie.name}
-                    name={movie.name}
-                    imageUrl={movie.imageUrl}
-                    genre={movie.genre}
-                    rating={movie.raiting}
-                  />
-                    </li>
+                {movies.slice(0, 3).map((movie, idx) => (
+                  <li key={idx} onClick={handleMovieClick}>
+                    {" "}
+                    <ExpectedCard
+                      key={movie.name}
+                      name={movie.name}
+                      imageUrl={movie.imageUrl}
+                      genre={movie.genre}
+                      rating={movie.raiting}
+                    />
+                  </li>
                 ))}
               </div>
             </Carousel.Item>

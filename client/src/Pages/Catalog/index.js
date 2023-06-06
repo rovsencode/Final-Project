@@ -17,7 +17,7 @@ function Catalog() {
   const [raiting, setRaiting] = useState([0, 5]);
   const [year, setYear] = useState([undefined, undefined]);
   const [rangeYear, setRangeYear] = React.useState([]);
-  const [pageCount, setPageCount] = React.useState([]);
+  const [pageCount, setPageCount] = React.useState(0);
   const [selectedGenre, setSelectedGenre] = React.useState([]);
   const [genres, setGenres] = React.useState([]);
   const [selectedQualty, setSelectedQualty] = React.useState([]);
@@ -25,7 +25,7 @@ function Catalog() {
   const [movies, setMovies] = React.useState([]);
 
   const handleMovieClick = (movieId) => {
-    Navigate(`/movies/${movieId}`);
+    Navigate(`/movies/movieId=${movieId}`);
   };
   const fetchMovie = async (page) => {
     console.log("normalpage: " + page);
@@ -254,9 +254,9 @@ function Catalog() {
       </div>
       <div className="movies">
         <Grid container spacing={2}>
-          {movies.map((movie) => (
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <li onClick={handleMovieClick}>
+          {movies.map((movie, idx) => (
+            <Grid key={idx} item xs={12} sm={6} md={4} lg={3}>
+              <li key={idx} onClick={() => handleMovieClick(movie.id)}>
                 {" "}
                 <MovieCard
                   key={movie.id}

@@ -38,7 +38,7 @@ const ExpectedCard = ({ name, genre, imageUrl, rating }) => {
             <Icon
               path={mdiStar}
               size={1}
-              color="#ff55a5" // Yıldız rengi #ff55a5 olarak ayarlandı
+              color="#ff55a5" 
             />
             <Typography
               variant="body2"

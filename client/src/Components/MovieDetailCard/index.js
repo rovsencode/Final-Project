@@ -1,5 +1,7 @@
 import React from "react";
 import "../MovieDetailCard/index.scss";
+import Icon from "@mdi/react";
+import { mdiStar } from "@mdi/js";
 function MovieDetailCard({
   title,
   poster,
@@ -23,9 +25,12 @@ function MovieDetailCard({
             </div>
             <div className="movie-details">
               <div className="movie-info">
+                <div className="raiting-box ">
+                  <Icon path={mdiStar} size={0.9} color="#ff55a5" />
+                  <span className="rating ">{rating}</span>
+                </div>
                 <span className="quality">{quality}</span>
                 <span className="age-restriction">{ageRestriction}</span>
-                <span className="rating">{rating}</span>
               </div>
               <p className="genres">
                 Genre: <span>{genres}</span>
@@ -40,7 +45,10 @@ function MovieDetailCard({
           </div>
         </div>
         <div className="movie-right">
-          <video width="550px" src="https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4"></video>
+          <video
+            width="550px"
+            src="https://storage.cloud.google.com/my-film-trailers/Trailers/1917%20-%20Official%20Trailer%20%5BHD%5D.mp4"
+          ></video>
         </div>
       </div>
     </div>

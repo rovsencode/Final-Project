@@ -1,12 +1,9 @@
 import React from "react";
 import "./index.scss";
 import { plansService } from "../../APIs/Services/PlansService";
-import { propertyService } from "../../APIs/Services/PropertiesService";
-import MovieForm from "../MovieForm";
-import background from "../../Pages/Catalog/section.jpg"
+import background from "../../Pages/Catalog/section.jpg";
 export default function Plans() {
   const [plans, setPLans] = React.useState([]);
-  const [properties, setProperty] = React.useState([]);
   React.useState(() => {
     const fetchPlans = async () => {
       const { data } = await plansService.getAll();
@@ -48,15 +45,15 @@ export default function Plans() {
         <div className="container">
           <div className="row">
             {/* price */}
-            {plans.map((item) => (
-              <div className="col-12 col-md-6 col-lg-4">
+            {plans.map((item, idx) => (
+              <div key={idx} className="col-12 col-md-6 col-lg-4">
                 <div className="price">
                   <div className="price__item price__item--first">
                     <span>{item.planName}</span>
                     {item.price}$
                   </div>
-                  {item.properties.map((property) => (
-                    <div className="price__item">
+                  {item.properties.map((property, idx) => (
+                    <div key={idx} className="price__item">
                       <span>{property.name}</span>
                     </div>
                   ))}
@@ -71,8 +68,5 @@ export default function Plans() {
         </div>
       </div>
     </>
-    // <>
-    //   {/* <MovieForm /> */}
-    // </>
   );
 }

@@ -194,28 +194,27 @@ function Header() {
                     type="button"
                   >
                     <Icon path={mdiMagnify} size={1.5} />
-                    {/* <Search /> */}
                   </button>
                   {userName ? (
-                    <a
+                    <Link
                       className="header__sign-in"
-                      style={{ color: "white" }}
-                      onClick={logOut}
+                      style={{ textDecoration: "none", color: "white" }}
+                      to="/register"
+                      onClick={() => logOut}
                     >
-                      <Link
-                        style={{ textDecoration: "none", color: "white" }}
-                        to="/register"
-                      >
-                        Log out
-                      </Link>
-                    </a>
+                      Log out
+                    </Link>
                   ) : (
-                    <a className="header__sign-in">
+                    <div>
                       <Icon className="icon" path={mdiLogin} size={1} />
-                      <Link to="/login" style={{ textDecoration: "none" }}>
+                      <Link
+                        className="header__sign-in"
+                        to="/login"
+                        style={{ textDecoration: "none" }}
+                      >
                         <span>sign in</span>
                       </Link>
-                    </a>
+                    </div>
                   )}
                 </div>
                 {/* end header auth */}
