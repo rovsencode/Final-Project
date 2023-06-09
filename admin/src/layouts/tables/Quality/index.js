@@ -17,6 +17,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import { Button } from "@mui/material";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -25,11 +26,13 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import React from "react";
 import DataTable from "examples/Tables/DataTable";
-
+import { Link } from "react-router-dom";
 export default function QualityTable() {
   const [qualitys, setQuality] = React.useState([]);
   const fetchQuality = async () => {
@@ -37,6 +40,10 @@ export default function QualityTable() {
     setQuality(data);
     console.log(data);
   };
+  const deleteQuality = async (qualityId) => [
+    await axios.delete(`https://localhost:7152/api/Quality/SoftDelete/${qualityId}`),
+    fetchQuality(),
+  ];
   React.useEffect(() => {
     fetchQuality();
   }, []);
@@ -46,28 +53,33 @@ export default function QualityTable() {
     { Header: "Action", accessor: "action", align: "left" },
   ];
 
-  const rows = qualitys.map(({ name }) => {
+  const rows = qualitys.map((quality) => {
     return {
       name: (
         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          {name}
+          {quality.name}
         </MDTypography>
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
+          <Link to={`/quality/update/${quality.id}`}>
+            <IconButton>
+              <EditIcon style={{ color: "gray" }} />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            onClick={() => {
+              deleteQuality(quality.id);
+            }}
+            aria-label="delete"
           >
-            Edit
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };
@@ -78,6 +90,22 @@ export default function QualityTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/quality/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
           <Grid item xs={12}>
             <Card>
               <MDBox

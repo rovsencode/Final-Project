@@ -44,16 +44,40 @@ namespace ServiceLayer.Services
             var genres = await _repo.GetAll();
             return _mapper.Map < List<GenreListDto>>(genres);
         }
-     
+        
 
-        public Task SoftDelete(int id)
+
+        public async Task<ApiResponse> Update(int id, GenreUpdateDto genre)
         {
-            throw new NotImplementedException();
+            var dbGenre = await _repo.Get(id);
+            Genre result = _repo.GetAllT().Where(d => d.Name == genre.Name && d.Id!=id).FirstOrDefault();
+            if (result!=null)
+            {
+                ApiResponse response = new();
+                response.StatusCode = 400;
+                response.Errors = new()
+                {
+                    "bele bir genre name var"
+                };
+                return response;
+            }
+          var mappedData= _mapper.Map(genre, dbGenre);
+            mappedData.Id = id;
+            await _repo.Update(dbGenre);
+            return new ApiResponse { StatusCode = StatusCodes.Status200OK };
+        }
+        public async Task<GenreListDto> GetOne(int id)
+        { 
+            Genre genre= await _repo.Get(id);
+           var mappedData= _mapper.Map<GenreListDto>(genre);
+            return (mappedData);
+        }
+        public async Task SoftDelete(int id)
+        {
+            Genre genre= await _repo.Get(id);
+            await _repo.SoftDelete(genre);
         }
 
-        public Task Update(int id, GenreUpdateDto genre)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

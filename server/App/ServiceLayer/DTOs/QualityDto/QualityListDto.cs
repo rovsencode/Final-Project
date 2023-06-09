@@ -8,6 +8,7 @@ namespace ServiceLayer.DTOs.QualityDto
 {
     public class QualityListDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -28,5 +28,21 @@ namespace App.Controllers
         {   
             return Ok(await _genreService.GetAll());
         }
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Update([FromRoute]int id,GenreUpdateDto genre)
+        {
+            return Ok(await _genreService.Update(id, genre));
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            return Ok(await _genreService.GetOne(id));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> SoftDelete([FromRoute] int id)
+        {
+            await _genreService.SoftDelete(id);
+            return Ok();
+        }
     }
 }

@@ -17,15 +17,16 @@ import DataTable from "examples/Tables/DataTable";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 export default function GenreTable() {
-  const handleClick = () => {
-    console.log("dsfsadfsdf");
-  };
   const [genres, setGenres] = React.useState([]);
   const fetchGenre = async () => {
     const { data } = await axios.get("https://localhost:7152/api/Genre/GetAll");
     setGenres(data);
     console.log(data);
   };
+  const deleteGenre = async (genreId) => [
+    await axios.delete(`https://localhost:7152/api/Genre/SoftDelete/${genreId}`),
+    fetchGenre(),
+  ];
   React.useEffect(() => {
     fetchGenre();
   }, []);
@@ -44,10 +45,18 @@ export default function GenreTable() {
       ),
       action: (
         <MDBox>
-          <IconButton>
-            <EditIcon style={{ color: "gray" }} />
-          </IconButton>
-          <IconButton aria-label="delete">
+          <Link to={`/genre/update/${genre.id}`}>
+            <IconButton>
+              <EditIcon style={{ color: "gray" }} />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            onClick={() => {
+              deleteGenre(genre.id);
+            }}
+            aria-label="delete"
+          >
             <DeleteIcon
               style={{
                 color: "rgba(216, 18, 41, 0.71)",

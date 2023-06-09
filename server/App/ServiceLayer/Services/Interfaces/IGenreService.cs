@@ -13,7 +13,8 @@ namespace ServiceLayer.Services.Interfaces
     public interface IGenreService
     {
         Task<ApiResponse> Create(GenreCreateDto genre);
-        Task Update(int id, GenreUpdateDto genre);
+        Task <ApiResponse>Update(int id, GenreUpdateDto genre);
+        Task<GenreListDto> GetOne(int id);
         Task<List<GenreListDto>> GetAll();
         Task Delete(int id);
         Task SoftDelete(int id);

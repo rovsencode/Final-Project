@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.ActressDto;
+﻿using ServiceLayer.DTOs.Account;
+using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.QualityDto;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IQualityService
     {
-        Task Create(QualityCreateDto quality);
-        Task Update(int id, QualityUpdateDto quality);
+        Task<ApiResponse> Create(QualityCreateDto quality);
+        Task<ApiResponse> Update(int id, QualityUpdateDto quality);
 
         Task<List<QualityListDto>> GetAll();
+        Task<QualityListDto> GetOne(int id);
         Task Delete(int id);
         Task SoftDelete(int id);
     }

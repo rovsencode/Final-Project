@@ -32,10 +32,12 @@ function GenreCreate() {
   );
 
   const handleSubmit = async (values) => {
-    console.log("isleyir");
     const { data } = await axios.post("https://localhost:7152/api/Genre/Create", values);
     if (data.errors === null) {
       setSuccessSB(true);
+      setTimeout(() => {
+        navigate("/genre");
+      }, 2000);
     }
   };
   return (

@@ -52,6 +52,9 @@ import QualityTable from "layouts/tables/Quality";
 import PlanTable from "layouts/tables/Plans";
 import PropertyTable from "layouts/tables/Property";
 import GenreCreate from "layouts/tables/Genre/create";
+import GenreUpdate from "layouts/tables/Genre/update";
+import QualityUpdate from "layouts/tables/Quality/update";
+import QualityCreate from "layouts/tables/Quality/create";
 
 const routes = [
   {
@@ -154,6 +157,24 @@ const routes = [
   {
     route: "/genre/create",
     component: <GenreCreate />,
+  },
+  {
+    name: "genreUpdate",
+    key: "genreUpdate",
+    route: "/genre/update/:genreId",
+    component: <GenreUpdate />,
+  },
+  {
+    name: "qualityCreate",
+    key: "qualityCreate",
+    route: "/quality/create",
+    component: <QualityCreate />,
+  },
+  {
+    name: "qualityUpdate",
+    key: "qualityUpdate",
+    route: "/quality/update/:qualityId",
+    component: <QualityUpdate />,
   },
 ];
 

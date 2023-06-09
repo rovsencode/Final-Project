@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services.Interfaces;
@@ -48,16 +50,20 @@ namespace ServiceLayer.Services
             return _mapper.Map<List<ActressListDto>>(actreses);
         }
 
-        public async Task Update(int id, ActressUpdateDto actress)
+        public async Task<ApiResponse> Update(int id, ActressUpdateDto actress)
         {
-
             var dbActress = await _repo.Get(id);
+            var result= _repo.GetAllT().Where(d=>d.FullName==actress.FullName);
+            if(dbActress.Id!=id && result!=null ){
+                return new ApiResponse
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    Errors = { "Bele bir fullname var" }
+                };
+            }
             _mapper.Map(actress, dbActress);
             await _repo.Update(dbActress);
-
-
-
-
+            return new ApiResponse { StatusCode = StatusCodes.Status200OK };
         }
 
       
