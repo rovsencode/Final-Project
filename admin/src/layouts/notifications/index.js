@@ -32,10 +32,10 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 function Notifications() {
-  const [successSB, setSuccessSB] = useState(false);
   const [infoSB, setInfoSB] = useState(false);
   const [warningSB, setWarningSB] = useState(false);
   const [errorSB, setErrorSB] = useState(false);
+  const [successSB, setSuccessSB] = useState(false);
 
   const openSuccessSB = () => setSuccessSB(true);
   const closeSuccessSB = () => setSuccessSB(false);

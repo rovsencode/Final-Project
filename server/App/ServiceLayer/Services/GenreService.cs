@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.Services.Interfaces;
@@ -23,10 +25,13 @@ namespace ServiceLayer.Services
             _repo = repo;
         }
 
-        public async Task Create(GenreCreateDto genre)
+        public async Task<ApiResponse> Create(GenreCreateDto genre)
         {
+            if (genre == null) return new ApiResponse { StatusCode = StatusCodes.Status400BadRequest, Errors = { "name must not null" } };
             var mappedData = _mapper.Map<Genre>(genre);
             await _repo.Create(mappedData);
+
+            return new ApiResponse { StatusCode = 200, Errors = null };
         }
 
         public Task Delete(int id)

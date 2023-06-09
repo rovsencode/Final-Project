@@ -1,23 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/function-component-definition */
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -25,12 +11,15 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
 import axios from "axios";
 import React from "react";
 import DataTable from "examples/Tables/DataTable";
-
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 export default function GenreTable() {
+  const handleClick = () => {
+    console.log("dsfsadfsdf");
+  };
   const [genres, setGenres] = React.useState([]);
   const fetchGenre = async () => {
     const { data } = await axios.get("https://localhost:7152/api/Genre/GetAll");
@@ -55,19 +44,16 @@ export default function GenreTable() {
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-          >
-            Edit
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+          <IconButton>
+            <EditIcon style={{ color: "gray" }} />
+          </IconButton>
+          <IconButton aria-label="delete">
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };
@@ -78,6 +64,23 @@ export default function GenreTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/genre/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
+
           <Grid item xs={12}>
             <Card>
               <MDBox

@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.Contact;
+﻿using ServiceLayer.DTOs.Account;
+using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.GenreDto;
 using System;
@@ -11,7 +12,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IGenreService
     {
-        Task Create(GenreCreateDto genre);
+        Task<ApiResponse> Create(GenreCreateDto genre);
         Task Update(int id, GenreUpdateDto genre);
         Task<List<GenreListDto>> GetAll();
         Task Delete(int id);

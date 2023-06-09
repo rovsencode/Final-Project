@@ -19,8 +19,8 @@ namespace App.Controllers
         public async Task<IActionResult> Create([FromBody] GenreCreateDto genre)
         {
             if (genre == null) return NotFound();
-            await _genreService.Create(genre);
-            return Ok();
+
+            return Ok(await _genreService.Create(genre));
         }
 
         [HttpGet]

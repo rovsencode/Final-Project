@@ -51,6 +51,7 @@ import ContactTable from "layouts/tables/Contact";
 import QualityTable from "layouts/tables/Quality";
 import PlanTable from "layouts/tables/Plans";
 import PropertyTable from "layouts/tables/Property";
+import GenreCreate from "layouts/tables/Genre/create";
 
 const routes = [
   {
@@ -149,6 +150,10 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+  },
+  {
+    route: "/genre/create",
+    component: <GenreCreate />,
   },
 ];
 
