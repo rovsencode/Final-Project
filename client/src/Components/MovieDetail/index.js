@@ -5,6 +5,7 @@ import ExpectedCard from "../ExpectedCard";
 import { MovieContext } from "../../Contexts/movieContext";
 import { useParams } from "react-router-dom";
 import { movieService } from "../../APIs/Services/MovieService";
+import Comment from "../Comment";
 function MovieDetail() {
   const movies = useContext(MovieContext);
   const { movieId } = useParams();
@@ -46,7 +47,7 @@ function MovieDetail() {
               {movie ? <h2 className="content__title">{movie.name}</h2> : ""}
             </div>
             <div className="col-12 video-section ">
-              <div className="movie-video" style={{width:"80%"}}>
+              <div className="movie-video" style={{ width: "80%" }}>
                 {movie ? (
                   <iframe
                     width="900px"
@@ -63,7 +64,7 @@ function MovieDetail() {
               <div className="aside">
                 <div className="aside-movies">
                   {movies
-                    ? movies.slice(3,7).map((movie, idx) => (
+                    ? movies.slice(3, 7).map((movie, idx) => (
                         <div key={idx} className="movie">
                           <ExpectedCard
                             name={movie.name}
@@ -78,6 +79,7 @@ function MovieDetail() {
           </div>
         </div>
       </div>
+      <Comment />
     </section>
   );
 }

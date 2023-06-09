@@ -1,4 +1,5 @@
 import { HttpClient } from "../HttpClient";
+
 class FaqService extends HttpClient {
   constructor() {
     super("https://localhost:7152/api/Faq");

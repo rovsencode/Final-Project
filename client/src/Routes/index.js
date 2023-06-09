@@ -1,7 +1,7 @@
 import React from "react";
 import { ROUTER } from "../Routes/const";
 import Home from "../Pages/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router } from "react-router-dom";
 import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import MovieDetail from "../Components/MovieDetail";
@@ -22,7 +22,7 @@ function Routs() {
         <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />
         <Route path={ROUTER.About.PATH.toString()} element={<About />} />
         <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />/
-        <Route path={ROUTER.MovieDetail.PATH.toString()}element={<MovieDetail />}/>
+        <Route path={ROUTER.MovieDetail.PATH.toString()} element={<MovieDetail />} />
       </Routes>
     </MoiveProvider>
   );

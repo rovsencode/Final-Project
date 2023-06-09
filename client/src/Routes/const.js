@@ -21,4 +21,7 @@ export const ROUTER = {
   MovieDetail: {
     PATH: "/catalog/:movieId",
   },
+  Admin: {
+    PATH: "/admin",
+  },
 };

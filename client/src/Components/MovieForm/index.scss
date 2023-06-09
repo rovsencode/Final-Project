@@ -1,0 +1,47 @@
+.movie-form-container {
+    margin-top: 200px;
+    margin-left: 200px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    color: white;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+select[multiple] {
+    height: 120px;
+}
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.uploaded-image {
+    width: 300px;
+    margin-top: 20px;
+}

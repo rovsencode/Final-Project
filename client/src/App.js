@@ -4,11 +4,8 @@ import Footer from "./Components/Layout/Footer";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./Pages/Login";
-import Home from "./Pages/Home";
 import Routs from "./Routes";
 import { TokenProvider } from "./Contexts/tokenContext";
-
 function App() {
   return (
     <>

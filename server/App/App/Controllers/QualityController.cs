@@ -16,7 +16,7 @@ namespace App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDatas()
+        public async Task<IActionResult> GetAll()
         {
             return Ok(await _qualityService.GetAll());
         }

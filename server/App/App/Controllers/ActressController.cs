@@ -6,7 +6,7 @@ using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ActressController : ControllerBase
     {
@@ -22,5 +22,11 @@ namespace App.Controllers
             await _actressService.Create(actress);
             return Ok();
         }
-    }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _actressService.GetAll());
+        }
+            
+            }
 }
