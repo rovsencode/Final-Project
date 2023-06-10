@@ -17,7 +17,9 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -55,19 +57,24 @@ export default function PropertyTable() {
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
+          <Link to={`/genre/update/${genre.id}`}>
+            <IconButton>
+              <EditIcon style={{ color: "gray" }} />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            onClick={() => {
+              deleteGenre(genre.id);
+            }}
+            aria-label="delete"
           >
-            Edit
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };

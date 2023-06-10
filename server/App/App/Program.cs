@@ -40,10 +40,6 @@ namespace App
 
             builder.Services.AddScoped<IMovieService, MovieService>();
             builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-            builder.Services.AddScoped<IActressService, ActressService>();
-            builder.Services.AddScoped<IActressRepository, ActressRepository>();
-            builder.Services.AddScoped<ISerieService, SerieService>();
-            builder.Services.AddScoped<ISerieRepository, SerieRepository>();
             builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
             builder.Services.AddScoped<IQualityService, QualityService>();

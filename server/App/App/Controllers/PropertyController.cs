@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.DTOs.PricingPlans;
+using ServiceLayer.DTOs.PropertyDto;
+using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
 
 namespace App.Controllers
@@ -18,6 +21,24 @@ namespace App.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _propertyService.GetAll());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(PropertyCreateDto property)
+        {
+            await _propertyService.Create(property);
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            await _propertyService.SoftDelete(id);
+            return Ok();
+        }
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id, PropertyUpdateDto property)
+        {
+            await _propertyService.Update(id, property);
+            return Ok();
         }
     }
 }

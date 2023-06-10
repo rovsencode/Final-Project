@@ -1,5 +1,4 @@
-﻿using ServiceLayer.DTOs.EpisodeDto;
-using ServiceLayer.DTOs.Faq;
+﻿using ServiceLayer.DTOs.Faq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

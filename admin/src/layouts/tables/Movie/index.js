@@ -17,7 +17,10 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-
+import { Button } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -29,6 +32,7 @@ import MDAvatar from "components/MDAvatar";
 import axios from "axios";
 import React from "react";
 import DataTable from "examples/Tables/DataTable";
+import { Link } from "react-router-dom";
 
 export default function MovieTable() {
   const Movie = ({ image, name }) => (
@@ -79,29 +83,24 @@ export default function MovieTable() {
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
+          <Link to={`/movie/update/${movie.id}`}>
+            <IconButton>
+              <EditIcon style={{ color: "gray" }} />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            onClick={() => {
+              deleteGenre(movie.id);
+            }}
+            aria-label="delete"
           >
-            Edit
-          </MDTypography>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-          >
-            Detail
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };
@@ -112,6 +111,22 @@ export default function MovieTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/movie/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
           <Grid item xs={12}>
             <Card>
               <MDBox

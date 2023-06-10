@@ -234,6 +234,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Google.Cloud.Storage.V1": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.0.0, )"

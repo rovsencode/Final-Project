@@ -18,16 +18,12 @@ namespace RepositoryLayer.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ActressConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
-            modelBuilder.ApplyConfiguration(new EpisodeConfiguration());
             modelBuilder.ApplyConfiguration(new FaqConfiguration());
             modelBuilder.ApplyConfiguration(new FeatureConfiguration());
             modelBuilder.ApplyConfiguration(new GenreConfiguration());
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
             modelBuilder.ApplyConfiguration(new PricingPlansConfiguration());
-            modelBuilder.ApplyConfiguration(new SeasonConfiguration());
-            modelBuilder.ApplyConfiguration(new SerieConfiguration());
             modelBuilder.ApplyConfiguration(new QualityConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());

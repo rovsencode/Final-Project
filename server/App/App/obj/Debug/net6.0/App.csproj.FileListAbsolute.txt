@@ -79,3 +79,13 @@ C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\MailKit.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\MimeKit.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\myfilmproject-6df0eb86f541.json
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Api.Gax.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Api.Gax.Rest.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Auth.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Storage.v1.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Cloud.Storage.V1.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll

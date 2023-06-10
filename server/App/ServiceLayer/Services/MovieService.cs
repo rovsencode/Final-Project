@@ -17,9 +17,11 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ServiceLayer.DTOs.GenreDto;
-using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.QualityDto;
 using Newtonsoft.Json.Schema;
+using Microsoft.AspNetCore.Http;
+using Google.Cloud.Storage.V1;
+using Google.Apis.Auth.OAuth2;
 
 namespace ServiceLayer.Services
 {
@@ -28,6 +30,7 @@ namespace ServiceLayer.Services
         private readonly IMovieRepository _repo;
     
         private readonly IMapper _mapper;
+        private const string BucketName = "my-films-1207";
 
 
         public MovieService(IMapper mapper, IMovieRepository repo)
@@ -41,9 +44,20 @@ namespace ServiceLayer.Services
 
         public async Task Create(MovieCreateDto movie)
         {
-            var mappedData= _mapper.Map<Movie>(movie);
+            string imageUrl = await Upload(movie.file);
+            Movie mappedData = new()
+            {
+               Name=movie.Name,
+               AgeRestriction=movie.AgeRestriction,
+               Description=movie.Description,
+               ImageUrl=imageUrl,
+               Raiting=movie.Raiting,
+               Year=movie.Year,
+               GenreId=movie.GenreId,
+               
+            };
             await _repo.Create(mappedData);
-           await _repo.CreateMany(mappedData, movie.actressIds,movie.qualityIds);
+           await _repo.CreateMany(mappedData,movie.qualityIds);
 
 
         }
@@ -87,10 +101,6 @@ namespace ServiceLayer.Services
                 ImageUrl = m.ImageUrl,
                 VideoUrl=m.VideoUrl,
                 GenreId = m.Genre.Id,
-                Actresses = m.MovieActresses.Select(ma => new ActressListDto
-                {
-                    FullName = ma.Actress.FullName,
-                }).ToList(),
                 Qualities = m.MovieQualities.Select(ma => new QualityListDto
                 {
                     Name = ma.Quality.Name,
@@ -121,10 +131,6 @@ namespace ServiceLayer.Services
                 Price = m.Price,
                 ImageUrl = m.ImageUrl,
                 GenreId = m.Genre.Id,
-                Actresses = m.MovieActresses.Select(ma => new ActressListDto
-                {
-                    FullName = ma.Actress.FullName,
-                }).ToList(),
                 Qualities = m.MovieQualities.Select(ma => new QualityListDto
                 {
                     Name = ma.Quality.Name,
@@ -200,10 +206,6 @@ namespace ServiceLayer.Services
                 Price = m.Price,
                 ImageUrl = m.ImageUrl,
                 GenreId = m.Genre.Id,
-                Actresses = m.MovieActresses.Select(ma => new ActressListDto
-                {
-                    FullName = ma.Actress.FullName,
-                }).ToList(),
                 Qualities = m.MovieQualities.Select(ma => new QualityListDto
                 {
                     Name = ma.Quality.Name,
@@ -233,10 +235,6 @@ namespace ServiceLayer.Services
                 Id = movie.Id,
                 BackgroundImage = movie.BackgroundImage,
                 Price = movie.Price,
-                Actresses = movie.MovieActresses.Select(ma => new ActressListDto
-                {
-                    FullName = ma.Actress.FullName,
-                }).ToList(),
                 Qualities = movie.MovieQualities.Select(ma => new QualityListDto
                 {
                     Name = ma.Quality.Name,
@@ -249,16 +247,26 @@ namespace ServiceLayer.Services
            
             return moviePage;
         }
-        public async Task<Movie> Random()
+ 
+        public async Task<string> Upload(IFormFile file)
         {
-            List<Movie> movies =await _repo.GetAll();
-            int randomNum = GenerateRandomNumber(1, movies.Count);
-             return movies[randomNum];
+            if (file == null || file.Length <= 0)
+            {
+                return null;
+            }
+
+            string uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+
+
+            GoogleCredential credential = GoogleCredential.FromFile(@"C:\Users\HP\Desktop\Final Project\server\App\App\myfilmproject-6df0eb86f541.json");
+            var storageClient = await StorageClient.CreateAsync(credential);
+
+
+            await storageClient.UploadObjectAsync(BucketName, uniqueFileName, null, file.OpenReadStream());
+
+            var url = $"https://storage.googleapis.com/{BucketName}/{uniqueFileName}";
+            return url;
         }
-        public static int GenerateRandomNumber(int min, int max)
-        {
-            Random random = new Random();
-            return random.Next(min, max + 1);
-        }
+
     }
 }

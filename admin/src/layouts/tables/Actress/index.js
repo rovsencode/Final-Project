@@ -15,6 +15,9 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 // @mui material components
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -55,19 +58,24 @@ export default function ActressTable() {
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
+          <Link to={`/genre/update/${genre.id}`}>
+            <IconButton>
+              <EditIcon style={{ color: "gray" }} />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            onClick={() => {
+              deleteGenre(genre.id);
+            }}
+            aria-label="delete"
           >
-            Edit
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };

@@ -1,10 +1,13 @@
 ﻿using DomainLayer.Entites;
+using Google.Cloud.Storage.V1;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
+using Google.Apis.Auth.OAuth2;
 
 namespace App.Controllers
 {
@@ -13,6 +16,7 @@ namespace App.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
+ 
 
         public MovieController(IMovieService movieService)
         {
@@ -73,11 +77,20 @@ namespace App.Controllers
         {
             return Ok(await  _movieService.MovieVideos());
         }
-        [HttpGet]
-        public async Task<IActionResult> Random()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
-            return Ok(await _movieService.Random());
+            await _movieService.SoftDelete(id);
+            return Ok();
+
         }
+        [HttpPost]
+        public async Task<IActionResult> Update([FromRoute] int id,MovieUpdateDto movie)
+        {
+            await _movieService.Update(id, movie);
+            return Ok();
+        }
+
 
 
 

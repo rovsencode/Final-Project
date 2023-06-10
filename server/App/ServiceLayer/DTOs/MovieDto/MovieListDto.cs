@@ -1,5 +1,4 @@
 ﻿using DomainLayer.Entites;
-using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.QualityDto;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace ServiceLayer.DTOs.MovieDto
         public DateTime? Year { get; set; }
         public double? Price { get; set; }
         public float Raiting { get; set; }
-        public List<ActressListDto>? Actresses { get; set; }
         public List<QualityListDto>? Qualities { get; set; }
         public string? Genre { get; set; }
         public int? GenreId { get; set; }

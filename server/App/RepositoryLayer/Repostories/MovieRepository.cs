@@ -15,14 +15,12 @@ namespace RepositoryLayer.Repostories
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
 
-        private readonly IActressRepository _repo;
         private readonly IGenreRepository _genreRepository;
         private readonly AppDbContext _appDbContext;
        
-        public MovieRepository(AppDbContext appDbContext, IActressRepository repo, IGenreRepository genreRepository) : base(appDbContext)
+        public MovieRepository(AppDbContext appDbContext, IGenreRepository genreRepository) : base(appDbContext)
         {
 
-            _repo = repo;
             _appDbContext = appDbContext;
             _genreRepository = genreRepository;
        
@@ -30,23 +28,12 @@ namespace RepositoryLayer.Repostories
 
 
 
-        public async Task CreateMany(Movie movie, int[] actressIds, int[] qualityIds)
+        public async Task CreateMany(Movie movie, int[] qualityIds)
         {
 
-            var genres = _genreRepository.GetAll();
+            var genres = await _genreRepository.GetAll();
 
-            var actresses = await _repo.FindAllByExpression(a => actressIds.Contains(a.Id));
-
-            movie.MovieActresses = new();
-            foreach (var actress in actresses)
-            {
-                movie.MovieActresses.Add(new MovieActress
-                {
-                    ActressId = actress.Id,
-                    MovieId = movie.Id,
-                    isDeleted = false,
-                    CreatedTime = DateTime.UtcNow,
-                });
+         
                 movie.MovieQualities = new();
                 foreach (var qualtyId in qualityIds)
                 {
@@ -63,14 +50,13 @@ namespace RepositoryLayer.Repostories
 
 
 
+            await _appDbContext.SaveChangesAsync();
             }
 
 
-            await _appDbContext.SaveChangesAsync();
 
 
         }
 
 
     }
-}

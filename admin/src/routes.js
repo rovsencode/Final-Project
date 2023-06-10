@@ -45,6 +45,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import MovieTable from "layouts/tables/Movie";
+import MovieCreate from "layouts/tables/Movie/create";
 import GenreTable from "layouts/tables/Genre";
 import ActressTable from "layouts/tables/Actress";
 import ContactTable from "layouts/tables/Contact";
@@ -55,6 +56,8 @@ import GenreCreate from "layouts/tables/Genre/create";
 import GenreUpdate from "layouts/tables/Genre/update";
 import QualityUpdate from "layouts/tables/Quality/update";
 import QualityCreate from "layouts/tables/Quality/create";
+import MovieUpdate from "layouts/tables/Movie/update";
+import ActressCreate from "layouts/tables/Actress/create";
 
 const routes = [
   {
@@ -175,6 +178,24 @@ const routes = [
     key: "qualityUpdate",
     route: "/quality/update/:qualityId",
     component: <QualityUpdate />,
+  },
+  {
+    name: "movieCreate",
+    key: "movieCreate",
+    route: "/movie/create",
+    component: <MovieCreate />,
+  },
+  {
+    name: "movieUpdate",
+    key: "movieUpdate",
+    route: "/movie/update",
+    component: <MovieUpdate />,
+  },
+  {
+    name: "actressCreate",
+    key: "actressCreate",
+    route: "/actress/create",
+    component: <ActressCreate />,
   },
 ];
 

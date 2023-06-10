@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using ServiceLayer.DTOs.Account;
-using ServiceLayer.DTOs.ActressDto;
 using ServiceLayer.DTOs.Comment;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.DTOs.Faq;
@@ -11,7 +10,6 @@ using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.DTOs.PricingPlans;
 using ServiceLayer.DTOs.PropertyDto;
 using ServiceLayer.DTOs.QualityDto;
-using ServiceLayer.DTOs.SerieDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,12 +39,6 @@ namespace ServiceLayer.Mappings
             CreateMap<Movie, MoviePageDto>();
             CreateMap<Movie, MovieFilterDto>();
             CreateMap<MovieUpdateDto, Movie>();
-            CreateMap<ActressCreateDto, Actress>();
-            CreateMap<Actress, ActressListDto>();
-            CreateMap<ActressUpdateDto, Actress>();
-            CreateMap<SerieCreateDto, Serie>();
-            CreateMap<Serie, SerieListDto>();
-            CreateMap<SerieUpdateDto, Serie>();
             CreateMap<GenreCreateDto, Genre>();
             CreateMap<Genre, GenreListDto>();
             CreateMap<GenreUpdateDto, Genre>();
