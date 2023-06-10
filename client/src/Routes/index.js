@@ -6,7 +6,6 @@ import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import MovieDetail from "../Components/MovieDetail";
 import Catalog from "../Pages/Catalog";
-import About from "../Pages/About";
 import Pricing from "../Pages/Pricings";
 import Help from "../Pages/Help";
 import { MoiveProvider } from "../Contexts/movieContext";
@@ -20,9 +19,11 @@ function Routs() {
         <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
         <Route path={ROUTER.Catalog.PATH.toString()} element={<Catalog />} />
         <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />
-        <Route path={ROUTER.About.PATH.toString()} element={<About />} />
         <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />/
-        <Route path={ROUTER.MovieDetail.PATH.toString()} element={<MovieDetail />} />
+        <Route
+          path={ROUTER.MovieDetail.PATH.toString()}
+          element={<MovieDetail />}
+        />
       </Routes>
     </MoiveProvider>
   );

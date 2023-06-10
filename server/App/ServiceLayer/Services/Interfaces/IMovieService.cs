@@ -25,5 +25,7 @@ namespace ServiceLayer.Services.Interfaces
         Task <List<MovieVideoDto>> MovieVideos();
         Task Delete(int id);
         Task SoftDelete(int id);
+
+        Task<Movie> Random();
     }
 }

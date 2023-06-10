@@ -3,13 +3,19 @@ import MovieDetailCard from "../MovieDetailCard";
 import "../MovieDetail/index.scss";
 import ExpectedCard from "../ExpectedCard";
 import { MovieContext } from "../../Contexts/movieContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { movieService } from "../../APIs/Services/MovieService";
 import Comment from "../Comment";
 function MovieDetail() {
+  const navigate = useNavigate();
   const movies = useContext(MovieContext);
   const { movieId } = useParams();
   const [movie, setMovie] = React.useState();
+  const handleNavigate = (newMovieId) => {
+    const currentUrl = window.location.pathname;
+    const baseRoute = currentUrl.split("/movies")[0];
+    navigate(`${baseRoute}/movies/${newMovieId}`);
+  };
   const fetchMovie = async () => {
     const { data } = await movieService.getMovie(movieId);
     setMovie(data);
@@ -66,10 +72,16 @@ function MovieDetail() {
                   {movies
                     ? movies.slice(3, 7).map((movie, idx) => (
                         <div key={idx} className="movie">
-                          <ExpectedCard
-                            name={movie.name}
-                            imageUrl={movie.imageUrl}
-                          />
+                          <li
+                            onClick={() => {
+                              handleNavigate(movie.id);
+                            }}
+                          >
+                            <ExpectedCard
+                              name={movie.name}
+                              imageUrl={movie.imageUrl}
+                            />
+                          </li>
                         </div>
                       ))
                     : ""}

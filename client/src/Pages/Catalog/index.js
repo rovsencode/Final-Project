@@ -24,7 +24,7 @@ function Catalog() {
   const [movies, setMovies] = React.useState([]);
   const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
-    navigate(`/catalog/${movieId}`);
+    navigate(`/movies/${movieId}`);
   };
   const handleReset = () => {
     setSelectedGenre([]);
@@ -129,7 +129,7 @@ function Catalog() {
                 }}
               >
                 {/* section title */}
-                <h2 className="section__title">Catalog</h2>
+                <h2 className="section__title">Movies</h2>
                 {/* end section title */}
                 {/* breadcrumb */}
                 {/* <ul className="breadcrumb">

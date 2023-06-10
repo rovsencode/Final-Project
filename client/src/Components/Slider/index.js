@@ -8,6 +8,7 @@ import "../Slider/index.scss";
 import { movieService } from "../../APIs/Services/MovieService";
 import { SplitButton } from "react-bootstrap";
 import { MovieContext } from "../../Contexts/movieContext";
+import { useNavigate } from "react-router-dom";
 function Slider() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(true);
@@ -18,7 +19,10 @@ function Slider() {
   const handleVideoLoad = () => {
     setIsLoading(false);
   };
-
+  const navigate = useNavigate();
+  const handleNavigate = (movieId) => {
+    navigate(`/movies/${movieId}`);
+  };
   const handleScroll = () => {
     const video = videoRef.current;
     if (video) {
@@ -114,7 +118,11 @@ function Slider() {
           ) : (
             ""
           )}
-          <button className="watch-now-button" onClick={handlePlayPause}>
+
+          <button
+            className="watch-now-button"
+            onClick={() => handleNavigate(randomVideo.id)}
+          >
             Watch Now
           </button>
           {isLoading ? (

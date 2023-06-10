@@ -2,6 +2,7 @@ import React from "react";
 import "./index.scss";
 import { plansService } from "../../APIs/Services/PlansService";
 import background from "../../Pages/Catalog/section.jpg";
+import { Button } from "react-bootstrap";
 export default function Plans() {
   const [plans, setPLans] = React.useState([]);
   React.useState(() => {
@@ -12,6 +13,9 @@ export default function Plans() {
 
     fetchPlans();
   }, []);
+  const alertClick = (planName) => {
+    alert(`siz ${planName} planini secdiz odenisi en qisa zamanda edin`);
+  };
   return (
     <>
       <section
@@ -57,9 +61,14 @@ export default function Plans() {
                       <span>{property.name}</span>
                     </div>
                   ))}
-                  <a href="#" className="price__btn">
+                  <Button
+                    onClick={() => {
+                      alertClick(item.planName);
+                    }}
+                    className="price__btn"
+                  >
                     Choose Plan
-                  </a>
+                  </Button>
                 </div>
               </div>
             ))}

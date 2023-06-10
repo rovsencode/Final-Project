@@ -10,12 +10,12 @@ import ExpectedCard from "../ExpectedCard";
 import "../ExpectedFilms/index.scss";
 import { BeatLoader } from "react-spinners";
 import { MovieContext } from "../../Contexts/movieContext";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function ExpectedFilms() {
+  const navigate = useNavigate();
   const handleMovieClick = (movieId) => {
-    Navigate(`/catalog/movieId=${movieId}`);
+    navigate(`/movies/${movieId}`);
   };
-  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
   const movies = useContext(MovieContext);
   React.useEffect(() => {
@@ -66,8 +66,12 @@ function ExpectedFilms() {
                 style={{ gap: "80px" }}
               >
                 {movies.slice(0, 3).map((movie, idx) => (
-                  <li key={idx} onClick={handleMovieClick}>
-                    {" "}
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      handleMovieClick(movie.id);
+                    }}
+                  >
                     <ExpectedCard
                       key={movie.name}
                       name={movie.name}
@@ -84,14 +88,21 @@ function ExpectedFilms() {
                 className="d-flex justify-content-center"
                 style={{ gap: "80px" }}
               >
-                {movies.slice(3, 6).map((movie) => (
-                  <ExpectedCard
-                    key={movie.name}
-                    name={movie.name}
-                    imageUrl={movie.imageUrl}
-                    genre={movie.genre}
-                    rating={movie.raiting}
-                  />
+                {movies.slice(3, 6).map((movie, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      handleMovieClick(movie.id);
+                    }}
+                  >
+                    <ExpectedCard
+                      key={movie.name}
+                      name={movie.name}
+                      imageUrl={movie.imageUrl}
+                      genre={movie.genre}
+                      rating={movie.raiting}
+                    />
+                  </li>
                 ))}
               </div>
             </Carousel.Item>
@@ -100,14 +111,21 @@ function ExpectedFilms() {
                 className="d-flex justify-content-center"
                 style={{ gap: "80px" }}
               >
-                {movies.slice(6, 9).map((movie) => (
-                  <ExpectedCard
-                    key={movie.name}
-                    name={movie.name}
-                    imageUrl={movie.imageUrl}
-                    genre={movie.genre}
-                    rating={movie.raiting}
-                  />
+                {movies.slice(6, 9).map((movie, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      handleMovieClick(movie.id);
+                    }}
+                  >
+                    <ExpectedCard
+                      key={movie.name}
+                      name={movie.name}
+                      imageUrl={movie.imageUrl}
+                      genre={movie.genre}
+                      rating={movie.raiting}
+                    />
+                  </li>
                 ))}
               </div>
             </Carousel.Item>

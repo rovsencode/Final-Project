@@ -1,4 +1,3 @@
-import { useState } from "react";
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,39 +6,38 @@ import MovieCard from "../MovieCard";
 import { Grid } from "@mui/material";
 import { MovieContext } from "../../Contexts/movieContext";
 import "../NewItems/index.scss";
-const split = {
-  title: "split",
-  description: "psixlosjdkffdasijkldsfjlsjfkjsofkjdofsjajdfsmjmjdsafmm",
-};
-const datas = {
-  newRelases: ["actrees", "films", "series"],
-  series: [split],
-  movies: ["spiderman", "split", "batman"],
-  cartoons: ["tom and jerry", "minions"],
-};
+import { useNavigate, Link } from "react-router-dom";
 export default function ColorTabs() {
+  const navigate = useNavigate();
   const movies = React.useContext(MovieContext);
-  React.useEffect(() => {}, []);
-  const [tab, setTab] = React.useState(null);
+  const [tab, setTab] = React.useState([]);
   const handleClick = (e) => {
-    if (e.target.name === "series") {
+    if (e.target.name === "raiting") {
       console.log("success");
-      console.log(datas.series);
-      // // set(datas.series);
+      setTab(movies.slice(0, 3));
     }
-    if (e.target.name === "movies") {
+    if (e.target.name === "popular") {
       console.log("success");
-      // setMovie(datas.movies);
+      setTab(movies.slice(3, 6));
     }
     if (e.target.name === "newRelases") {
       console.log("success");
-      // // setMovie(datas.newRelases);
+      setTab(movies.slice(6, 9));
     }
   };
+  React.useEffect(() => {
+    if (movies.length) {
+      setTab(movies.slice(6, 9));
+      console.log("Succcess");
+    }
+  }, []);
   const [value, setValue] = React.useState("one");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const handleNavigate = (movieId) => {
+    navigate(`/movies/${movieId}`);
   };
 
   return (
@@ -76,9 +74,9 @@ export default function ColorTabs() {
               fontSize: "1.2rem",
             }}
             value="two"
-            name="movies"
+            name="raiting"
             onClick={handleClick}
-            label="MOVIES"
+            label="The most raiting Films"
           />
           <Tab
             sx={{
@@ -89,28 +87,37 @@ export default function ColorTabs() {
             }}
             className="tab"
             value="three"
-            name="series"
+            name="popular"
             onClick={handleClick}
-            label="TV SERIES"
+            label="Popular Films"
           />
         </Tabs>
       </Box>
       <Grid container spacing={2}>
-        {movies.slice(0,6).map((movie, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <MovieCard
-              key={movie.index}
-              title={movie.name}
-              description={movie.description}
-              imageUrl={movie.imageUrl}
-              action={movie.genre}
-              rating={movie.raiting}
-              ageRestriction={movie.ageRestriction}
-              quality={movie.quality}
-              Year={movie.Year}
-            />
-          </Grid>
-        ))}
+        {tab
+          ? tab.map((movie, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <li
+                  style={{ textDecoration: "none" }}
+                  onClick={() => {
+                    handleNavigate(movie.id);
+                  }}
+                >
+                  <MovieCard
+                    key={movie.index}
+                    title={movie.name}
+                    description={movie.description}
+                    imageUrl={movie.imageUrl}
+                    action={movie.genre}
+                    rating={movie.raiting}
+                    ageRestriction={movie.ageRestriction}
+                    quality={movie.quality}
+                    Year={movie.Year}
+                  />
+                </li>
+              </Grid>
+            ))
+          : ""}
       </Grid>
     </div>
   );

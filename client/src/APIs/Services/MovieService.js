@@ -6,6 +6,9 @@ class MovieService extends HttpClient {
   skip(skip) {
     return this.getSkip("MovieCatalog", skip);
   }
+  random() {
+    return this.get("Random");
+  }
   getMovie(movieId) {
     return this.getByID("GetOne", movieId);
   }

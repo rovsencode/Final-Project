@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import "../Header/index.scss";
 import Icon from "@mdi/react";
-
 import { mdiMagnify } from "@mdi/js";
 import { mdiLogin } from "@mdi/js";
 import { mdiDotsHorizontal } from "@mdi/js";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { movieService } from "../../../APIs/Services/MovieService";
 import { accountService } from "../../../APIs/Services/AccountService";
 import { TokenContext } from "../../../Contexts/tokenContext";
 import ExpectedCard from "../../ExpectedCard";
-
 function Header() {
   const [userName, setUserName] = React.useState("");
   const { token, setToken } = useContext(TokenContext);
@@ -20,7 +18,10 @@ function Header() {
   const [inputValue, setInputValue] = React.useState("");
   const [searchData, setSearchData] = React.useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const handleNavigate = (movieId) => {
+    navigate(`/movies/${movieId}`);
+  };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -84,30 +85,9 @@ function Header() {
                   {/* end dropdown */}
                   {/* dropdown */}
                   <li className="header__nav-item">
-                    <Link
-                      className="dropdown-toggle header__nav-link"
-                      id="dropdownMenuCatalog"
-                      to="/catalog"
-                    >
-                      Catalog
+                    <Link className=" header__nav-link" to="/movies">
+                      Movies
                     </Link>
-                    <ul
-                      className=" header__dropdown-menu"
-                      aria-labelledby="dropdownMenuCatalog"
-                    >
-                      <li>
-                        <a href="catalog1.html">Catalog Grid</a>
-                      </li>
-                      <li>
-                        <a href="catalog2.html">Catalog List</a>
-                      </li>
-                      <li>
-                        <a href="details1.html">Details Movie</a>
-                      </li>
-                      <li>
-                        <a href="details2.html">Details TV Series</a>
-                      </li>
-                    </ul>
                   </li>
                   {/* end dropdown */}
                   <li className="header__nav-item">
@@ -206,13 +186,13 @@ function Header() {
                     </Link>
                   ) : (
                     <div>
-                      <Icon className="icon" path={mdiLogin} size={1} />
                       <Link
                         className="header__sign-in"
                         to="/login"
                         style={{ textDecoration: "none" }}
                       >
-                        <span>sign in</span>
+                        <Icon className="icon" path={mdiLogin} size={1} />
+                        <span> sign in</span>
                       </Link>
                     </div>
                   )}
@@ -244,10 +224,10 @@ function Header() {
                         </li>
                         <li>
                           <Link
-                            to="/catalog"
+                            to="/movies"
                             style={{ textDecoration: "none", color: "white" }}
                           >
-                            Catalog
+                            Movies
                           </Link>
                         </li>
                         <li>
@@ -329,51 +309,38 @@ function Header() {
                   margin: 0,
                 }}
               >
-                {
-                  searchData && inputValue && isActiveSearch ? (
-                    searchData.map((movie) => (
-                      <div style={{ width: "400px" }}>
-                        <li
-                          style={{
-                            width: "50%",
-                            color: "white",
-                            backgroundColor: "#28282d",
-                            fontSize: "16px",
-                          }}
-                        >
-                          <ExpectedCard
-                            name={movie.name}
-                            imageUrl={movie.imageUrl}
-                          />
-                        </li>
-                      </div>
-                    ))
-                  ) : inputValue.length < 2 && inputValue.length > 0 ? (
-                    <li
-                      style={{
-                        color: "white",
-                        backgroundColor: "#28282d",
-                        fontSize: "16px",
-                      }}
-                    >
-                      En azi 2 herf daxil edin
-                    </li>
-                  ) : null
-                  //     (
-                  //   <li
-                  //     className={
-                  //       isActiveSearch && inputValue ? "content" : "d-none"
-                  //     }
-                  //     style={{
-                  //       color: "white",
-                  //       backgroundColor: "#28282d",
-                  //       fontSize: "16px",
-                  //     }}
-                  //   >
-                  //     it is not found film
-                  //   </li>
-                  // )
-                }
+                {searchData && inputValue && isActiveSearch ? (
+                  searchData.map((movie) => (
+                    <div style={{ width: "400px" }}>
+                      <li
+                        style={{
+                          width: "50%",
+                          color: "white",
+                          backgroundColor: "#28282d",
+                          fontSize: "16px",
+                        }}
+                        onClick={() => {
+                          handleNavigate(movie.id);
+                        }}
+                      >
+                        <ExpectedCard
+                          name={movie.name}
+                          imageUrl={movie.imageUrl}
+                        />
+                      </li>
+                    </div>
+                  ))
+                ) : inputValue.length < 2 && inputValue.length > 0 ? (
+                  <li
+                    style={{
+                      color: "white",
+                      backgroundColor: "#28282d",
+                      fontSize: "16px",
+                    }}
+                  >
+                    En azi 2 herf daxil edin
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>

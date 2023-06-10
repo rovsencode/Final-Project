@@ -7,10 +7,7 @@ export const ROUTER = {
     PATH: "/register",
   },
   Catalog: {
-    PATH: "/catalog",
-  },
-  About: {
-    PATH: "/about",
+    PATH: "/movies",
   },
   Pricing: {
     PATH: "/plans",
@@ -19,7 +16,7 @@ export const ROUTER = {
     PATH: "/help",
   },
   MovieDetail: {
-    PATH: "/catalog/:movieId",
+    PATH: "/movies/:movieId",
   },
   Admin: {
     PATH: "/admin",

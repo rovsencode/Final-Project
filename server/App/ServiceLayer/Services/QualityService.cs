@@ -41,7 +41,7 @@ namespace ServiceLayer.Services
             }
             var mappedData= _mapper.Map<Quality>(quality);
            await _repo.Create(mappedData);
-            return new ApiResponse { StatusCode = 200 };
+            return new ApiResponse { StatusCode = 200 ,Errors=null};
         }
 
         public async Task Delete(int id)
@@ -86,7 +86,7 @@ namespace ServiceLayer.Services
             var mappedData = _mapper.Map(quality, dbQuality);
             mappedData.Id = id;
             await _repo.Update(dbQuality);
-            return new ApiResponse { StatusCode = StatusCodes.Status200OK };
+            return new ApiResponse { StatusCode = StatusCodes.Status200OK,Errors=null };
         }
     }
 }

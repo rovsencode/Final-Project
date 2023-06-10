@@ -73,6 +73,11 @@ namespace App.Controllers
         {
             return Ok(await  _movieService.MovieVideos());
         }
+        [HttpGet]
+        public async Task<IActionResult> Random()
+        {
+            return Ok(await _movieService.Random());
+        }
 
 
 

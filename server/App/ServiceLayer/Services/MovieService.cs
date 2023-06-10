@@ -249,5 +249,16 @@ namespace ServiceLayer.Services
            
             return moviePage;
         }
+        public async Task<Movie> Random()
+        {
+            List<Movie> movies =await _repo.GetAll();
+            int randomNum = GenerateRandomNumber(1, movies.Count);
+             return movies[randomNum];
+        }
+        public static int GenerateRandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max + 1);
+        }
     }
 }

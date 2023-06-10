@@ -7,9 +7,9 @@ import MovieForm from "../../Components/MovieForm";
 function Help() {
   return (
     <>
-      {/* <Faq />
+      <Faq />
+      {/* <MovieForm />
       <Comment /> */}
-      <MovieForm />
     </>
   );
 }
