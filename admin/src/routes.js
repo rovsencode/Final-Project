@@ -118,14 +118,6 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Actress",
-    key: "actress",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/actress",
-    component: <ActressTable />,
-  },
-  {
-    type: "collapse",
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
@@ -190,12 +182,6 @@ const routes = [
     key: "movieUpdate",
     route: "/movie/update",
     component: <MovieUpdate />,
-  },
-  {
-    name: "actressCreate",
-    key: "actressCreate",
-    route: "/actress/create",
-    component: <ActressCreate />,
   },
 ];
 
