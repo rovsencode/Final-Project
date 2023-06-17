@@ -19,12 +19,12 @@ namespace App.Controllers
             _contactService = contactService;
         }
 
-        [Authorize(Roles ="Admin")]
+       
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] ContactCreateDto contact)
+        public async Task<IActionResult> Create([FromBody] ContactCreateDto contact)
         {
-            await _contactService.Create(contact);
-            return Ok();
+        
+            return Ok(await _contactService.Create(contact));
         }
         [HttpGet]
         public async Task<IActionResult> GetAll()

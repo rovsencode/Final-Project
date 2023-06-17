@@ -289,7 +289,6 @@ function Catalog() {
           ))}
         </Grid>
       </div>
-      <Button onClick={handleMovieClick}>click</Button>
 
       <div className="text-center" style={{ marginLeft: "500px" }}>
         <Pagination

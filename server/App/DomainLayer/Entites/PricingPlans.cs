@@ -11,6 +11,7 @@ namespace DomainLayer.Entites
     {
         public string PlanName { get; set; }
         public List<Property> Properties { get; set; }
+        public List<AppUser> Users { get; set; }
         public double Price { get; set; }
     }
 }

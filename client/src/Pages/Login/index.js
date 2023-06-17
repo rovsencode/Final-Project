@@ -3,10 +3,8 @@ import { Formik, Form, Field } from "formik";
 import "../Login/index.scss";
 import { TokenContext } from "../../Contexts/tokenContext";
 import { accountService } from "../../APIs/Services/AccountService";
-import Header from "../../Components/Layout/Header";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Register from "../Register";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,7 +18,7 @@ function Login() {
   const handleSubmit = async (values) => {
     const { data } = await accountService.signIn(values);
     console.log(data);
-    if (data != undefined) {
+    if (data !== undefined) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userName", data.userName);
       const token = localStorage.getItem("token");
@@ -78,7 +76,7 @@ function Login() {
                       <Link to={"/register"}>Sign up!</Link>
                     </span>
                     <span className="sign__text">
-                      <a href="#">Forgot password?</a>
+                      <Link to="/forgetPassword">Forgot password?</Link>
                     </span>
                   </Form>
                 </Formik>

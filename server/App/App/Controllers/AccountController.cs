@@ -37,13 +37,13 @@ namespace App.Controllers
             return await _accountService.Register(user,request);
         }
 
-        [HttpPost(Name = "ResetPassword")]
-        public async Task<ApiResponse> ResetPassword(string userId,string token, string password)
+        [HttpPost]
+        public async Task<ApiResponse> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
         {
-            return await _accountService.ResetPassword(userId,token,password);
 
-
-
+          
+          return  await _accountService.ResetPassword(resetPasswordDto);
+           
         }
         [HttpPost]
         public async Task<ApiResponse> ForgetPassword(ForgetPasswordDto forgetPassword)

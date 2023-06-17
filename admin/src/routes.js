@@ -47,7 +47,6 @@ import Icon from "@mui/material/Icon";
 import MovieTable from "layouts/tables/Movie";
 import MovieCreate from "layouts/tables/Movie/create";
 import GenreTable from "layouts/tables/Genre";
-import ActressTable from "layouts/tables/Actress";
 import ContactTable from "layouts/tables/Contact";
 import QualityTable from "layouts/tables/Quality";
 import PlanTable from "layouts/tables/Plans";
@@ -57,7 +56,9 @@ import GenreUpdate from "layouts/tables/Genre/update";
 import QualityUpdate from "layouts/tables/Quality/update";
 import QualityCreate from "layouts/tables/Quality/create";
 import MovieUpdate from "layouts/tables/Movie/update";
-import ActressCreate from "layouts/tables/Actress/create";
+import ContactCreate from "layouts/tables/Contact/create";
+import PlanCreate from "layouts/tables/Plans/create";
+import PropertyCreate from "layouts/tables/Property/create";
 
 const routes = [
   {
@@ -92,6 +93,7 @@ const routes = [
     route: "/contact",
     component: <ContactTable />,
   },
+
   {
     type: "collapse",
     name: "Property",
@@ -116,38 +118,20 @@ const routes = [
     route: "/quality",
     component: <QualityTable />,
   },
-  {
-    type: "collapse",
-    name: "Billing",
-    key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
-    component: <Billing />,
-  },
-  {
-    type: "collapse",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
-    component: <Notifications />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Billing",
+  //   key: "billing",
+  //   icon: <Icon fontSize="small">receipt_long</Icon>,
+  //   route: "/billing",
+  //   component: <Billing />,
+  // },
 
   {
-    type: "collapse",
     name: "Sign In",
     key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
   {
     route: "/genre/create",
@@ -182,6 +166,24 @@ const routes = [
     key: "movieUpdate",
     route: "/movie/update",
     component: <MovieUpdate />,
+  },
+  {
+    name: "contactCreate",
+    key: "contactCreate",
+    route: "/contact/create",
+    component: <ContactCreate />,
+  },
+  {
+    name: "PlanCreate",
+    key: "PlanCreate",
+    route: "/plan/create",
+    component: <PlanCreate />,
+  },
+  {
+    name: "PropertyCreate",
+    key: "PropertyCreate",
+    route: "/property/create",
+    component: <PropertyCreate />,
   },
 ];
 

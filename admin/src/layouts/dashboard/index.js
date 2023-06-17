@@ -16,7 +16,7 @@ function Dashboard() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox py={3}></MDBox>
+      <MDBox py={3}>Welcome to Admin</MDBox>
     </DashboardLayout>
   );
 }

@@ -7,11 +7,11 @@ class CommentService extends HttpClient {
   addComment(comment) {
     return this.post("Create", comment);
   }
-  getComments() {
-    return this.get("GetAll");
+  getComments(movieId) {
+    return this.getByID("GetAll", movieId);
   }
   deleteComment(id) {
-    return this.delete("Delete",id)
+    return this.delete("Delete", id);
   }
 }
 export const commentService = new CommentService();

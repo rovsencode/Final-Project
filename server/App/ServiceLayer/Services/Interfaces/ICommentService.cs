@@ -13,6 +13,6 @@ namespace ServiceLayer.Services.Interfaces
     {
         public Task<ApiResponse> Add(CommentCreateDto commentCreateDto);
         public Task<ApiResponse> Delete(int CommentId);
-        public Task<List<CommentListDto>> GetComments();
+        public Task<List<CommentListDto>> GetComments(int movieId);
     }
 }

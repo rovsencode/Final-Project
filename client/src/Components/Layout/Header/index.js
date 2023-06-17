@@ -21,6 +21,7 @@ function Header() {
   const navigate = useNavigate();
   const handleNavigate = (movieId) => {
     navigate(`/movies/${movieId}`);
+    window.location.reload();
   };
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -95,12 +96,6 @@ function Header() {
                       Pricing Plans
                     </Link>
                   </li>
-                  <li className="header__nav-item">
-                    <Link className="header__nav-link" to="/help">
-                      {" "}
-                      Help
-                    </Link>
-                  </li>
                   {userName != null ? (
                     <li className="header__nav-item">
                       <Link className="header__nav-link">{userName}</Link>
@@ -140,8 +135,8 @@ function Header() {
                       aria-labelledby="dropdownMenuMore"
                     >
                       <li>
-                        <Link style={{ textDecoration: "none" }} to="/about">
-                          About{" "}
+                        <Link style={{ textDecoration: "none" }} to="/help">
+                          Help
                         </Link>
                       </li>
                       {userName ? (

@@ -12,13 +12,16 @@ export const ROUTER = {
   Pricing: {
     PATH: "/plans",
   },
-  Help: {
-    PATH: "/help",
+  CheckOut: {
+    PATH: "/checkout/:id",
+  },
+  ForgetPassword: {
+    PATH: "/forgetPassword",
+  },
+  ResetPassword: {
+    PATH: "/resetPassword",
   },
   MovieDetail: {
     PATH: "/movies/:movieId",
-  },
-  Admin: {
-    PATH: "/admin",
   },
 };

@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Entites;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.Contact;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IContactService
     {
-        Task Create(ContactCreateDto contact);
+        Task<ApiResponse> Create(ContactCreateDto contact);
       
         Task<List<ContactListDto>> GetAll();
         Task Delete(int id);

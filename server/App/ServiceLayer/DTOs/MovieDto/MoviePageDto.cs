@@ -17,6 +17,8 @@ namespace ServiceLayer.DTOs.MovieDto
         public string ?Description { get; set; }
         public string ?ImageUrl { get; set; }
         public string? BackgroundImage { get; set; }
+        public bool? LikeActive { get; set; }
+        public bool ?DislikeActive { get; set; }
         public string ?AgeRestriction { get; set; }
         public int? Year { get; set; }
         public double ?Price { get; set; }

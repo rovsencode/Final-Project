@@ -26,10 +26,10 @@ namespace App.Controllers
         {
             return Ok(await _commentService.Delete(commentId));
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAll([FromRoute]int id)
         {
-            return Ok(await _commentService.GetComments());
+            return Ok(await _commentService.GetComments(id));
         }
 
     }

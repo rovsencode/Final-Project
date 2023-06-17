@@ -111,8 +111,11 @@ export default function ColorTabs() {
                     action={movie.genre}
                     rating={movie.raiting}
                     ageRestriction={movie.ageRestriction}
-                    quality={movie.quality}
-                    Year={movie.Year}
+                    Year={movie.year}
+                    quality={movie.qualities[0].name}
+                    releaseYear={movie.year}
+                    likeActive={undefined}
+                    disLikeActive={undefined}
                   />
                 </li>
               </Grid>

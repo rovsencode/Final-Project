@@ -1,3 +1,4 @@
+import { body } from "@mui/material/CssBaseline";
 import { HttpClient } from "../HttpClient";
 class MovieService extends HttpClient {
   constructor() {
@@ -7,10 +8,10 @@ class MovieService extends HttpClient {
     return this.getSkip("MovieCatalog", skip);
   }
   random() {
-    return this.get("Random");
+    return this.get("RandomMovies");
   }
-  getMovie(movieId) {
-    return this.getByID("GetOne", movieId);
+  getOne(body) {
+    return this.getMovie("GetOne", body);
   }
   movieVideo() {
     return this.get("MovieVideo");
@@ -32,6 +33,12 @@ class MovieService extends HttpClient {
   }
   getAll() {
     return this.get("GetAll");
+  }
+  Like(body) {
+    return this.post("Like", body);
+  }
+  DisLike(body) {
+    return this.post("DisLike", body);
   }
 }
 export const movieService = new MovieService();

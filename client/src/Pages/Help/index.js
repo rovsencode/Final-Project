@@ -8,8 +8,8 @@ function Help() {
   return (
     <>
       <Faq />
-      {/* <MovieForm />
-      <Comment /> */}
+      <MovieForm />
+      <Comment />
     </>
   );
 }

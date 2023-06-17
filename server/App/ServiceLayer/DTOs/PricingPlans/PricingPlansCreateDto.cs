@@ -9,7 +9,6 @@ namespace ServiceLayer.DTOs.PricingPlans
     public class PricingPlansCreateDto
     {
         public string PlanName { get; set; }
-        public string Property { get; set; }
         public double Price { get; set; }
     }
 }

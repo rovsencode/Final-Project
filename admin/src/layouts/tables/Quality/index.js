@@ -62,12 +62,6 @@ export default function QualityTable() {
       ),
       action: (
         <MDBox>
-          <Link to={`/quality/update/${quality.id}`}>
-            <IconButton>
-              <EditIcon style={{ color: "gray" }} />
-            </IconButton>
-          </Link>
-
           <IconButton
             onClick={() => {
               deleteQuality(quality.id);

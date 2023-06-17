@@ -11,29 +11,29 @@ import {
   MDBBtn,
   MDBTextArea,
 } from "mdb-react-ui-kit";
+import userImage from "../Comment/user.png";
 import { commentService } from "../../APIs/Services/CommentService";
 import "../Comment/index.scss";
-function Comment() {
+function Comment({ movieId }) {
   const [comments, setComments] = React.useState([]);
   const [message, setMessage] = React.useState("");
-     const fetchComment = async () => {
-       const { data } = await commentService.getComments();
-       setComments(data);
-       console.log(data);
-     };
-    React.useEffect(() => {
-      fetchComment();
-    }, []);
+  const fetchComment = async () => {
+    const { data } = await commentService.getComments(movieId);
+    setComments(data);
+    console.log(data);
+  };
+  React.useEffect(() => {
+    fetchComment();
+  }, []);
   const handleSubmit = async () => {
     const comment = {
       message: message,
-      movieId: 1024,
+      movieId: movieId,
       userName: localStorage.getItem("userName"),
     };
     const { data } = await commentService.addComment(comment);
     if (data.statusCode === 201) {
       fetchComment();
-      
     }
     console.log(data);
   };
@@ -73,7 +73,7 @@ function Comment() {
                       <div className="d-flex flex-start">
                         <MDBCardImage
                           className="rounded-circle shadow-1-strong me-3"
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
+                          src={userImage}
                           alt="avatar"
                           width="60"
                           height="60"
@@ -127,7 +127,7 @@ function Comment() {
                   <div className="d-flex flex-start w-100">
                     <MDBCardImage
                       className="rounded-circle shadow-1-strong me-3"
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                      src={userImage}
                       alt="avatar"
                       width="65"
                       height="65"

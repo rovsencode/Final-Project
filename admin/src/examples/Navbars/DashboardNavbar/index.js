@@ -52,8 +52,10 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
+import React from "react";
 
 function DashboardNavbar({ absolute, light, isMini }) {
+  const [userName, setUserName] = React.useState("");
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
@@ -61,6 +63,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const route = useLocation().pathname.split("/").slice(1);
 
   useEffect(() => {
+    setUserName(localStorage.getItem("userName"));
     // Setting the navbar type
     if (fixedNavbar) {
       setNavbarType("sticky");
@@ -135,15 +138,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </MDBox>
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <MDBox pr={1}>
-              <MDInput label="Search here" />
-            </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
-                <IconButton sx={navbarIconButton} size="small" disableRipple>
-                  <Icon sx={iconsStyle}>account_circle</Icon>
-                </IconButton>
-              </Link>
+              <Link>{userName}</Link>
               <IconButton
                 size="small"
                 disableRipple
@@ -164,18 +160,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
-              <IconButton
-                size="small"
-                disableRipple
-                color="inherit"
-                sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon sx={iconsStyle}>notifications</Icon>
-              </IconButton>
+
               {renderMenu()}
             </MDBox>
           </MDBox>

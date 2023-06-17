@@ -21,7 +21,11 @@ import Card from "@mui/material/Card";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -31,6 +35,10 @@ import React from "react";
 import DataTable from "examples/Tables/DataTable";
 
 export default function ContactTable() {
+  const deleteContact = async (contactId) => {
+    const { data } = await axios.delete(`https://localhost:7152/api/Contact/Delete/${contactId}`);
+    fetchContact();
+  };
   const [contacts, setContacts] = React.useState([]);
   const fetchContact = async () => {
     const { data } = await axios.get("https://localhost:7152/api/Contact/GetAll");
@@ -47,33 +55,32 @@ export default function ContactTable() {
     { Header: "Action", accessor: "action", align: "left" },
   ];
 
-  const rows = contacts.map(({ phoneNumber, mailAccount }) => {
+  const rows = contacts.map((contact) => {
     return {
       email: (
         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          {mailAccount}
+          {contact.mailAccount}
         </MDTypography>
       ),
       phoneNumber: (
         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          {phoneNumber}
+          {contact.phoneNumber}
         </MDTypography>
       ),
       action: (
         <MDBox>
-          <MDTypography
-            style={{ marginRight: "5px" }}
-            component="a"
-            href="#"
-            variant="caption"
-            color="text"
-            fontWeight="medium"
+          <IconButton
+            onClick={() => {
+              deleteContact(contact.id);
+            }}
+            aria-label="delete"
           >
-            Edit
-          </MDTypography>
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Delete
-          </MDTypography>
+            <DeleteIcon
+              style={{
+                color: "rgba(216, 18, 41, 0.71)",
+              }}
+            />
+          </IconButton>
         </MDBox>
       ),
     };
@@ -84,6 +91,22 @@ export default function ContactTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/contact/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
           <Grid item xs={12}>
             <Card>
               <MDBox

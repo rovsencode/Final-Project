@@ -11,6 +11,7 @@ namespace RepositoryLayer.Repostories.Interfaces
     public interface IRepository<T> where T : BaseEntity
     {
         Task<List<T>> GetAll();
+        Task SavaChanges();
         Task<T> Get(int id);
         Task<T> GetAny();
         Task<T> GetLast();

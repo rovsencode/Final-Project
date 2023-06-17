@@ -19,8 +19,9 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-
+import { Link } from "react-router-dom";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -34,6 +35,13 @@ import DataTable from "examples/Tables/DataTable";
 
 export default function PlanTable() {
   const [plans, setPlans] = React.useState([]);
+
+  const deletePlan = async (planId) => {
+    console.log(planId);
+    const { data } = await axios.delete(`https://localhost:7152/api/Plans/Delete/${planId}`);
+    console.log(data);
+    fetchPlan();
+  };
   const fetchPlan = async () => {
     const { data } = await axios.get("https://localhost:7152/api/Plans/GetAll");
     setPlans(data);
@@ -48,16 +56,16 @@ export default function PlanTable() {
     { Header: "Action", accessor: "action", align: "left" },
   ];
 
-  const rows = plans.map(({ planName }) => {
+  const rows = plans.map((pricinPlang) => {
     return {
       plan: (
         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          {planName}
+          {pricinPlang.planName}
         </MDTypography>
       ),
       action: (
         <MDBox>
-          <Link to={`/genre/update/${genre.id}`}>
+          <Link to={`/plan/update/${pricinPlang.id}`}>
             <IconButton>
               <EditIcon style={{ color: "gray" }} />
             </IconButton>
@@ -65,7 +73,7 @@ export default function PlanTable() {
 
           <IconButton
             onClick={() => {
-              deleteGenre(genre.id);
+              deletePlan(pricinPlang.id);
             }}
             aria-label="delete"
           >
@@ -85,6 +93,22 @@ export default function PlanTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/plan/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
           <Grid item xs={12}>
             <Card>
               <MDBox

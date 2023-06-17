@@ -7,7 +7,8 @@ import axios from "axios";
 import MDButton from "components/MDButton";
 import MDSnackbar from "components/MDSnackbar";
 const validationSchema = Yup.object().shape({
-  name: Yup.mixed().required("Name is required"),
+  planName: Yup.mixed().required("plan  is required"),
+  price: Yup.mixed().required("price is required"),
 });
 
 function PlanCreate() {
@@ -32,7 +33,8 @@ function PlanCreate() {
   );
 
   const handleSubmit = async (values) => {
-    const { data } = await axios.post("https://localhost:7152/api/Plan/Create", values);
+    console.log(values);
+    const { data } = await axios.post("https://localhost:7152/api/Plans/Create", values);
     if (data.errors === null) {
       setSuccessSB(true);
       setTimeout(() => {
@@ -56,7 +58,8 @@ function PlanCreate() {
       >
         <Formik
           initialValues={{
-            name: "",
+            planName: "",
+            price: 0,
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -74,22 +77,54 @@ function PlanCreate() {
               >
                 <label
                   style={{ marginRight: "5px", position: "relative", bottom: "20px" }}
-                  htmlFor="name"
+                  htmlFor="planName"
                   className="form-label"
                 >
-                  Name
+                  Plan
                 </label>
                 <Field
                   style={{ width: "300px", position: "relative", bottom: "20px" }}
                   type="text"
-                  name="name"
-                  id="name"
+                  name="planName"
+                  id="planName"
                   className="form-control"
                 />
                 <div style={{ height: "20px" }}>
                   <ErrorMessage
                     component="div"
-                    name="name"
+                    name="planName"
+                    style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
+                  />
+                </div>
+              </div>
+              <div
+                className="form-group"
+                style={{
+                  marginTop: "20px",
+                  width: "400px",
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <label
+                  style={{ marginRight: "5px", position: "relative", bottom: "20px" }}
+                  htmlFor="price"
+                  className="form-label"
+                >
+                  Price
+                </label>
+                <Field
+                  style={{ width: "300px", position: "relative", bottom: "20px" }}
+                  type="number"
+                  name="price"
+                  id="price"
+                  className="form-control"
+                />
+                <div style={{ height: "20px" }}>
+                  <ErrorMessage
+                    component="div"
+                    name="price"
                     style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
                   />
                 </div>

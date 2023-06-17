@@ -3,8 +3,14 @@ import "./index.scss";
 import { plansService } from "../../APIs/Services/PlansService";
 import background from "../../Pages/Catalog/section.jpg";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 export default function Plans() {
+  const navigate = useNavigate();
   const [plans, setPLans] = React.useState([]);
+  const handleNavigate = (id) => {
+    navigate(`/checkout/${id}`);
+  };
+  const selectPlan = localStorage.getItem("plan");
   React.useState(() => {
     const fetchPlans = async () => {
       const { data } = await plansService.getAll();
@@ -13,9 +19,7 @@ export default function Plans() {
 
     fetchPlans();
   }, []);
-  const alertClick = (planName) => {
-    alert(`siz ${planName} planini secdiz odenisi en qisa zamanda edin`);
-  };
+
   return (
     <>
       <section
@@ -61,14 +65,25 @@ export default function Plans() {
                       <span>{property.name}</span>
                     </div>
                   ))}
-                  <Button
-                    onClick={() => {
-                      alertClick(item.planName);
-                    }}
-                    className="price__btn"
-                  >
-                    Choose Plan
-                  </Button>
+                  {selectPlan != undefined && selectPlan == item.id ? (
+                    <Button
+                      onClick={() => {
+                        handleNavigate(item.id);
+                      }}
+                      className="price__btn"
+                    >
+                      SelectedPlan
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        handleNavigate(item.id);
+                      }}
+                      className="price__btn"
+                    >
+                      Choose Plan
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

@@ -24,8 +24,8 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]QualityCreateDto quality)
         {
-            await _qualityService.Create(quality);
-            return Ok();
+        
+            return Ok(await _qualityService.Create(quality));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne([FromRoute]int id)

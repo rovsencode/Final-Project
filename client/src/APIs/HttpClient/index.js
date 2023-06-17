@@ -17,12 +17,15 @@ export class HttpClient {
   async get(endpoint) {
     return await axios.get(`${this.baseUrl}/${endpoint}`);
   }
-  async getByID(endpoint, id) {
-    return await axios.get(`${this.baseUrl}/${endpoint}/${id}`);
+  async getMovie(endpoint, body) {
+    return await axios.post(`${this.baseUrl}/${endpoint}`, body);
   }
 
   async getParams(endpoint, params) {
     return await axios.get(`${this.baseUrl}/${endpoint}/?${params}`);
+  }
+  async getByID(endpoint, id) {
+    return await axios.get(`${this.baseUrl}/${endpoint}/${id}`);
   }
 
   async post(endpoint, body) {

@@ -8,6 +8,7 @@ namespace ServiceLayer.DTOs.PropertyDto
 {
     public class PropertyListDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int PlanId { get; set; }
     }

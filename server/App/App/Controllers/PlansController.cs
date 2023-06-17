@@ -24,8 +24,8 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PricingPlansCreateDto pricingPlans)
         {
-            await _pricingPlansService.Create(pricingPlans);
-            return Ok();
+
+            return Ok(await _pricingPlansService.Create(pricingPlans));
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute]int id)
@@ -34,10 +34,21 @@ namespace App.Controllers
             return Ok();
         }
         [HttpPost("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id,PricingPlansUpdateDto pricingPlans)
+        public async Task<IActionResult> Update([FromRoute] int id,PricingPlansUpdateDto pricingPlans)
         {
             await _pricingPlansService.Update(id,pricingPlans);
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChoosePlan(ChoosePlanDto plan)
+        {
+            return Ok(await _pricingPlansService.ChoosePlan(plan));
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOne([FromRoute] int id)
+        {
+            return Ok(await _pricingPlansService.Get(id));
         }
     }
 }

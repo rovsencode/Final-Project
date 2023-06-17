@@ -8,6 +8,7 @@ import MDButton from "components/MDButton";
 import MDSnackbar from "components/MDSnackbar";
 const validationSchema = Yup.object().shape({
   name: Yup.mixed().required("Name is required"),
+  planId: Yup.mixed().required("Plan is required"),
 });
 
 function PropertyCreate() {
@@ -15,6 +16,15 @@ function PropertyCreate() {
   const handleClick = () => {
     navigate("/property");
   };
+  const [planOptions, setPlanOptions] = React.useState();
+  const fetchPlan = async () => {
+    const { data } = await axios.get("https://localhost:7152/api/Plans/GetAll");
+    setPlanOptions(data);
+    console.log(data);
+  };
+  React.useEffect(() => {
+    fetchPlan();
+  }, []);
 
   const [successSB, setSuccessSB] = React.useState(false);
   const closeSuccessSB = () => setSuccessSB(false);
@@ -57,6 +67,7 @@ function PropertyCreate() {
         <Formik
           initialValues={{
             name: "",
+            planId: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -90,6 +101,42 @@ function PropertyCreate() {
                   <ErrorMessage
                     component="div"
                     name="name"
+                    style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
+                  />
+                </div>
+              </div>
+              <div
+                className="form-group"
+                style={{
+                  width: "400px",
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <label
+                  style={{ marginRight: "5px", position: "relative", bottom: "20px" }}
+                  htmlFor="name"
+                  className="form-label"
+                >
+                  Plan
+                </label>
+                {planOptions ? (
+                  <Field as="select" name="planId" id="planId" className="form-control">
+                    <option value="">Select a plan</option>
+                    {planOptions.map((option) => (
+                      <option key={option.id} value={option.id}>
+                        {option.planName}
+                      </option>
+                    ))}
+                  </Field>
+                ) : (
+                  ""
+                )}
+                <div style={{ height: "20px" }}>
+                  <ErrorMessage
+                    component="div"
+                    name="plan"
                     style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
                   />
                 </div>

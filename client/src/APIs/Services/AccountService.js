@@ -5,6 +5,13 @@ class AccountService extends HttpClient {
     super("https://localhost:7152/api/Account");
   }
 
+  forgetPassword(body) {
+    return this.post("ForgetPassword", body);
+  }
+
+  resetPassword(body) {
+    return this.post("ResetPassword", body);
+  }
   signUp(body) {
     return this.post("Register", body);
   }

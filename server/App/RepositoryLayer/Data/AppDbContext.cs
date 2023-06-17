@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,8 @@ namespace RepositoryLayer.Data
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             base.OnModelCreating(modelBuilder);
+        
+    
         }
     }
 }

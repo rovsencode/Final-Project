@@ -173,42 +173,45 @@ namespace ServiceLayer.Services
                 return new ApiResponse { StatusMessage = "User not found", StatusCode = StatusCodes.Status400BadRequest };
             }
 
-            var resetPasswordRoute = "ResetPassword";
-            var baseUrl = $"{request.Scheme}://{request.Host}";
+            //var resetPasswordRoute = "ResetPassword";
+            var baseUrl = "http://localhost:3000";
+
             var token = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
+
             var userId = await _userManager.GetUserIdAsync(dbUser);
-            var link = $"{baseUrl}/api/Account/{resetPasswordRoute}?userId={userId}&token={token}";
+            var link = $"{baseUrl}/resetPassword?userId={userId}&token={token}";
             await SendEmailConfirmationEmail(dbUser.Email, link);
             return new ApiResponse { StatusMessage = "Password reset email sent", StatusCode = StatusCodes.Status200OK };
         }
 
-        public async Task<ApiResponse> ResetPassword(string userId, string token,string password)
+        public async Task<ApiResponse> ResetPassword(ResetPasswordDto resetPassword)
         {
-            AppUser exsistUser = await _userManager.FindByIdAsync(userId);
+            AppUser exsistUser = await _userManager.FindByIdAsync(resetPassword.UserId);
 
             if (exsistUser == null)
             {
                 return new ApiResponse { StatusCode = StatusCodes.Status404NotFound };
             }
+       
 
             bool checkPassword = await _userManager.VerifyUserTokenAsync(
                 exsistUser,
                 _userManager.Options.Tokens.PasswordResetTokenProvider,
                 "ResetPassword",
-                token);
+                resetPassword.Token);
 
             if (!checkPassword)
             {
                 return new ApiResponse { StatusCode = StatusCodes.Status400BadRequest };
             }
 
-            if (await _userManager.CheckPasswordAsync(exsistUser, password))
+            if (await _userManager.CheckPasswordAsync(exsistUser, resetPassword.Password))
             {
 
                 return new ApiResponse { StatusMessage = "This password is the same as your previous password" };
             }
 
-            var resetPasswordResult = await _userManager.ResetPasswordAsync(exsistUser, token, password);
+            var resetPasswordResult = await _userManager.ResetPasswordAsync(exsistUser, resetPassword.Token, resetPassword.Password);
             if (!resetPasswordResult.Succeeded)
             {
                 return new ApiResponse { StatusCode = StatusCodes.Status500InternalServerError };

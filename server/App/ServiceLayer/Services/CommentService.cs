@@ -58,9 +58,9 @@ namespace ServiceLayer.Services
             return new ApiResponse { StatusCode = StatusCodes.Status200OK };
         }
 
-        public async Task<List<CommentListDto>> GetComments()
+        public async Task<List<CommentListDto>> GetComments(int movieId)
         {
-           var comments=await _repo.GetAll();
+           var comments=await _repo.FindAllByExpression(c=>c.MovieId==movieId);
             List<CommentListDto> commentListDtos = new();
             foreach (var comment in comments)
             {

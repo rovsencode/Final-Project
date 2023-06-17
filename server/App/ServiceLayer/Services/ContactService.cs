@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Entites;
 using RepositoryLayer.Repostories.Interfaces;
+using ServiceLayer.DTOs.Account;
 using ServiceLayer.DTOs.Contact;
 using ServiceLayer.Services.Interfaces;
 using System;
@@ -22,10 +23,11 @@ namespace ServiceLayer.Services
             _mapper = mapper;
         }
 
-        public async Task Create(ContactCreateDto contact)
+        public async Task<ApiResponse> Create(ContactCreateDto contact)
         {
             var mappedData = _mapper.Map<Contact>(contact);
             await _repo.Create(mappedData);
+            return new ApiResponse { Errors = null, StatusCode = 200 };
         }
 
         public async Task Delete(int id)

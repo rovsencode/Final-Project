@@ -3,7 +3,12 @@ import "../MovieDetailCard/index.scss";
 import Icon from "@mdi/react";
 import { mdiStar } from "@mdi/js";
 import Comment from "../Comment";
+import { mdiThumbUpOutline } from "@mdi/js";
+import { mdiThumbDownOutline } from "@mdi/js";
+import { IconButton } from "@mui/material";
+import { movieService } from "../../APIs/Services/MovieService";
 function MovieDetailCard({
+  movieId,
   title,
   poster,
   rating,
@@ -14,8 +19,40 @@ function MovieDetailCard({
   runningTime,
   country,
   description,
+  likeActive,
+  disLikeActive,
   trailer,
 }) {
+  const [like, setLike] = React.useState(likeActive);
+  const [disLike, setDisLike] = React.useState(disLikeActive);
+  const [movieRaiting, setMovieRaiting] = React.useState(
+    Number(rating).toPrecision(2)
+  );
+  const handleLike = async () => {
+    console.log("salam");
+    const userName = localStorage.getItem("userName");
+    const body = {
+      userName: userName,
+      id: movieId,
+    };
+    const { data } = await movieService.Like(body);
+    console.log(data);
+    setLike(data.likeActive);
+    setDisLike(data.disLikeActive);
+    setMovieRaiting(Number(data.raiting).toPrecision(2));
+  };
+  const handleDisLike = async () => {
+    const userName = localStorage.getItem("userName");
+    const body = {
+      userName: userName,
+      id: movieId,
+    };
+    const { data } = await movieService.DisLike(body);
+    console.log(data);
+    setLike(data.likeActive);
+    setDisLike(data.disLikeActive);
+    setMovieRaiting(Number(data.raiting).toPrecision(2));
+  };
   return (
     <>
       <div className="container">
@@ -30,7 +67,7 @@ function MovieDetailCard({
                 <div className="movie-info">
                   <div className="raiting-box ">
                     <Icon path={mdiStar} size={0.9} color="#ff55a5" />
-                    <span className="rating ">{rating}</span>
+                    <span className="rating ">{movieRaiting}</span>
                   </div>
                   <span className="quality">{quality}</span>
                   <span className="age-restriction">{ageRestriction}</span>
@@ -46,6 +83,25 @@ function MovieDetailCard({
                 <p className="description">{description}</p>
               </div>
             </div>
+            {likeActive !== undefined && disLikeActive !== undefined && (
+              <>
+                <IconButton onClick={handleLike}>
+                  <Icon
+                    color={like ? "blue" : "white"}
+                    path={mdiThumbUpOutline}
+                    size={1}
+                  />
+                </IconButton>
+
+                <IconButton onClick={handleDisLike}>
+                  <Icon
+                    color={disLike ? "blue" : "white"}
+                    path={mdiThumbDownOutline}
+                    size={1}
+                  />
+                </IconButton>
+              </>
+            )}
           </div>
           <div className="movie-right">
             <video
@@ -57,7 +113,6 @@ function MovieDetailCard({
           </div>
         </div>
       </div>
-   
     </>
   );
 }

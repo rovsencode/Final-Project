@@ -37,17 +37,20 @@ function Slider() {
     }
   };
 
+  const [randomMovie, setRandomMovie] = React.useState({});
   const [randomVideo, setRandomVideo] = useState({});
 
-  const movies = useContext(MovieContext);
-  const [randomMovie, setRandomMovie] = React.useState({});
-  React.useEffect(() => {
-    console.log("vasvdsasddss");
-    if (movies.length) {
-      const randomIndex = Math.floor(Math.random() * movies.length);
-      setRandomVideo(movies[randomIndex]);
+  const fetchRandomMovie = async () => {
+    const { data } = await movieService.random();
+    setRandomMovie(data);
+    console.log(data);
+    if (data.length) {
+      setRandomVideo(data[0]);
     }
-  }, [movies]);
+  };
+  React.useEffect(() => {
+    fetchRandomMovie();
+  }, []);
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);

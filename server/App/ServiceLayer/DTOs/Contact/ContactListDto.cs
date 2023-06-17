@@ -8,6 +8,7 @@ namespace ServiceLayer.DTOs.Contact
 {
     public class ContactListDto
     {
+        public int Id { get; set; }
         public string PhoneNumber { get; set; }
         public string MailAccount { get; set; }
         public DateTime CreatedTime { get; set; }

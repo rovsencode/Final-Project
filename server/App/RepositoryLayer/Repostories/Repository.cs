@@ -28,6 +28,10 @@ namespace RepositoryLayer.Repostories
         {
             return _appDbContext.Set<T>();
         }
+        public async Task SavaChanges()
+        {
+          await  _appDbContext.SaveChangesAsync();
+        }
         public  async Task Create(T entity)
         {
             if (entity == null) throw new ArgumentNullException();
@@ -53,7 +57,7 @@ namespace RepositoryLayer.Repostories
 
         public async Task<List<T>> FindAllByExpression(Expression<Func<T, bool>> expression)
         {
-            return await _entites.Where(expression).ToListAsync();
+            return await _entites.Where(expression).Where(e=>!e.isDeleted).ToListAsync();
         }
 
         public async Task<T> Get(int id)

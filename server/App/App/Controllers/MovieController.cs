@@ -8,6 +8,7 @@ using ServiceLayer.DTOs.GenreDto;
 using ServiceLayer.DTOs.MovieDto;
 using ServiceLayer.Services.Interfaces;
 using Google.Apis.Auth.OAuth2;
+using ServiceLayer.DTOs.Account;
 
 namespace App.Controllers
 {
@@ -16,18 +17,33 @@ namespace App.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
- 
+
 
         public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] MovieCreateDto movie)
+        public async Task<IActionResult> Create([FromForm] MovieCreateDto movie)
         {
             if (movie == null) return NotFound();
-            await _movieService.Create(movie);
-            return Ok();
+
+            return Ok(await _movieService.Create(movie));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Like([FromBody]MovieRaitingDto movieRaitingDto)
+        {
+            return Ok(await _movieService.Like(movieRaitingDto));  
+        }
+        [HttpPost]
+        public async Task<IActionResult> DisLike([FromBody] MovieRaitingDto movieRaitingDto)
+        {
+            return Ok(await _movieService.DisLike(movieRaitingDto));
+        }
+        [HttpGet]
+        public async Task<IActionResult> RandomMovies()
+        {
+            return Ok(await _movieService.Random());
         }
         [HttpGet]
         public async Task<IActionResult> GetAll(int skip)
@@ -52,10 +68,10 @@ namespace App.Controllers
         {
             return Ok(await _movieService.Search(search));
         }
-        [HttpGet("{movieId}")]
-        public async Task<IActionResult> GetOne([FromRoute]int movieId)
+        [HttpPost]
+        public async Task<IActionResult> GetOne([FromBody] MovieGetOneDto movieGetOneDto)
         {
-            return Ok(await _movieService.Get(movieId));
+            return Ok(await _movieService.Get(movieGetOneDto));
         }
 
         [HttpGet]

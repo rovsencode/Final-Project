@@ -15,9 +15,16 @@ function MovieDetail() {
     const currentUrl = window.location.pathname;
     const baseRoute = currentUrl.split("/movies")[0];
     navigate(`${baseRoute}/movies/${newMovieId}`);
+    window.location.reload();
   };
+
   const fetchMovie = async () => {
-    const { data } = await movieService.getMovie(movieId);
+    const userName = localStorage.getItem("userName");
+    const body = {
+      movieId: movieId,
+      userName: userName,
+    };
+    const { data } = await movieService.getOne(body);
     setMovie(data);
     console.log(data);
   };
@@ -30,15 +37,18 @@ function MovieDetail() {
         {movie ? (
           <MovieDetailCard
             key={movie.id}
+            movieId={movie.id}
             title={movie.name}
             poster={movie.imageUrl}
             rating={movie.raiting}
-            quality={movie.qualities[0].name}
             ageRestriction={movie.ageRestriction}
             genres={movie.genre}
+            quality={movie.qualities[0].name}
             releaseYear={movie.year}
             runningTime="120"
             country="USA"
+            likeActive={movie.likeActive}
+            disLikeActive={movie.dislikeActive}
             description={movie.description}
             trailer={movie.videoUrl}
           />
@@ -54,18 +64,7 @@ function MovieDetail() {
             </div>
             <div className="col-12 video-section ">
               <div className="movie-video" style={{ width: "80%" }}>
-                {movie ? (
-                  <iframe
-                    width="900px"
-                    height="500px"
-                    src="https://www.youtube.com/embed/z_iyiHdRL6A"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                  ></iframe>
-                ) : (
-                  ""
-                )}
+                <Comment movieId={movieId} />
               </div>
               <div className="aside">
                 <div className="aside-movies">
@@ -91,7 +90,6 @@ function MovieDetail() {
           </div>
         </div>
       </div>
-      <Comment />
     </section>
   );
 }

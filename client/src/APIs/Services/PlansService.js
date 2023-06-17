@@ -16,6 +16,9 @@ class PlansService extends HttpClient {
   editPost(id, body) {
     return this.put("posts", body, id);
   }
+  getId(id) {
+    return this.getByID("GetOne", id);
+  }
 }
 
 export const plansService = new PlansService();

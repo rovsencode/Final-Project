@@ -18,6 +18,8 @@ import { useState, useEffect, useMemo } from "react";
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
+import SignIn from "layouts/authentication/sign-in";
+
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -166,6 +168,7 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
+          <Route exact element={<Navigate to="/authentication/sign-in" />} />
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
@@ -191,7 +194,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route exact path="*" element={<Navigate to="/authentication/sign-in" />} />
+        {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
       </Routes>
     </ThemeProvider>
   );

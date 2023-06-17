@@ -7,7 +7,8 @@ import axios from "axios";
 import MDButton from "components/MDButton";
 import MDSnackbar from "components/MDSnackbar";
 const validationSchema = Yup.object().shape({
-  name: Yup.mixed().required("Name is required"),
+  mailAccount: Yup.mixed().required("Email is required"),
+  phoneNumber: Yup.mixed().required("phone number is required"),
 });
 
 function ContactCreate() {
@@ -32,6 +33,7 @@ function ContactCreate() {
   );
 
   const handleSubmit = async (values) => {
+    console.log(values);
     const { data } = await axios.post("https://localhost:7152/api/Contact/Create", values);
     if (data.errors === null) {
       setSuccessSB(true);
@@ -56,7 +58,8 @@ function ContactCreate() {
       >
         <Formik
           initialValues={{
-            name: "",
+            mailAccount: "",
+            phoneNumber: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -74,22 +77,54 @@ function ContactCreate() {
               >
                 <label
                   style={{ marginRight: "5px", position: "relative", bottom: "20px" }}
-                  htmlFor="name"
+                  htmlFor="mailAccount"
                   className="form-label"
                 >
-                  Name
+                  Email
                 </label>
                 <Field
                   style={{ width: "300px", position: "relative", bottom: "20px" }}
                   type="text"
-                  name="name"
-                  id="name"
+                  name="mailAccount"
+                  id="mailAccount"
                   className="form-control"
                 />
                 <div style={{ height: "20px" }}>
                   <ErrorMessage
                     component="div"
-                    name="name"
+                    name="email"
+                    style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
+                  />
+                </div>
+              </div>
+              <div
+                className="form-group"
+                style={{
+                  marginTop: "20px",
+                  width: "400px",
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <label
+                  style={{ marginRight: "5px", position: "relative", bottom: "20px" }}
+                  htmlFor="phoneNumber"
+                  className="form-label"
+                >
+                  Phone
+                </label>
+                <Field
+                  style={{ width: "300px", position: "relative", bottom: "20px" }}
+                  type="text"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  className="form-control"
+                />
+                <div style={{ height: "20px" }}>
+                  <ErrorMessage
+                    component="div"
+                    name="phoneNumber"
                     style={{ color: "red", fontSize: "14px", marginTop: "-10px" }}
                   />
                 </div>

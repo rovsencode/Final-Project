@@ -25,8 +25,8 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PropertyCreateDto property)
         {
-            await _propertyService.Create(property);
-            return Ok();
+      
+            return Ok(await _propertyService.Create(property));
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -35,7 +35,7 @@ namespace App.Controllers
             return Ok();
         }
         [HttpPost("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id, PropertyUpdateDto property)
+        public async Task<IActionResult> Update([FromRoute] int id, PropertyUpdateDto property)
         {
             await _propertyService.Update(id, property);
             return Ok();

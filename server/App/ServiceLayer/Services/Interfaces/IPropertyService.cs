@@ -1,4 +1,5 @@
-﻿using ServiceLayer.DTOs.PricingPlans;
+﻿using ServiceLayer.DTOs.Account;
+using ServiceLayer.DTOs.PricingPlans;
 using ServiceLayer.DTOs.PropertyDto;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace ServiceLayer.Services.Interfaces
 {
     public interface IPropertyService
     {
-        Task Create(PropertyCreateDto property);
+        Task<ApiResponse> Create(PropertyCreateDto property);
         Task Update(int id, PropertyUpdateDto property);
         Task<List<PropertyListDto>> GetAll();
         Task Delete(int id);

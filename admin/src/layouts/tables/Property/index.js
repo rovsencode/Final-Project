@@ -17,6 +17,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
@@ -26,6 +27,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
+import { Button } from "@mui/material";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import axios from "axios";
@@ -39,6 +41,11 @@ export default function PropertyTable() {
     setProperty(data);
     console.log(data);
   };
+  const deleteProperty = async (propertyId) => {
+    const { data } = await axios.delete(`https://localhost:7152/api/Property/Delete/${propertyId}`);
+    console.log(data);
+    fetchProperty();
+  };
   React.useEffect(() => {
     fetchProperty();
   }, []);
@@ -48,24 +55,18 @@ export default function PropertyTable() {
     { Header: "Action", accessor: "action", align: "left" },
   ];
 
-  const rows = propertys.map(({ name }) => {
+  const rows = propertys.map((property) => {
     return {
       property: (
         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          {name}
+          {property.name}
         </MDTypography>
       ),
       action: (
         <MDBox>
-          <Link to={`/genre/update/${genre.id}`}>
-            <IconButton>
-              <EditIcon style={{ color: "gray" }} />
-            </IconButton>
-          </Link>
-
           <IconButton
             onClick={() => {
-              deleteGenre(genre.id);
+              deleteProperty(property.id);
             }}
             aria-label="delete"
           >
@@ -85,6 +86,22 @@ export default function PropertyTable() {
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
+          <Link to="/property/create">
+            <Button
+              style={{
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                width: "100px",
+                marginLeft: "70px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Button>
+          </Link>
           <Grid item xs={12}>
             <Card>
               <MDBox

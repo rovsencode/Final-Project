@@ -45,6 +45,10 @@ export default function MovieTable() {
       </MDBox>
     </MDBox>
   );
+  const deleteMovie = async (movieId) => {
+    await axios.delete(`https://localhost:7152/api/Movie/Delete/${movieId}`);
+    fetchMovie();
+  };
   const [movies, setMovies] = React.useState([]);
   const fetchMovie = async () => {
     const { data } = await axios.get("https://localhost:7152/api/Movie/GetAll");
@@ -83,15 +87,9 @@ export default function MovieTable() {
       ),
       action: (
         <MDBox>
-          <Link to={`/movie/update/${movie.id}`}>
-            <IconButton>
-              <EditIcon style={{ color: "gray" }} />
-            </IconButton>
-          </Link>
-
           <IconButton
             onClick={() => {
-              deleteGenre(movie.id);
+              deleteMovie(movie.id);
             }}
             aria-label="delete"
           >

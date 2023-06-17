@@ -6,7 +6,7 @@ class GenreService extends HttpClient {
   }
 
   getAll() {
-    return this.get("GetDatas");
+    return this.get("GetAll");
   }
 
   postNewPost(body) {
