@@ -89,3 +89,17 @@ C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Co
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Apis.Storage.v1.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Google.Cloud.Storage.V1.dll
 C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Azure.Security.KeyVault.Certificates.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.Certificate.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.Certificateless.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.TokenCache.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.UI.Views.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.Identity.Web.UI.dll
+C:\Users\HP\Desktop\Final Project\server\App\App\bin\Debug\net6.0\Microsoft.IdentityModel.Validators.dll

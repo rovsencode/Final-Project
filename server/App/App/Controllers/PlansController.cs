@@ -16,6 +16,7 @@ namespace App.Controllers
             _pricingPlansService = pricingPlansService;
         }
         [HttpGet]
+        [Route("/")]
         public async Task<IActionResult> GetAll()
         {
 
