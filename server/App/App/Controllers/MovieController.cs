@@ -19,7 +19,7 @@ namespace App.Controllers
         private readonly IMovieService _movieService;
         private static readonly string[] Summaries = new[]
      {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing", "Bracing", "Chilly", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
         public MovieController(IMovieService movieService)
