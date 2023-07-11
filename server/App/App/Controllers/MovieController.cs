@@ -17,10 +17,7 @@ namespace App.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
-        private static readonly string[] Summaries = new[]
-     {
-        "Freezing", "Bracing", "Chilly", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+
 
         public MovieController(IMovieService movieService)
         {
@@ -48,29 +45,10 @@ namespace App.Controllers
         {
             return Ok(await _movieService.Random());
         }
-        public class WeatherForecast
-        {
-            public DateTime Date { get; set; }
-
-            public int TemperatureC { get; set; }
-
-            public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-            public string? Summary { get; set; }
-
-        }
         [HttpGet]
-        public  IEnumerable<WeatherForecast> GetAll()
+        public async Task<IActionResult> GetAll(int skip)
         {
-          
-            //return Ok(await _movieService.GetAll());
-            return  Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-            })
-         .ToArray();
-
+            return Ok(await _movieService.GetAll());
         }
         [HttpGet("{skip}")]
         public async Task<IActionResult> MovieCatalog([FromRoute]int skip)
@@ -104,7 +82,7 @@ namespace App.Controllers
             return Ok(response);
         }
         [HttpGet]
-        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto movieFilter)
+        public async Task<IActionResult> FilterPage([FromQuery] MovieFilterDto? movieFilter)
         {
             int skip = 1;
 

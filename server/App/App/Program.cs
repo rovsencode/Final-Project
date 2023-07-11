@@ -11,8 +11,6 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Identity.Web;
 
 namespace App
 {
@@ -29,8 +27,6 @@ namespace App
                 options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
