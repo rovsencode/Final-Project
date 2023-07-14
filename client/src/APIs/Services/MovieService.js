@@ -2,7 +2,7 @@ import { body } from "@mui/material/CssBaseline";
 import { HttpClient } from "../HttpClient";
 class MovieService extends HttpClient {
   constructor() {
-    super("https://localhost:7152/api/Movie");
+    super("http://flixgo-001-site1.ctempurl.com/api/Movie");
   }
   skip(skip) {
     return this.getSkip("MovieCatalog", skip);

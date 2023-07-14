@@ -38,12 +38,14 @@ export default function PlanTable() {
 
   const deletePlan = async (planId) => {
     console.log(planId);
-    const { data } = await axios.delete(`https://localhost:7152/api/Plans/Delete/${planId}`);
+    const { data } = await axios.delete(
+      `http://flixgo-001-site1.ctempurl.com/api/Plans/Delete/${planId}`
+    );
     console.log(data);
     fetchPlan();
   };
   const fetchPlan = async () => {
-    const { data } = await axios.get("https://localhost:7152/api/Plans/GetAll");
+    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Plans/GetAll");
     setPlans(data);
     console.log(data);
   };

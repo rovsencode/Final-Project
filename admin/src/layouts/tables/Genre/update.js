@@ -19,7 +19,9 @@ function GenreUpdate() {
   };
 
   const getGenre = async () => {
-    const { data } = await axios.get(`https://localhost:7152/api/Genre/Get/${genreId}`);
+    const { data } = await axios.get(
+      `http://flixgo-001-site1.ctempurl.com/api/Genre/Get/${genreId}`
+    );
     setGenre(data);
     console.log(data);
   };
@@ -45,7 +47,10 @@ function GenreUpdate() {
   const handleSubmit = async (values) => {
     console.log("isleyir");
     console.log(values);
-    const { data } = await axios.post(`https://localhost:7152/api/Genre/Update/${genreId}`, values);
+    const { data } = await axios.post(
+      `http://flixgo-001-site1.ctempurl.com/api/Genre/Update/${genreId}`,
+      values
+    );
     if (data.errors === null) {
       setSuccessSB(true);
       console.log("succcess");

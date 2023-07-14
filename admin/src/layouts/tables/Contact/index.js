@@ -36,12 +36,14 @@ import DataTable from "examples/Tables/DataTable";
 
 export default function ContactTable() {
   const deleteContact = async (contactId) => {
-    const { data } = await axios.delete(`https://localhost:7152/api/Contact/Delete/${contactId}`);
+    const { data } = await axios.delete(
+      `http://flixgo-001-site1.ctempurl.com/api/Contact/Delete/${contactId}`
+    );
     fetchContact();
   };
   const [contacts, setContacts] = React.useState([]);
   const fetchContact = async () => {
-    const { data } = await axios.get("https://localhost:7152/api/Contact/GetAll");
+    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Contact/GetAll");
     setContacts(data);
     console.log(data);
   };

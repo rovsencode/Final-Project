@@ -1,7 +1,7 @@
 import { HttpClient } from "../HttpClient";
 class CommentService extends HttpClient {
   constructor() {
-    super("https://localhost:7152/api/Comment");
+    super("http://flixgo-001-site1.ctempurl.com/api/Comment");
   }
 
   addComment(comment) {

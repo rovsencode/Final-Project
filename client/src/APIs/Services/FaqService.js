@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class FaqService extends HttpClient {
   constructor() {
-    super("https://localhost:7152/api/Faq");
+    super("http://flixgo-001-site1.ctempurl.com/api/Faq");
   }
   getAll() {
     return this.get("GetAll");

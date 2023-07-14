@@ -34,7 +34,10 @@ function ContactCreate() {
 
   const handleSubmit = async (values) => {
     console.log(values);
-    const { data } = await axios.post("https://localhost:7152/api/Contact/Create", values);
+    const { data } = await axios.post(
+      "http://flixgo-001-site1.ctempurl.com/api/Contact/Create",
+      values
+    );
     if (data.errors === null) {
       setSuccessSB(true);
       setTimeout(() => {

@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class PlansService extends HttpClient {
   constructor() {
-    super("https://localhost:7152/api/Plans");
+    super("http://flixgo-001-site1.ctempurl.com/api/Plans");
   }
 
   getAll() {

@@ -19,7 +19,9 @@ function MovieUpdate() {
   };
 
   const getMovie = async () => {
-    const { data } = await axios.get(`https://localhost:7152/api/Movie/Get/${movieId}`);
+    const { data } = await axios.get(
+      `http://flixgo-001-site1.ctempurl.com/api/Movie/Get/${movieId}`
+    );
     setMovie(data);
     console.log(data);
   };
@@ -45,7 +47,10 @@ function MovieUpdate() {
   const handleSubmit = async (values) => {
     console.log("isleyir");
     console.log(values);
-    const { data } = await axios.post(`https://localhost:7152/api/Movie/Update/${movieId}`, values);
+    const { data } = await axios.post(
+      `http://flixgo-001-site1.ctempurl.com/api/Movie/Update/${movieId}`,
+      values
+    );
     if (data.errors === null) {
       setSuccessSB(true);
       console.log("succcess");

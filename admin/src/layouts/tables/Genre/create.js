@@ -32,7 +32,10 @@ function GenreCreate() {
   );
 
   const handleSubmit = async (values) => {
-    const { data } = await axios.post("https://localhost:7152/api/Genre/Create", values);
+    const { data } = await axios.post(
+      "http://flixgo-001-site1.ctempurl.com/api/Genre/Create",
+      values
+    );
     if (data.errors === null) {
       setSuccessSB(true);
       setTimeout(() => {

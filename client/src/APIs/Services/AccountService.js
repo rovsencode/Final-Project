@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class AccountService extends HttpClient {
   constructor() {
-    super("https://localhost:7152/api/Account");
+    super("http://flixgo-001-site1.ctempurl.com/api/Account");
   }
 
   forgetPassword(body) {

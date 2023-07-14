@@ -58,18 +58,26 @@ function Basic() {
       password: password,
     };
     console.log(values);
-    const { data } = await axios.post("https://localhost:7152/api/Account/Login", values);
-    console.log(data);
-    if (data != undefined) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userName", data.userName);
-      // const token = localStorage.getItem("token");
-      // setToken(token);
-      navigate("/dashboard");
-    } else {
-      console.log(data.errors);
+    try {
+      const { data } = await axios.post(
+        "http://flixgo-001-site1.ctempurl.com/api/Account/Login",
+        values
+      );
+      console.log(data);
+      if (data != undefined) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.userName);
+        // const token = localStorage.getItem("token");
+        // setToken(token);
+        navigate("/dashboard");
+      } else {
+        console.log(data.errors);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);

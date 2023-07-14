@@ -18,7 +18,9 @@ function QualityUpdate() {
   };
   const { qualityId } = useParams();
   const getQuality = async () => {
-    const { data } = await axios.get(`https://localhost:7152/api/Quality/GetOne/${qualityId}`);
+    const { data } = await axios.get(
+      `http://flixgo-001-site1.ctempurl.com/api/Quality/GetOne/${qualityId}`
+    );
     setQuality(data);
     console.log(data);
   };
@@ -44,7 +46,7 @@ function QualityUpdate() {
   const handleSubmit = async (values) => {
     console.log(values);
     const { data } = await axios.post(
-      `https://localhost:7152/api/Quality/Update/${qualityId}`,
+      `http://flixgo-001-site1.ctempurl.com/api/Quality/Update/${qualityId}`,
       values
     );
     if (data.errors === null) {

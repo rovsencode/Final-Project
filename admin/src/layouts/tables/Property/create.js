@@ -18,7 +18,7 @@ function PropertyCreate() {
   };
   const [planOptions, setPlanOptions] = React.useState();
   const fetchPlan = async () => {
-    const { data } = await axios.get("https://localhost:7152/api/Plans/GetAll");
+    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Plans/GetAll");
     setPlanOptions(data);
     console.log(data);
   };
@@ -42,7 +42,10 @@ function PropertyCreate() {
   );
 
   const handleSubmit = async (values) => {
-    const { data } = await axios.post("https://localhost:7152/api/Property/Create", values);
+    const { data } = await axios.post(
+      "http://flixgo-001-site1.ctempurl.com/api/Property/Create",
+      values
+    );
     if (data.errors === null) {
       setSuccessSB(true);
       setTimeout(() => {

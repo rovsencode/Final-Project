@@ -38,11 +38,11 @@ function MovieCreate() {
   const [qualityOptions, setQualityOptions] = React.useState([]);
 
   const fetchGenre = async () => {
-    const { data } = await axios.get("https://localhost:7152/api/Genre/GetAll");
+    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Genre/GetAll");
     setGenreOptions(data);
   };
   const fetchQualiyt = async () => {
-    const { data } = await axios.get("https://localhost:7152/api/Quality/GetAll");
+    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Quality/GetAll");
     setQualityOptions(data);
   };
 
@@ -132,7 +132,7 @@ function MovieCreate() {
           onSubmit={handleSubmit}
         >
           {({ handleSubmit, setFieldValue, values }) => (
-            <Form onSubmit={handleSubmit}>
+            <Form style={{ marginLeft: "250px" }} onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name" className="form-label">
                   Name
@@ -236,15 +236,16 @@ function MovieCreate() {
                 />
               </div>
               <ErrorMessage name="raiting" component="div" className="error-message" />
-
+              <span>Image: </span>
               <input type="file" onChange={handleImageChange} accept="image/*" name="imageUrl" />
+              <span>BackgroundImage: </span>
               <input type="file" onChange={handleBackImageChange} name="backgroundImage" />
+              <span>Video: </span>
               <input type="file" onChange={handleVideoChange} name="videoUrl" />
               <Button
                 style={{
                   marginTop: "10px",
-                  position: "relative",
-                  left: "200px",
+
                   color: "white",
                 }}
                 type="submit"
