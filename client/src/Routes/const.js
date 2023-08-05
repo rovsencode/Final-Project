@@ -21,6 +21,9 @@ export const ROUTER = {
   ResetPassword: {
     PATH: "/resetPassword",
   },
+  Help: {
+    PATH: "/help",
+  },
   MovieDetail: {
     PATH: "/movies/:movieId",
   },

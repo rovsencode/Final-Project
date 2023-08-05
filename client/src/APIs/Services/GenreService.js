@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class GenreService extends HttpClient {
   constructor() {
-    super("http://flixgo-001-site1.ctempurl.com/api/Genre");
+    super("https://flixgo-001-site1.ctempurl.com/api/Genre");
   }
 
   getAll() {

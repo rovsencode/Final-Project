@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class ContactService extends HttpClient {
   constructor() {
-    super("http://flixgo-001-site1.ctempurl.com/api/Contact");
+    super("https://flixgo-001-site1.ctempurl.com/api/Contact");
   }
 
   getPost() {

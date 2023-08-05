@@ -37,13 +37,13 @@ import DataTable from "examples/Tables/DataTable";
 export default function PropertyTable() {
   const [propertys, setProperty] = React.useState([]);
   const fetchProperty = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Property/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Property/GetAll");
     setProperty(data);
     console.log(data);
   };
   const deleteProperty = async (propertyId) => {
     const { data } = await axios.delete(
-      `http://flixgo-001-site1.ctempurl.com/api/Property/Delete/${propertyId}`
+      `https://flixgo-001-site1.ctempurl.com/api/Property/Delete/${propertyId}`
     );
     console.log(data);
     fetchProperty();

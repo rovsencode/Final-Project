@@ -31,6 +31,8 @@ function Routs() {
       <Routes>
         <Route path={ROUTER.PATH.toString()} element={<Home />} exact />
         <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
+        <Route path={ROUTER.Help.PATH.toString()} element={<Help />} />
+
         <Route path={ROUTER.Login.PATH.toString()} element={<Login />} />
         <Route path={ROUTER.Catalog.PATH.toString()} element={<Catalog />} />
         <Route path={ROUTER.Pricing.PATH.toString()} element={<Pricing />} />

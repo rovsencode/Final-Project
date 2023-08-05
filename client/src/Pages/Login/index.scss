@@ -228,3 +228,26 @@
         margin-bottom: 50px;
     }
 }
+.success {
+    background-color:  #52c41a !important;
+
+    border-color: #52c41a !important;
+    color: white;
+
+}
+
+.success-icon {
+    display: inline-block;
+    width: 1.2em;
+    height: 1em;
+    margin-left: 4px;
+    vertical-align: middle;
+    position: relative;
+    top: -5px;
+}
+.error{
+    color: red;
+        font-size: 14px;
+        margin-left: 9px;
+}
+

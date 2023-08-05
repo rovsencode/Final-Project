@@ -175,7 +175,7 @@ function Header() {
                       className="header__sign-in"
                       style={{ textDecoration: "none", color: "white" }}
                       to="/register"
-                      onClick={() => logOut}
+                      onClick={logOut}
                     >
                       Log out
                     </Link>

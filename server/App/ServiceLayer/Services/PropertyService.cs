@@ -49,7 +49,7 @@ namespace ServiceLayer.Services
         public async Task SoftDelete(int id)
         {
            var property=await _repo.Get(id);
-            await _repo.SoftDelete(property);
+            await _repo.Delete(property);
         }
 
         public Task Update(int id, PropertyUpdateDto property)

@@ -26,12 +26,10 @@ export default function ColorTabs() {
     }
   };
   React.useEffect(() => {
-    if (movies.length) {
-      setTab(movies.slice(6, 9));
-      console.log("Succcess");
-    }
-  }, []);
-  const [value, setValue] = React.useState("one");
+    setTab(movies.slice(6, 9));
+    console.log("Succcess");
+  }, [movies]);
+  const [value, setValue] = React.useState("two");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

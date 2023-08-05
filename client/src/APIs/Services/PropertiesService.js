@@ -2,7 +2,7 @@ import { HttpClient } from "../HttpClient";
 
 class PropertyService extends HttpClient {
   constructor() {
-    super("http://flixgo-001-site1.ctempurl.com/api/Property");
+    super("https://flixgo-001-site1.ctempurl.com/api/Property");
   }
 
   getAll() {

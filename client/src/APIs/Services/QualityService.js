@@ -1,7 +1,7 @@
 import { HttpClient } from "../HttpClient";
 class QualityService extends HttpClient {
   constructor() {
-    super("http://flixgo-001-site1.ctempurl.com/api/Quality");
+    super("https://flixgo-001-site1.ctempurl.com/api/Quality");
   }
 
   getAll() {

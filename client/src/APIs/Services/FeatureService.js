@@ -1,7 +1,7 @@
 import { HttpClient } from "../HttpClient";
 class FeatureService extends HttpClient {
   constructor() {
-    super("http://flixgo-001-site1.ctempurl.com/api/Feature");
+    super("https://flixgo-001-site1.ctempurl.com/api/Feature");
   }
   getAll() {
     return this.get("GetAll");
