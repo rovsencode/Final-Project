@@ -92,6 +92,7 @@ function MovieCreate() {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      maxBodyLength: 5000 * 1024 * 1024,
     });
     console.log(data.statusCode);
     if (data.errors === null) {

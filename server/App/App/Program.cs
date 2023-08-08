@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace App
 {
@@ -82,6 +83,16 @@ namespace App
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
+            builder.Services.Configure<IISServerOptions>(options =>
+            {
+                options.MaxRequestBodySize = 500 * 1024 * 1024; // 500 MB
+            });
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = 500 * 1024 * 1024; // 500 MB
+            });
             builder.Services.Configure<IdentityOptions>(opt =>
             {
                 opt.Password.RequireDigit = true;

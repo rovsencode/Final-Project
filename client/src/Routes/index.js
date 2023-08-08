@@ -17,15 +17,15 @@ function Routs() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    return (
-      <Routes>
-        <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
-        <Route path={ROUTER.Login.PATH.toString()} element={<Login />} />
-        <Route path="*" element={<Login />} />
-      </Routes>
-    );
-  }
+  // if (!token) {
+  // return (
+  //   <Routes>
+  //     <Route path={ROUTER.Register.PATH.toString()} element={<Register />} />
+  //     <Route path={ROUTER.Login.PATH.toString()} element={<Login />} />
+  //     <Route path="*" element={<Login />} />
+  //   </Routes>
+  // );
+  // }
   return (
     <MoiveProvider>
       <Routes>

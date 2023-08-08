@@ -9,13 +9,14 @@ import { movieService } from "../../APIs/Services/MovieService";
 import { SplitButton } from "react-bootstrap";
 import { MovieContext } from "../../Contexts/movieContext";
 import { useNavigate } from "react-router-dom";
+import Popup from "../Popup";
 function Slider() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(true);
   const [isMuted, setIsMuted] = React.useState(false);
 
   const videoRef = useRef(null);
-
+  const token = localStorage.getItem("token");
   const handleVideoLoad = () => {
     setIsLoading(false);
   };
@@ -58,7 +59,14 @@ function Slider() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const [showPopup, setShowPopup] = React.useState(false);
+  const handleOpenPopup = () => {
+    setShowPopup(true);
+  };
 
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
   const handlePlayPause = () => {
     const video = videoRef.current;
     if (video) {
@@ -124,10 +132,20 @@ function Slider() {
 
           <button
             className="watch-now-button"
-            onClick={() => handleNavigate(randomVideo.id)}
+            onClick={() => {
+              if (token) {
+                handleNavigate(randomVideo.id);
+              } else {
+                console.log("popup");
+                handleOpenPopup();
+              }
+            }}
           >
             Watch Now
           </button>
+          {showPopup && <div className="overlay" onClick={handleClosePopup} />}
+          {showPopup && <Popup onClose={handleClosePopup} />}
+
           {isLoading ? (
             ""
           ) : (
