@@ -35,7 +35,7 @@ function PlanCreate() {
   const handleSubmit = async (values) => {
     console.log(values);
     const { data } = await axios.post(
-      "http://flixgo-001-site1.ctempurl.com/api/Plans/Create",
+      "https://flixgo-001-site1.ctempurl.com/api/Plans/Create",
       values
     );
     if (data.errors === null) {

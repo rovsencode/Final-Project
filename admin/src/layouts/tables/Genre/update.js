@@ -48,7 +48,7 @@ function GenreUpdate() {
     console.log("isleyir");
     console.log(values);
     const { data } = await axios.post(
-      `http://flixgo-001-site1.ctempurl.com/api/Genre/Update/${genreId}`,
+      `https://flixgo-001-site1.ctempurl.com/api/Genre/Update/${genreId}`,
       values
     );
     if (data.errors === null) {

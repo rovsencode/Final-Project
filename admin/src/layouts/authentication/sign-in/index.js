@@ -60,7 +60,7 @@ function Basic() {
     console.log(values);
     try {
       const { data } = await axios.post(
-        "http://flixgo-001-site1.ctempurl.com/api/Account/Login",
+        "https://flixgo-001-site1.ctempurl.com/api/Account/Login",
         values
       );
       console.log(data);

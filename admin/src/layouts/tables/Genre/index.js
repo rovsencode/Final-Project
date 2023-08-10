@@ -19,12 +19,12 @@ import { Link } from "react-router-dom";
 export default function GenreTable() {
   const [genres, setGenres] = React.useState([]);
   const fetchGenre = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Genre/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Genre/GetAll");
     setGenres(data);
     console.log(data);
   };
   const deleteGenre = async (genreId) => [
-    await axios.delete(`http://flixgo-001-site1.ctempurl.com/api/Genre/SoftDelete/${genreId}`),
+    await axios.delete(`https://flixgo-001-site1.ctempurl.com/api/Genre/SoftDelete/${genreId}`),
     fetchGenre(),
   ];
   React.useEffect(() => {

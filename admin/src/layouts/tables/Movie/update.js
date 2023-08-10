@@ -48,7 +48,7 @@ function MovieUpdate() {
     console.log("isleyir");
     console.log(values);
     const { data } = await axios.post(
-      `http://flixgo-001-site1.ctempurl.com/api/Movie/Update/${movieId}`,
+      `https://flixgo-001-site1.ctempurl.com/api/Movie/Update/${movieId}`,
       values
     );
     if (data.errors === null) {

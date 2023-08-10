@@ -46,7 +46,7 @@ function QualityUpdate() {
   const handleSubmit = async (values) => {
     console.log(values);
     const { data } = await axios.post(
-      `http://flixgo-001-site1.ctempurl.com/api/Quality/Update/${qualityId}`,
+      `https://flixgo-001-site1.ctempurl.com/api/Quality/Update/${qualityId}`,
       values
     );
     if (data.errors === null) {

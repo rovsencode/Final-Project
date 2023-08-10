@@ -38,11 +38,11 @@ function MovieCreate() {
   const [qualityOptions, setQualityOptions] = React.useState([]);
 
   const fetchGenre = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Genre/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Genre/GetAll");
     setGenreOptions(data);
   };
   const fetchQualiyt = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Quality/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Quality/GetAll");
     setQualityOptions(data);
   };
 

@@ -36,12 +36,12 @@ import { Link } from "react-router-dom";
 export default function QualityTable() {
   const [qualitys, setQuality] = React.useState([]);
   const fetchQuality = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Quality/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Quality/GetAll");
     setQuality(data);
     console.log(data);
   };
   const deleteQuality = async (qualityId) => [
-    await axios.delete(`http://flixgo-001-site1.ctempurl.com/api/Quality/SoftDelete/${qualityId}`),
+    await axios.delete(`https://flixgo-001-site1.ctempurl.com/api/Quality/SoftDelete/${qualityId}`),
     fetchQuality(),
   ];
   React.useEffect(() => {

@@ -46,12 +46,12 @@ export default function MovieTable() {
     </MDBox>
   );
   const deleteMovie = async (movieId) => {
-    await axios.delete(`http://flixgo-001-site1.ctempurl.com/api/Movie/Delete/${movieId}`);
+    await axios.delete(`https://flixgo-001-site1.ctempurl.com/api/Movie/Delete/${movieId}`);
     fetchMovie();
   };
   const [movies, setMovies] = React.useState([]);
   const fetchMovie = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Movie/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Movie/GetAll");
     setMovies(data);
     console.log(data);
   };

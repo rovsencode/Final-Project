@@ -18,7 +18,7 @@ function PropertyCreate() {
   };
   const [planOptions, setPlanOptions] = React.useState();
   const fetchPlan = async () => {
-    const { data } = await axios.get("http://flixgo-001-site1.ctempurl.com/api/Plans/GetAll");
+    const { data } = await axios.get("https://flixgo-001-site1.ctempurl.com/api/Plans/GetAll");
     setPlanOptions(data);
     console.log(data);
   };

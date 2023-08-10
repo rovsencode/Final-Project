@@ -33,7 +33,7 @@ function QualityCreate() {
   const handleSubmit = async (values) => {
     console.log("worjin");
     const { data } = await axios.post(
-      "http://flixgo-001-site1.ctempurl.com/api/Quality/Create",
+      "https://flixgo-001-site1.ctempurl.com/api/Quality/Create",
       values
     );
     if (data.errors === null) {
