@@ -35,12 +35,13 @@ function LoginPop({ onClose }) {
     if (data !== undefined) {
       setLoading(false);
       setSuccess(true);
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("userName", data.userName);
       const token = localStorage.getItem("token");
       setToken(token);
       setTimeout(() => {
-        navigate("/");
+        onClose();
       }, 1000);
     } else {
       console.log(data.errors);
