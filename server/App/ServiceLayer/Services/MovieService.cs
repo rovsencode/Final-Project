@@ -260,22 +260,7 @@ namespace ServiceLayer.Services
            
             return moviePage;
         }
-        public async Task<List<Movie>>  Random()
-        {
-           var films=await _repo.GetAll();
-            Random random = new Random();
-            int n = films.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = random.Next(n + 1);
-                var value = films[k];
-                films[k] = films[n];
-                films[n] = value;
-            }
-            return films;
-        }
-
+      
         public async Task<string> Upload(IFormFile file)
         {
             if (file == null || file.Length <= 0)
